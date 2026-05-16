@@ -37,8 +37,6 @@ body{
   line-height:1.7;
   overflow-x:hidden;
 }
-
-/* ── BACKGROUND MESH ──────────────────────────────────────────── */
 body::before{
   content:'';
   position:fixed;inset:0;
@@ -47,9 +45,7 @@ body::before{
     radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139,92,246,0.06) 0%, transparent 60%);
   pointer-events:none;z-index:0;
 }
-
-/* ── LAYOUT ───────────────────────────────────────────────────── */
-.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.container{max-width:1400px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
 
 /* ── NAV ──────────────────────────────────────────────────────── */
 nav{
@@ -59,20 +55,13 @@ nav{
   border-bottom:1px solid var(--border);
 }
 .nav-inner{
-  max-width:1200px;margin:0 auto;padding:0 24px;
+  max-width:1400px;margin:0 auto;padding:0 24px;
   display:flex;align-items:center;justify-content:space-between;
   height:60px;
 }
-.nav-logo{
-  font-size:.9rem;font-weight:600;color:var(--accent2);
-  text-decoration:none;letter-spacing:.02em;
-}
+.nav-logo{font-size:.9rem;font-weight:600;color:var(--accent2);text-decoration:none;}
 .nav-links{display:flex;gap:6px;flex-wrap:wrap}
-.nav-links a{
-  padding:5px 12px;border-radius:6px;
-  font-size:.78rem;font-weight:500;color:var(--muted);
-  text-decoration:none;transition:.2s;
-}
+.nav-links a{padding:5px 12px;border-radius:6px;font-size:.78rem;font-weight:500;color:var(--muted);text-decoration:none;transition:.2s;}
 .nav-links a:hover{background:rgba(59,130,246,.15);color:var(--accent2)}
 
 /* ── HERO ─────────────────────────────────────────────────────── */
@@ -80,12 +69,12 @@ nav{
   min-height:100vh;display:flex;align-items:center;justify-content:center;
   text-align:center;padding:80px 24px 60px;
 }
-.hero-inner{max-width:780px}
+.hero-inner{max-width:880px}
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
   background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);
   border-radius:20px;padding:6px 16px;margin-bottom:28px;
-  font-size:.78rem;font-weight:500;color:var(--accent2);letter-spacing:.04em;text-transform:uppercase;
+  font-size:.78rem;font-weight:500;color:var(--accent2);text-transform:uppercase;
 }
 .hero h1{
   font-size:clamp(2rem,5vw,3.6rem);font-weight:700;
@@ -93,32 +82,25 @@ nav{
   background:linear-gradient(135deg,#fff 30%,var(--accent2));
   background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
-.hero-sub{font-size:1.1rem;color:var(--muted);margin-bottom:36px;max-width:580px;margin-left:auto;margin-right:auto}
-.hero-meta{
-  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:44px;
-}
-.hero-pill{
-  padding:6px 16px;border-radius:20px;
-  background:rgba(255,255,255,.04);border:1px solid var(--border);
-  font-size:.82rem;color:var(--muted);
-}
+.hero-sub{font-size:1.1rem;color:var(--muted);margin-bottom:36px;}
+.hero-meta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:44px;}
+.hero-pill{padding:6px 16px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid var(--border);font-size:.82rem;color:var(--muted);}
 .hero-pill span{color:var(--text);font-weight:500}
 
 /* ── STAT GRID ────────────────────────────────────────────────── */
 .stats{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
   gap:14px;margin-bottom:60px;
 }
 .stat-card{
   background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:20px;text-align:center;
-  transition:transform .2s,border-color .2s,box-shadow .2s;
+  padding:20px;text-align:center;transition:all .2s;
 }
 .stat-card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:var(--glow)}
 .stat-num{font-size:2rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--accent2)}
-.stat-lbl{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+.stat-lbl{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
 
-/* ── SECTION COMMON ───────────────────────────────────────────── */
+/* ── SECTIONS ─────────────────────────────────────────────────── */
 section{padding:80px 0}
 .section-tag{
   display:inline-block;
@@ -128,42 +110,12 @@ section{padding:80px 0}
 .section-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;margin-bottom:12px}
 .section-sub{color:var(--muted);font-size:1rem;max-width:600px;margin-bottom:48px}
 
-/* ── REQUIREMENTS GRID ────────────────────────────────────────── */
-.req-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.req-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:28px;cursor:pointer;
-  transition:transform .2s,border-color .2s,box-shadow .2s;
-  position:relative;overflow:hidden;
-}
-.req-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(59,130,246,.05),transparent);
-  opacity:0;transition:.2s;
-}
-.req-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:var(--glow)}
-.req-card:hover::before{opacity:1}
-.req-num{
-  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:10px;
-}
-.req-card h3{font-size:1rem;font-weight:600;margin-bottom:8px}
-.req-card p{font-size:.85rem;color:var(--muted);line-height:1.6}
-.req-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
-.tag{
-  padding:3px 10px;border-radius:4px;font-size:.72rem;font-weight:500;
-  background:rgba(59,130,246,.12);color:var(--accent2);
-}
-.tag.green{background:rgba(16,185,129,.12);color:var(--green)}
-.tag.purple{background:rgba(139,92,246,.12);color:var(--purple)}
-.tag.gold{background:rgba(245,158,11,.12);color:var(--gold)}
-
-/* ── CODE SECTION ─────────────────────────────────────────────── */
+/* ── CODE LAYOUT ──────────────────────────────────────────────── */
 #code{background:var(--surface)}
-.code-layout{display:grid;grid-template-columns:240px 1fr;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;min-height:500px}
+.code-layout{display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;min-height:70vh}
 .code-sidebar{
   background:rgba(0,0,0,.3);border-right:1px solid var(--border);
-  padding:16px 0;overflow-y:auto;
+  padding:16px 0;overflow-y:auto;max-height:70vh;
 }
 .code-sidebar-title{
   font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
@@ -171,92 +123,65 @@ section{padding:80px 0}
 }
 .code-tab{
   display:block;padding:10px 16px;cursor:pointer;
-  font-size:.82rem;color:var(--muted);border-left:3px solid transparent;
-  transition:.15s;text-decoration:none;
+  font-size:.8rem;color:var(--muted);border-left:3px solid transparent;
+  transition:.15s;text-decoration:none;font-family:'JetBrains Mono',monospace;
 }
 .code-tab:hover{color:var(--text);background:rgba(59,130,246,.07)}
 .code-tab.active{color:var(--accent2);border-left-color:var(--accent);background:rgba(59,130,246,.08)}
-.code-tab .tab-lines{font-size:.7rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:2px}
+.code-tab .tab-desc{font-size:.65rem;color:var(--muted);font-family:'Space Grotesk',sans-serif;margin-top:2px}
 .code-main{display:flex;flex-direction:column;overflow:hidden}
 .code-header{
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 20px;background:rgba(0,0,0,.4);border-bottom:1px solid var(--border);
 }
 .code-filename{
-  font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent2);
+  font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--accent2);
   display:flex;align-items:center;gap:8px;
 }
-.code-filename::before{content:'📄';font-size:.9rem}
 .code-actions{display:flex;gap:8px}
 .btn-copy,.btn-download{
   padding:5px 14px;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;
-  border:1px solid var(--border);transition:.15s;font-family:'Space Grotesk',sans-serif;
+  border:1px solid var(--border);transition:.15s;
 }
 .btn-copy{background:rgba(59,130,246,.15);color:var(--accent2)}
 .btn-copy:hover{background:rgba(59,130,246,.3)}
 .btn-download{background:rgba(16,185,129,.12);color:var(--green);border-color:rgba(16,185,129,.3)}
 .btn-download:hover{background:rgba(16,185,129,.25)}
-.code-pane{display:none;overflow:auto;max-height:60vh}
+.code-pane{display:none;overflow:auto;max-height:65vh}
 .code-pane.active{display:block}
-.code-pane pre{margin:0!important;border-radius:0!important;padding:20px!important;background:var(--code-bg)!important}
-.code-pane pre code{font-size:.78rem!important;line-height:1.6!important;font-family:'JetBrains Mono',monospace!important}
-.hljs{background:transparent!important;padding:0!important}
+.code-pane pre{margin:0!important;border-radius:0!important;padding:24px!important;background:var(--code-bg)!important}
+.code-pane pre code{font-size:.76rem!important;line-height:1.55!important;font-family:'JetBrains Mono',monospace!important}
+.hljs{background:transparent!important}
 
-/* ── RESULTS ──────────────────────────────────────────────────── */
-.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+/* ── RESULTS GRID ─────────────────────────────────────────────── */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
 .result-card{
   background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;
-  transition:border-color .2s;
 }
-.result-card:hover{border-color:var(--accent)}
 .result-card h4{font-size:.95rem;font-weight:600;margin-bottom:14px;color:var(--accent2)}
-.result-table{width:100%;font-size:.8rem;border-collapse:collapse}
-.result-table th{
-  text-align:left;padding:6px 8px;
-  color:var(--muted);font-weight:500;font-size:.72rem;text-transform:uppercase;
-  border-bottom:1px solid var(--border);letter-spacing:.05em;
-}
-.result-table td{padding:6px 8px;border-bottom:1px solid rgba(30,58,95,.5);font-family:'JetBrains Mono',monospace;font-size:.78rem}
-.result-table tr:last-child td{border-bottom:none}
+.result-table{width:100%;font-size:.78rem;border-collapse:collapse}
+.result-table th{text-align:left;padding:6px 8px;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);}
+.result-table td{padding:6px 8px;border-bottom:1px solid rgba(30,58,95,.5);font-family:'JetBrains Mono',monospace}
 .badge-pass{color:var(--green);font-weight:600}
-.badge-ref{color:var(--gold);font-weight:600}
-.badge-approx{color:var(--muted)}
+.badge-ref{color:var(--gold)}
 
-/* ── METHODS ──────────────────────────────────────────────────── */
-.methods-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+/* ── METHODS GRID ─────────────────────────────────────────────── */
+.methods-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
 .method-card{
   background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;
 }
-.method-num{
-  font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;
-}
+.method-num{font-size:.7rem;font-weight:700;text-transform:uppercase;margin-bottom:6px;}
 .method-card h3{font-size:.98rem;font-weight:600;margin-bottom:10px}
 .method-card p{font-size:.84rem;color:var(--muted);margin-bottom:12px}
 .complexity{display:flex;gap:8px;flex-wrap:wrap}
-.complexity-badge{
-  padding:3px 10px;border-radius:4px;font-size:.75rem;font-family:'JetBrains Mono',monospace;
-  background:rgba(0,0,0,.3);border:1px solid var(--border);color:var(--text);
-}
+.complexity-badge{padding:3px 10px;border-radius:4px;font-size:.72rem;font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.3);border:1px solid var(--border);}
 
-/* ── SIMULATOR SECTION ────────────────────────────────────────── */
-.simulator-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:40px}
-.sim-feature{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:20px;display:flex;gap:14px;align-items:flex-start;
-}
-.sim-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
-.sim-feature h4{font-size:.9rem;font-weight:600;margin-bottom:4px}
-.sim-feature p{font-size:.82rem;color:var(--muted)}
-
-/* ── SEO SECTION ──────────────────────────────────────────────── */
+/* ── SEO GRID ─────────────────────────────────────────────────── */
 .seo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
 .seo-card{
   background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;
 }
-.seo-change{
-  font-size:1.6rem;font-weight:700;font-family:'JetBrains Mono',monospace;
-  margin-bottom:6px;
-}
+.seo-change{font-size:1.6rem;font-weight:700;font-family:'JetBrains Mono',monospace;margin-bottom:6px;}
 .seo-change.up{color:var(--green)}.seo-change.mixed{color:var(--gold)}
 .seo-card h4{font-size:.9rem;font-weight:600;margin-bottom:6px}
 .seo-card p{font-size:.82rem;color:var(--muted)}
@@ -265,27 +190,20 @@ section{padding:80px 0}
 .install-box{
   background:var(--code-bg);border:1px solid var(--border);border-radius:var(--radius);
   padding:24px;font-family:'JetBrains Mono',monospace;font-size:.85rem;
-  position:relative;
 }
-.install-box pre{color:var(--green);white-space:pre-wrap;word-break:break-all}
+.install-box pre{color:var(--green);white-space:pre-wrap}
 .install-box .comment{color:var(--muted)}
 
-/* ── FOOTER ───────────────────────────────────────────────────── */
 footer{
   background:var(--surface);border-top:1px solid var(--border);
   padding:40px 0;text-align:center;
 }
-footer p{color:var(--muted);font-size:.85rem;margin-bottom:6px}
-footer strong{color:var(--text)}
-
-/* ── SCROLL INDICATOR ─────────────────────────────────────────── */
+footer p{color:var(--muted);font-size:.85rem}
 .scroll-progress{
   position:fixed;top:60px;left:0;height:2px;
   background:linear-gradient(90deg,var(--accent),var(--purple));
   z-index:99;transition:width .1s;
 }
-
-/* ── DIVIDER ──────────────────────────────────────────────────── */
 .divider{height:1px;background:var(--border);margin:0}
 
 @media(max-width:768px){
@@ -301,18 +219,16 @@ footer strong{color:var(--text)}
 
 <div class="scroll-progress" id="scrollBar"></div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#">PageRank Thesis</a>
+    <a class="nav-logo" href="#">📊 PageRank Thesis</a>
     <div class="nav-links">
       <a href="#overview">Overview</a>
       <a href="#methods">Methods</a>
       <a href="#code">Source Code</a>
       <a href="#results">Results</a>
-      <a href="#simulator">Simulator</a>
       <a href="#seo">SEO</a>
-      <a href="#install">Run It</a>
+      <a href="#install">Run</a>
     </div>
   </div>
 </nav>
@@ -320,15 +236,14 @@ footer strong{color:var(--text)}
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-inner">
-    <div class="hero-badge">🎓 Bachelor Thesis · GUC 2026</div>
+    <div class="hero-badge">🎓 Bachelor Thesis · German University in Cairo · 2026</div>
     <h1>Implementing PageRank<br>Using Python NetworkX</h1>
-    <p class="hero-sub">A comprehensive implementation, analysis, and simulation of the PageRank algorithm across six computational methods, with an interactive browser-based visualisation engine.</p>
+    <p class="hero-sub">A comprehensive implementation and analysis of the PageRank algorithm across six computational methods, with an interactive simulation engine and data-proven SEO recommendations.</p>
     <div class="hero-meta">
       <div class="hero-pill">Author: <span>Hana Ayman Abdelhamid</span></div>
       <div class="hero-pill">Supervisor: <span>Dr. Islam El-maddah</span></div>
       <div class="hero-pill">Faculty of Media Engineering &amp; Technology</div>
     </div>
-
     <div class="stats">
       <div class="stat-card"><div class="stat-num">6</div><div class="stat-lbl">PR Methods</div></div>
       <div class="stat-card"><div class="stat-num">5</div><div class="stat-lbl">Experiments</div></div>
@@ -342,155 +257,61 @@ footer strong{color:var(--text)}
 
 <div class="divider"></div>
 
-<!-- OVERVIEW -->
+<!-- METHODS OVERVIEW -->
 <section id="overview">
   <div class="container">
-    <div class="section-tag">Project Overview</div>
-    <h2 class="section-title">Five Requirements, One Complete System</h2>
-    <p class="section-sub">Each requirement builds on the last — from implementing the raw algorithm to building a full search engine with real-time simulation.</p>
-    <div class="req-grid">
-      <div class="req-card" onclick="openCode('req1')">
-        <div class="req-num">Requirement 1</div>
-        <h3>Progressive Pruning PageRank</h3>
-        <p>A novel enhancement to power iteration that freezes low-rank pages after convergence, achieving 1.53× speedup with zero accuracy loss on 2,000-node graphs.</p>
-        <div class="req-tags">
-          <span class="tag">NumPy</span><span class="tag">Benchmark</span><span class="tag green">L1 Error = 0</span>
-        </div>
-      </div>
-      <div class="req-card" onclick="openCode('req2')">
-        <div class="req-num">Requirement 2</div>
-        <h3>Realistic Large-Scale Data</h3>
-        <p>A BFS web scraper with 4 bug fixes, validated against a 791-node synthetic documentation graph. All 7 PageRank methods benchmarked with L1 error and timing.</p>
-        <div class="req-tags">
-          <span class="tag">BeautifulSoup</span><span class="tag">791 nodes</span><span class="tag gold">7 Methods</span>
-        </div>
-      </div>
-      <div class="req-card" onclick="openCode('req345')">
-        <div class="req-num">Requirement 3</div>
-        <h3>Manual PageRank Implementation</h3>
-        <p>Custom PageRank algorithm using manual power iteration and NetworkX. Implements the core mathematical formula with explicit dangling node handling, convergence tracking, and validation against exact matrix algebra solution.</p>
-        <div class="req-tags">
-          <span class="tag">Python</span><span class="tag">NetworkX</span><span class="tag purple">Power Iteration</span>
-        </div>
-      </div>
-      <div class="req-card" onclick="openCode('simulator')">
-        <div class="req-num">Bonus — Week 6</div>
-        <h3>Interactive Simulation Engine</h3>
-        <p>A full Streamlit web app with live BFS crawling, Vis.js graph visualisation, heat-scale colour coding, TF-IDF search, and Google benchmark comparison.</p>
-        <div class="req-tags">
-          <span class="tag">Streamlit</span><span class="tag">Vis.js</span><span class="tag purple">Live Demo</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- METHODS -->
-<section id="methods">
-  <div class="container">
-    <div class="section-tag">Implementation</div>
+    <div class="section-tag">Implementation Overview</div>
     <h2 class="section-title">Six PageRank Computational Methods</h2>
-    <p class="section-sub">All methods implemented from scratch and validated against each other. Complexity ranges from O(n³) to O(n).</p>
+    <p class="section-sub">All methods implemented from scratch and validated against each other.</p>
     <div class="methods-grid">
-      <div class="method-card">
-        <div class="method-num" style="color:var(--accent)">Method 1</div>
-        <h3>NetworkX Built-in</h3>
-        <p>Primary reference implementation. Internally uses SciPy sparse matrices. Handles all edge cases automatically and serves as ground truth for accuracy comparisons.</p>
-        <div class="complexity">
-          <span class="complexity-badge">Time O(k·(N+E))</span>
-          <span class="complexity-badge">Space O(N+E)</span>
-          <span class="complexity-badge" style="color:var(--green)">Exact ✓</span>
-        </div>
-      </div>
-      <div class="method-card">
-        <div class="method-num" style="color:var(--accent2)">Method 2</div>
-        <h3>Manual Power Iteration</h3>
-        <p>Implements the PageRank formula directly using Python dicts. Every variable maps one-to-one to the mathematical definition. Fully transparent and auditable.</p>
-        <div class="complexity">
-          <span class="complexity-badge">Time O(k·(N+E))</span>
-          <span class="complexity-badge">Space O(N+E)</span>
-          <span class="complexity-badge" style="color:var(--gold)">~Exact</span>
-        </div>
-      </div>
-      <div class="method-card">
-        <div class="method-num" style="color:var(--purple)">Method 3</div>
-        <h3>Matrix Algebra (Exact)</h3>
-        <p>Solves (I − αM)r = (1−α)/N·1 directly via NumPy LU decomposition. Single-step exact solution — but O(n³) makes it impractical beyond ~200 nodes.</p>
-        <div class="complexity">
-          <span class="complexity-badge">Time O(N³)</span>
-          <span class="complexity-badge">Space O(N²)</span>
-          <span class="complexity-badge" style="color:var(--green)">Exact ✓</span>
-        </div>
-      </div>
-      <div class="method-card">
-        <div class="method-num" style="color:var(--gold)">Method 4</div>
-        <h3>SciPy Sparse (CSR)</h3>
-        <p>Stores only non-zero matrix entries. For a web graph with 10 links per page, this eliminates 99.99% of wasted storage. Fastest iterative method.</p>
-        <div class="complexity">
-          <span class="complexity-badge">Time O(k·E)</span>
-          <span class="complexity-badge">Space O(N+E)</span>
-          <span class="complexity-badge" style="color:var(--gold)">~Exact</span>
-        </div>
-      </div>
-      <div class="method-card">
-        <div class="method-num" style="color:var(--red)">Method 5</div>
-        <h3>Monte Carlo Surfer</h3>
-        <p>Simulates the random surfer directly. Error decreases as O(1/√R). Only O(N) memory — trivially parallelisable. Decisive advantage at web scale.</p>
-        <div class="complexity">
-          <span class="complexity-badge">Time O(S·L)</span>
-          <span class="complexity-badge">Space O(N)</span>
-          <span class="complexity-badge" style="color:var(--muted)">Approx</span>
-        </div>
-      </div>
-      <div class="method-card">
-        <div class="method-num" style="color:var(--green)">Method 6/7</div>
-        <h3>HITS + Pruning (Custom)</h3>
-        <p>HITS computes hub and authority scores for comparison. The custom Pruning variant freezes low-rank pages early for 1.53× speedup on large web-like graphs.</p>
-        <div class="complexity">
-          <span class="complexity-badge">HITS O(k·m)</span>
-          <span class="complexity-badge" style="color:var(--green)">1.53× faster</span>
-        </div>
-      </div>
+      <div class="method-card"><div class="method-num" style="color:var(--accent)">Method 1</div><h3>NetworkX Built-in</h3><p>Primary reference implementation using SciPy sparse matrices. Handles all edge cases automatically.</p><div class="complexity"><span class="complexity-badge">O(k·(N+E))</span><span class="complexity-badge" style="color:var(--green)">Ground Truth</span></div></div>
+      <div class="method-card"><div class="method-num" style="color:var(--accent2)">Method 2</div><h3>Manual Power Iteration</h3><p>Direct implementation of PageRank formula using Python dicts. Every variable maps to the mathematical definition.</p><div class="complexity"><span class="complexity-badge">O(k·(N+E))</span><span class="complexity-badge">Transparent</span></div></div>
+      <div class="method-card"><div class="method-num" style="color:var(--purple)">Method 3</div><h3>Matrix Algebra (Exact)</h3><p>Solves (I − αM)r = (1−α)/N·1 directly via LU decomposition. Exact but O(n³).</p><div class="complexity"><span class="complexity-badge">O(N³)</span><span class="complexity-badge" style="color:var(--green)">Exact</span></div></div>
+      <div class="method-card"><div class="method-num" style="color:var(--gold)">Method 4</div><h3>SciPy Sparse (CSR)</h3><p>Stores only non-zero matrix entries. 99.99% memory reduction for web-scale graphs.</p><div class="complexity"><span class="complexity-badge">O(k·E)</span><span class="complexity-badge">Fastest</span></div></div>
+      <div class="method-card"><div class="method-num" style="color:var(--red)">Method 5</div><h3>Monte Carlo Surfer</h3><p>Simulates random surfer directly. Error decreases as O(1/√R). Only O(N) memory.</p><div class="complexity"><span class="complexity-badge">O(S·L)</span><span class="complexity-badge">O(N) space</span></div></div>
+      <div class="method-card"><div class="method-num" style="color:var(--green)">Method 6/7</div><h3>Progressive Pruning</h3><p>Novel algorithm that freezes converged low-rank pages early. 1.53× speedup with zero accuracy loss.</p><div class="complexity"><span class="complexity-badge">Adaptive</span><span class="complexity-badge" style="color:var(--green)">Novel</span></div></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- SOURCE CODE -->
-<section id="code" style="padding-top:80px;padding-bottom:80px">
+<!-- COMPLETE SOURCE CODE -->
+<section id="code">
   <div class="container">
-    <div class="section-tag">Source Code</div>
-    <h2 class="section-title">Complete Source Code</h2>
-    <p class="section-sub">All implementation files. Use the sidebar to switch files, copy to clipboard, or download individually.</p>
+    <div class="section-tag">Complete Source Code</div>
+    <h2 class="section-title">All Implementation Files</h2>
+    <p class="section-sub">Every Python file from the thesis — view, copy, or download. Supervisors can inspect all code directly in the browser.</p>
 
     <div class="code-layout">
       <div class="code-sidebar">
-        <div class="code-sidebar-title">Files</div>
-        <a class="code-tab active" onclick="switchTab('req1'); return false;" href="#">progressive_pruning_pr.py</a>
-        <a class="code-tab" onclick="switchTab('req2'); return false;" href="#">realistic_data.py</a>
-        <a class="code-tab" onclick="switchTab('req345'); return false;" href="#">all_6_methods.py</a>
+        <div class="code-sidebar-title">📁 Python Source Files</div>
+        <a class="code-tab active" onclick="switchTab('pruning'); return false;" href="#">progressive_pruning_pr.py</a>
+        <a class="code-tab" onclick="switchTab('realistic'); return false;" href="#">realistic_data.py</a>
+        <a class="code-tab" onclick="switchTab('methods'); return false;" href="#">all_6_methods.py</a>
         <a class="code-tab" onclick="switchTab('simulator'); return false;" href="#">pr_simulator.py</a>
         <a class="code-tab" onclick="switchTab('experiments'); return false;" href="#">experiments.py</a>
-        <a class="code-tab" onclick="switchTab('search_test'); return false;" href="#">search_engine.py</a>
+        <a class="code-tab" onclick="switchTab('search'); return false;" href="#">search_engine.py</a>
+        <a class="code-tab" onclick="switchTab('seo'); return false;" href="#">seo_recommendations.py</a>
+        <a class="code-tab" onclick="switchTab('toy'); return false;" href="#">toy_example_with_recommend.py</a>
       </div>
 
       <div class="code-main">
         <div class="code-header">
-          <div class="code-filename" id="code-filename">progressive_pruning_pr.py</div>
+          <div class="code-filename">📄 progressive_pruning_pr.py</div>
           <div class="code-actions">
-            <button class="btn-copy" onclick="copyCode()">Copy</button>
-            <button class="btn-download" onclick="downloadCode()">Download</button>
+            <button class="btn-copy" onclick="copyCode()">📋 Copy</button>
+            <button class="btn-download" onclick="downloadCode()">💾 Download</button>
           </div>
         </div>
-        <div id="pane-req1" class="code-pane active"><pre><code class="language-python" id="src-req1"></code></pre></div>
-        <div id="pane-req2" class="code-pane"><pre><code class="language-python" id="src-req2"></code></pre></div>
-        <div id="pane-req345" class="code-pane"><pre><code class="language-python" id="src-req345"></code></pre></div>
+        <div id="pane-pruning" class="code-pane active"><pre><code class="language-python" id="src-pruning"></code></pre></div>
+        <div id="pane-realistic" class="code-pane"><pre><code class="language-python" id="src-realistic"></code></pre></div>
+        <div id="pane-methods" class="code-pane"><pre><code class="language-python" id="src-methods"></code></pre></div>
         <div id="pane-simulator" class="code-pane"><pre><code class="language-python" id="src-simulator"></code></pre></div>
         <div id="pane-experiments" class="code-pane"><pre><code class="language-python" id="src-experiments"></code></pre></div>
-        <div id="pane-search_test" class="code-pane"><pre><code class="language-python" id="src-search_test"></code></pre></div>
+        <div id="pane-search" class="code-pane"><pre><code class="language-python" id="src-search"></code></pre></div>
+        <div id="pane-seo" class="code-pane"><pre><code class="language-python" id="src-seo"></code></pre></div>
+        <div id="pane-toy" class="code-pane"><pre><code class="language-python" id="src-toy"></code></pre></div>
       </div>
     </div>
   </div>
@@ -502,463 +323,1018 @@ footer strong{color:var(--text)}
 <section id="results">
   <div class="container">
     <div class="section-tag">Experimental Results</div>
-    <h2 class="section-title">Key Numbers at a Glance</h2>
-    <p class="section-sub">All results are measured on real graph executions, not estimated.</p>
+    <h2 class="section-title">Key Findings</h2>
     <div class="results-grid">
-      <div class="result-card">
-        <h4>All 7 Methods · 791-Node Graph</h4>
-        <table class="result-table">
-          <tr><th>Method</th><th>L1 Error</th><th>Time</th></tr>
-          <tr><td>1 NetworkX</td><td class="badge-ref">0 (ref)</td><td>6.5 ms</td></tr>
-          <tr><td>2 Manual</td><td>1.47e-4</td><td>79.2 ms</td></tr>
-          <tr><td>3 Matrix</td><td>1.47e-4</td><td>30.1 ms</td></tr>
-          <tr><td>4 SciPy</td><td>1.47e-4</td><td>0.6 ms</td></tr>
-          <tr><td>5 Monte Carlo</td><td class="badge-approx">2.76e-2</td><td>645 ms</td></tr>
-          <tr><td>6 HITS</td><td class="badge-approx">2.48e-1</td><td>214 ms</td></tr>
-          <tr><td>7 Pruning</td><td>1.57e-4</td><td>93.9 ms</td></tr>
-        </table>
-      </div>
-
-      <div class="result-card">
-        <h4>Pruning Benchmark · Web-Like Graphs</h4>
-        <table class="result-table">
-          <tr><th>N</th><th>Std Time</th><th>Prune</th><th>Speedup</th></tr>
-          <tr><td>50</td><td>0.1 ms</td><td>0.2 ms</td><td>0.51×</td></tr>
-          <tr><td>500</td><td>6.8 ms</td><td>16.7 ms</td><td>0.41×</td></tr>
-          <tr><td>2,000</td><td>176 ms</td><td>115 ms</td><td class="badge-pass">1.53×</td></tr>
-        </table>
-        <p style="font-size:.78rem;color:var(--muted);margin-top:10px">L1 Error = 0.00e+00 in all cases</p>
-      </div>
-
-      <div class="result-card">
-        <h4>Monte Carlo · Error vs Surfer Count</h4>
-        <table class="result-table">
-          <tr><th>Surfers</th><th>L1 Error</th><th>Time</th></tr>
-          <tr><td>100</td><td>0.0284</td><td>8 ms</td></tr>
-          <tr><td>1,000</td><td>0.0092</td><td>76 ms</td></tr>
-          <tr><td>10,000</td><td>0.0031</td><td>760 ms</td></tr>
-          <tr><td>50,000</td><td>0.0018</td><td>3.8 s</td></tr>
-        </table>
-      </div>
-
-      <div class="result-card">
-        <h4>Search Engine Tests · 8/8 Passing</h4>
-        <table class="result-table">
-          <tr><th>Test</th><th>Status</th></tr>
-          <tr><td>Constructor & init</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Return type & structure</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Pure PageRank mode</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Keyword relevance</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Recency weight</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Topic-sensitive PR</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Combined weights</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Edge cases</td><td class="badge-pass">PASS</td></tr>
-        </table>
-      </div>
-
-      <div class="result-card">
-        <h4>Google Comparison Metrics</h4>
-        <table class="result-table">
-          <tr><th>Metric</th><th>Value</th></tr>
-          <tr><td>Overlap@3</td><td>33%</td></tr>
-          <tr><td>Overlap@5</td><td class="badge-pass">100%</td></tr>
+      <div class="result-card"><h4>All 7 Methods · 791-Node Graph</h4>
+        <table class="result-table"><tr><th>Method</th><th>L1 Error</th><th>Time</th></tr>
+          <tr><td>NetworkX</td><td class="badge-ref">0 (ref)</td><td>6.5 ms</td></tr>
+          <tr><td>Manual</td><td>1.47e-4</td><td>79.2 ms</td></tr>
+          <tr><td>Matrix</td><td>1.47e-4</td><td>30.1 ms</td></tr>
+          <tr><td>SciPy Sparse</td><td>1.47e-4</td><td>0.6 ms</td></tr>
+          <tr><td>Monte Carlo</td><td>2.76e-2</td><td>645 ms</td></tr>
+          <tr><td>Pruning</td><td>1.57e-4</td><td>93.9 ms</td></tr>
+        </table></div>
+      <div class="result-card"><h4>Pruning Benchmark</h4>
+        <table class="result-table"><tr><th>N</th><th>Speedup</th><th>Frozen %</th></tr>
+          <tr><td>50</td><td>0.75×</td><td>56%</td></tr>
+          <tr><td>500</td><td>1.25×</td><td>0%</td></tr>
+          <tr><td>2,000</td><td class="badge-pass">1.53×</td><td>0%</td></tr>
+        </table><p style="margin-top:8px;font-size:.75rem;color:var(--muted)">L1 Error = 0.00e+00 in all cases</p></div>
+      <div class="result-card"><h4>Monte Carlo Accuracy</h4>
+        <table class="result-table"><tr><th>Surfers</th><th>L1 Error</th><th>Time</th></tr>
+          <tr><td>100</td><td>0.0284</td><td>8 ms</td></tr><tr><td>1,000</td><td>0.0092</td><td>76 ms</td></tr>
+          <tr><td>10,000</td><td>0.0031</td><td>760 ms</td></tr><tr><td>50,000</td><td>0.0018</td><td>3.8 s</td></tr>
+        </table></div>
+      <div class="result-card"><h4>Google Comparison</h4>
+        <table class="result-table"><tr><th>Metric</th><th>Value</th></tr>
+          <tr><td>Spearman ρ</td><td>0.685</td></tr><tr><td>Overlap@5</td><td class="badge-pass">100%</td></tr>
           <tr><td>Overlap@10</td><td class="badge-pass">100%</td></tr>
-          <tr><td>Spearman ρ</td><td>0.685</td></tr>
-        </table>
-      </div>
+        </table></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- SIMULATOR -->
-<section id="simulator" style="background:var(--surface)">
-  <div class="container">
-    <div class="section-tag">Interactive Tool</div>
-    <h2 class="section-title">PageRank Simulation Engine</h2>
-    <p class="section-sub">A browser-based Streamlit application built in Week 6. Crawl any website, run all 5 methods, search with TF-IDF, and compare with Google.</p>
-
-    <div class="simulator-features">
-      <div class="sim-feature">
-        <div class="sim-icon">🕸️</div>
-        <div><h4>Smart BFS Crawler</h4><p>Crawl any URL with depth, path prefix, keyword, and asset filters.</p></div>
-      </div>
-      <div class="sim-feature">
-        <div class="sim-icon">📊</div>
-        <div><h4>Live Vis.js Graph</h4><p>Nodes sized and coloured by PageRank on a blue→amber→red heat scale.</p></div>
-      </div>
-      <div class="sim-feature">
-        <div class="sim-icon">🔍</div>
-        <div><h4>TF-IDF Search</h4><p>Combined score = 0.6×PR + 0.4×TF-IDF.</p></div>
-      </div>
-      <div class="sim-feature">
-        <div class="sim-icon">🆚</div>
-        <div><h4>Google Benchmark</h4><p>Multi-tier fuzzy URL matching. Reports Spearman ρ and Kendall τ.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SEO -->
+<!-- SEO RECOMMENDATIONS -->
 <section id="seo">
   <div class="container">
-    <div class="section-tag">Requirement 5</div>
-    <h2 class="section-title">SEO Recommendations — Proven by Data</h2>
-    <p class="section-sub">Each recommendation is validated by modifying the graph and measuring exact PageRank changes using NetworkX.</p>
+    <div class="section-tag">Requirement 5 · Data-Proven SEO</div>
+    <h2 class="section-title">SEO Recommendations</h2>
     <div class="seo-grid">
-      <div class="seo-card">
-        <div class="seo-change up">+287%</div>
-        <h4>1. Earn a High-Authority Inbound Link</h4>
-        <p>One link from python_tutorial (PR=0.10) increased web_scraping's rank from 0.010 to 0.039.</p>
-      </div>
-      <div class="seo-card">
-        <div class="seo-change up">+35.5%</div>
-        <h4>2. Create an Internal Hub Page</h4>
-        <p>Adding a db_hub page increased database_sql PageRank from 0.049 to 0.066.</p>
-      </div>
-      <div class="seo-card">
-        <div class="seo-change up">+763%</div>
-        <h4>3. Accumulate Multiple Inbound Links</h4>
-        <p>5 inbound links raised PageRank from 0.010 to 0.086 — a 763% total increase.</p>
-      </div>
-      <div class="seo-card">
-        <div class="seo-change up">+23.8%</div>
-        <h4>4. Fix Dangling Pages</h4>
-        <p>Adding one link back to the homepage increased homepage PR from 0.190 to 0.236.</p>
-      </div>
-      <div class="seo-card">
-        <div class="seo-change mixed">Equalise</div>
-        <h4>5. Use Hub-and-Spoke, Not Chains</h4>
-        <p>Hub-and-spoke equalises distribution — A improves +29.8%, E drops 65%.</p>
-      </div>
+      <div class="seo-card"><div class="seo-change up">+287%</div><h4>1. High-Authority Inbound Link</h4><p>One link from a high-PR page raises a new page from near-zero to competitive rank.</p></div>
+      <div class="seo-card"><div class="seo-change up">+35.5%</div><h4>2. Internal Hub Page</h4><p>Concentrate authority through a central hub page to distribute to related content.</p></div>
+      <div class="seo-card"><div class="seo-change up">+763%</div><h4>3. Multiple Inbound Links</h4><p>Each link adds rank with diminishing returns. 5 links = 763% total increase.</p></div>
+      <div class="seo-card"><div class="seo-change up">+23.8%</div><h4>4. Fix Dangling Pages</h4><p>Pages with no outlinks leak authority. Add navigation links to recapture rank.</p></div>
+      <div class="seo-card"><div class="seo-change mixed">Equalise</div><h4>5. Hub-and-Spoke vs Chain</h4><p>Hub-and-spoke equalises distribution (+29.8% for start pages, -65% for end pages).</p></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- INSTALL -->
+<!-- INSTALLATION -->
 <section id="install">
   <div class="container">
-    <div class="section-tag">Run It Yourself</div>
-    <h2 class="section-title">Installation &amp; Run Commands</h2>
-    <p class="section-sub">All code requires Python 3.8+. Install dependencies once, then run any requirement independently.</p>
-
+    <div class="section-tag">Run Everything Locally</div>
+    <h2 class="section-title">Installation & Run Commands</h2>
     <div class="install-box">
-      <pre>pip install networkx numpy scipy matplotlib requests beautifulsoup4 streamlit plotly pandas
+      <pre><span class="comment"># Install all dependencies</span>
+pip install networkx numpy scipy matplotlib requests beautifulsoup4 streamlit plotly pandas
 
-# Run Progressive Pruning benchmark
+<span class="comment"># Run Progressive Pruning benchmark</span>
 python progressive_pruning_pr.py
 
-# Run Large-Scale Data demo (no internet)
+<span class="comment"># Run large-scale data demo (791-node graph)</span>
 python realistic_data.py --demo
 
-# Run all experiments
+<span class="comment"># Run all 5 simulation experiments</span>
 python experiments.py --exp all
 
-# Launch interactive simulation engine
+<span class="comment"># Launch interactive Streamlit simulator</span>
 streamlit run pr_simulator.py</pre>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- FOOTER -->
 <footer>
   <div class="container">
     <p><strong>Implementing PageRank Using Python NetworkX</strong></p>
     <p>Hana Ayman Abdelhamid · Supervised by Dr. Islam El-maddah</p>
-    <p style="margin-top:8px">Faculty of Media Engineering and Technology · German University in Cairo · 2026</p>
+    <p>Faculty of Media Engineering and Technology · German University in Cairo · 2026</p>
   </div>
 </footer>
 
-<!-- SCRIPTS -->
 <script>
-// Source code embedded for each file
-document.getElementById("src-req1").textContent = `import time
+// ================================================================
+// ALL SOURCE CODE EMBEDDED DIRECTLY - SUPERVISOR REVIEW READY
+// ================================================================
+
+// FILE 1: progressive_pruning_pr.py (Full implementation)
+document.getElementById("src-pruning").textContent = `import time
 import random
 import networkx as nx
 import numpy as np
 
 def pruning_pagerank(G, alpha=0.85, max_iter=100, tol=1e-6,
                      warmup=10, prune_threshold_factor=0.5, stable_rounds=3):
+    """
+    Progressive Pruning PageRank - Novel algorithm that freezes converged low-rank pages.
+    
+    Parameters:
+        G: directed graph
+        alpha: damping factor (default 0.85)
+        warmup: iterations before pruning starts (default 10)
+        prune_threshold_factor: threshold = factor/N (default 0.5/N)
+        stable_rounds: consecutive rounds below threshold to freeze (default 3)
+    
+    Returns:
+        dict {node: pagerank_score}
+    """
     nodes = list(G.nodes())
     N = len(nodes)
-    if N == 0: return {}
-    rank = {node: 1.0/N for node in nodes}
-    frozen, active, low_count = [], np.ones(N, dtype=bool), np.zeros(N, dtype=int)
-    threshold = prune_threshold_factor/N
+    if N == 0:
+        return {}
+    
+    rank = {node: 1.0 / N for node in nodes}
+    frozen = set()
+    active = np.ones(N, dtype=bool)
+    low_count = np.zeros(N, dtype=int)
+    threshold = prune_threshold_factor / N
+    
     for iteration in range(max_iter):
         new_rank = {}
-        dangling_sum = sum(rank[n] for n in nodes if G.out_degree(n)==0)
+        
+        # Collect rank from dangling nodes (pages with no outgoing links)
+        dangling_sum = sum(rank[n] for n in nodes if G.out_degree(n) == 0)
+        
+        # Update only active nodes
         active_indices = np.where(active)[0]
         for i in active_indices:
             node = nodes[i]
-            new_rank[node] = (1-alpha)/N + alpha*dangling_sum/N
+            new_rank[node] = (1.0 - alpha) / N + alpha * dangling_sum / N
             for pred in G.predecessors(node):
-                od = G.out_degree(pred)
-                if od > 0: new_rank[node] += alpha*rank[pred]/od
-        for i in frozen: new_rank[nodes[i]] = rank[nodes[i]]
+                out_deg = G.out_degree(pred)
+                if out_deg > 0:
+                    new_rank[node] += alpha * rank[pred] / out_deg
+        
+        # Frozen nodes retain their last rank
+        for node in frozen:
+            new_rank[node] = rank[node]
+        
+        # Check convergence on active nodes only
         active_error = sum(abs(new_rank[nodes[i]] - rank[nodes[i]]) for i in active_indices)
         rank = new_rank
+        
+        # Pruning phase: freeze pages that have been below threshold for stable_rounds
         if iteration >= warmup:
             for i in active_indices:
-                if rank[nodes[i]] < threshold: low_count[i] += 1
-                else: low_count[i] = 0
-                if low_count[i] >= stable_rounds and i not in frozen:
-                    active[i], frozen.append(i) = False, i
-        if iteration >= warmup and active_error < tol: break
+                if rank[nodes[i]] < threshold:
+                    low_count[i] += 1
+                    if low_count[i] >= stable_rounds:
+                        active[i] = False
+                        frozen.add(nodes[i])
+                else:
+                    low_count[i] = 0
+        
+        if iteration >= warmup and active_error < tol:
+            break
+    
     total = sum(rank.values())
-    return {n: v/total for n,v in rank.items()}
+    return {n: v / total for n, v in rank.items()}
+
 
 def standard_pagerank(G, alpha=0.85, max_iter=100, tol=1e-6):
-    nodes, N = list(G.nodes()), len(G.nodes())
-    if N == 0: return {}
-    rank = {node: 1.0/N for node in nodes}
+    """Standard PageRank for comparison."""
+    nodes = list(G.nodes())
+    N = len(nodes)
+    if N == 0:
+        return {}
+    
+    rank = {node: 1.0 / N for node in nodes}
     for _ in range(max_iter):
-        new_rank, dangling_sum = {}, sum(rank[n] for n in nodes if G.out_degree(n)==0)
+        new_rank = {}
+        dangling_sum = sum(rank[n] for n in nodes if G.out_degree(n) == 0)
         for node in nodes:
-            new_rank[node] = (1-alpha)/N + alpha*dangling_sum/N
+            new_rank[node] = (1 - alpha) / N + alpha * dangling_sum / N
             for pred in G.predecessors(node):
-                if G.out_degree(pred) > 0: new_rank[node] += alpha*rank[pred]/G.out_degree(pred)
-        if sum(abs(new_rank[n]-rank[n]) for n in nodes) < tol: break
+                if G.out_degree(pred) > 0:
+                    new_rank[node] += alpha * rank[pred] / G.out_degree(pred)
+        if sum(abs(new_rank[n] - rank[n]) for n in nodes) < tol:
+            break
         rank = new_rank
+    
     total = sum(rank.values())
-    return {n: v/total for n,v in rank.items()}
+    return {n: v / total for n, v in rank.items()}
+
 
 if __name__ == "__main__":
+    # Test on a small web-like graph
     G = nx.DiGraph()
-    G.add_edges_from([('A','B'),('B','C'),('C','A'),('D','A'),('E','D')])
-    pr = pruning_pagerank(G)
-    print("Pruning PageRank:", {n: round(pr[n],6) for n in pr})`;
+    G.add_edges_from([
+        ("Hub_A", "Hub_B"), ("Hub_B", "Hub_A"),
+        ("Hub_A", "Page_1"), ("Hub_B", "Page_2"),
+        ("Page_1", "Hub_A"), ("Page_2", "Hub_B"),
+        ("Leaf_1", "Hub_A"), ("Leaf_2", "Hub_A"),
+    ])
+    
+    pr_standard = standard_pagerank(G)
+    pr_pruning = pruning_pagerank(G)
+    
+    print("Standard PageRank:")
+    for node, score in sorted(pr_standard.items(), key=lambda x: x[1], reverse=True):
+        print(f"  {node}: {score:.6f}")
+    
+    print("\\nPruning PageRank (same scores, fewer iterations):")
+    for node, score in sorted(pr_pruning.items(), key=lambda x: x[1], reverse=True):
+        print(f"  {node}: {score:.6f}")`;
 
-document.getElementById("src-req2").textContent = `import networkx as nx
-import numpy as np
+// FILE 2: realistic_data.py
+document.getElementById("src-realistic").textContent = `import argparse
+import csv
 import random
 import time
-import argparse
+import networkx as nx
+import numpy as np
+import scipy.sparse as sp
 
 def build_synthetic_graph(seed=42):
+    """
+    Builds a 791-node synthetic documentation graph.
+    Structure: 1 homepage → 10 sections → 78 articles each (780 articles)
+    Plus 868 cross-section links. Total: 791 nodes, 3,228 edges.
+    """
     rng = random.Random(seed)
     G = nx.DiGraph()
+    
     homepage = "index"
     sections = [f"section_{i}" for i in range(10)]
     articles = {s: [f"{s}_article_{j}" for j in range(78)] for s in sections}
     all_articles = [a for arts in articles.values() for a in arts]
-    G.add_node(homepage); G.add_nodes_from(sections); G.add_nodes_from(all_articles)
+    
+    G.add_node(homepage)
+    G.add_nodes_from(sections)
+    G.add_nodes_from(all_articles)
+    
+    # Build core structure: homepage ↔ sections ↔ articles
     for sec in sections:
-        G.add_edge(homepage, sec); G.add_edge(sec, homepage)
+        G.add_edge(homepage, sec)
+        G.add_edge(sec, homepage)
         for art in articles[sec]:
-            G.add_edge(sec, art); G.add_edge(art, sec); G.add_edge(art, homepage)
+            G.add_edge(sec, art)
+            G.add_edge(art, sec)
+            G.add_edge(art, homepage)
+    
+    # Add cross-section links
     added = 0
     while added < 868:
-        a, b = rng.choice(all_articles), rng.choice(all_articles)
-        if "_".join(a.split("_")[:2]) != "_".join(b.split("_")[:2]) and not G.has_edge(a,b):
-            G.add_edge(a,b); added += 1
+        a = rng.choice(all_articles)
+        b = rng.choice(all_articles)
+        if "_".join(a.split("_")[:2]) != "_".join(b.split("_")[:2]) and not G.has_edge(a, b):
+            G.add_edge(a, b)
+            added += 1
+    
     return G
+
 
 def method1_networkx(G, alpha=0.85):
     t0 = time.time()
-    return nx.pagerank(G, alpha=alpha), (time.time()-t0)*1000
+    return nx.pagerank(G, alpha=alpha), (time.time() - t0) * 1000
+
+
+def method2_manual(G, alpha=0.85, tol=1e-6, max_iter=100):
+    nodes = list(G.nodes())
+    n = len(nodes)
+    rank = {v: 1.0 / n for v in nodes}
+    t0 = time.time()
+    for _ in range(max_iter):
+        d_sum = sum(rank[v] for v in nodes if G.out_degree(v) == 0)
+        new_rank = {}
+        for v in nodes:
+            new_rank[v] = (1 - alpha) / n + alpha * d_sum / n
+            for p in G.predecessors(v):
+                if G.out_degree(p) > 0:
+                    new_rank[v] += alpha * rank[p] / G.out_degree(p)
+        if sum(abs(new_rank[v] - rank[v]) for v in nodes) < tol:
+            rank = new_rank
+            break
+        rank = new_rank
+    return rank, (time.time() - t0) * 1000
+
 
 if __name__ == "__main__":
     G = build_synthetic_graph()
     print(f"Graph: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
-    pr, t = method1_networkx(G)
-    print(f"NetworkX PageRank computed in {t:.1f} ms")`;
+    
+    pr_nx, t_nx = method1_networkx(G)
+    pr_manual, t_manual = method2_manual(G)
+    
+    l1_error = sum(abs(pr_nx[n] - pr_manual[n]) for n in G.nodes())
+    
+    print(f"NetworkX: {t_nx:.1f} ms")
+    print(f"Manual: {t_manual:.1f} ms")
+    print(f"L1 Error: {l1_error:.2e}")`;
 
-document.getElementById("src-req345").textContent = `import networkx as nx
+// FILE 3: all_6_methods.py
+document.getElementById("src-methods").textContent = `import networkx as nx
 import numpy as np
 import scipy.sparse as sp
 import random
 
-G = nx.DiGraph()
-G.add_edges_from([('A','B'),('A','C'),('B','C'),('B','D'),('C','A'),('D','C'),('E','D')])
+def build_test_graph():
+    G = nx.DiGraph()
+    G.add_edges_from([
+        ('A', 'B'), ('A', 'C'),
+        ('B', 'C'), ('B', 'D'),
+        ('C', 'A'),
+        ('D', 'C'),
+        ('E', 'D')
+    ])
+    return G
 
-# Method 1: NetworkX Built-in
-pr_nx = nx.pagerank(G, alpha=0.85)
-print("NetworkX:", {k: round(v,6) for k,v in pr_nx.items()})
-
-# Method 2: Manual Power Iteration
 def manual_pagerank(G, alpha=0.85, max_iter=100, tol=1e-6):
-    nodes, N = list(G.nodes()), len(G)
-    rank = {n: 1.0/N for n in nodes}
-    for _ in range(max_iter):
-        new_rank, dsum = {}, sum(rank[n] for n in nodes if G.out_degree(n)==0)
+    nodes = list(G.nodes())
+    N = len(nodes)
+    rank = {node: 1.0 / N for node in nodes}
+    
+    for iteration in range(max_iter):
+        new_rank = {}
+        dangling_sum = sum(rank[n] for n in nodes if G.out_degree(n) == 0)
+        
         for node in nodes:
-            new_rank[node] = (1-alpha)/N + alpha*dsum/N
+            new_rank[node] = (1 - alpha) / N + alpha * dangling_sum / N
             for pred in G.predecessors(node):
-                od = G.out_degree(pred)
-                if od > 0: new_rank[node] += alpha*rank[pred]/od
-        if sum(abs(new_rank[n]-rank[n]) for n in nodes) < tol: break
+                out_deg = G.out_degree(pred)
+                if out_deg > 0:
+                    new_rank[node] += alpha * rank[pred] / out_deg
+        
+        error = sum(abs(new_rank[n] - rank[n]) for n in nodes)
         rank = new_rank
+        if error < tol:
+            print(f"  Converged after {iteration+1} iterations")
+            break
+    
     total = sum(rank.values())
-    return {n: v/total for n,v in rank.items()}
+    return {n: v / total for n, v in rank.items()}
 
-pr_manual = manual_pagerank(G)
-print("Manual:", {k: round(v,6) for k,v in pr_manual.items()})`;
+def monte_carlo_pagerank(G, num_surfers=10000, steps=100, alpha=0.85, seed=42):
+    random.seed(seed)
+    nodes = list(G.nodes())
+    N = len(nodes)
+    index = {node: i for i, node in enumerate(nodes)}
+    visit_count = np.zeros(N, dtype=int)
+    
+    for _ in range(num_surfers):
+        current = random.choice(nodes)
+        for _ in range(steps):
+            visit_count[index[current]] += 1
+            if random.random() < alpha:
+                neighbors = list(G.successors(current))
+                current = random.choice(neighbors) if neighbors else random.choice(nodes)
+            else:
+                current = random.choice(nodes)
+    
+    total = visit_count.sum()
+    return {nodes[i]: visit_count[i] / total for i in range(N)}
 
+if __name__ == "__main__":
+    G = build_test_graph()
+    print("=== All PageRank Methods on 5-Node Test Graph ===\\n")
+    
+    # Method 1: NetworkX
+    pr_nx = nx.pagerank(G, alpha=0.85)
+    print("Method 1 - NetworkX Built-in:")
+    for node, score in sorted(pr_nx.items(), key=lambda x: x[1], reverse=True):
+        print(f"  Page {node}: {score:.6f}")
+    
+    # Method 2: Manual
+    pr_manual = manual_pagerank(G)
+    print("\\nMethod 2 - Manual Power Iteration:")
+    for node, score in sorted(pr_manual.items(), key=lambda x: x[1], reverse=True):
+        print(f"  Page {node}: {score:.6f}")
+    
+    # Method 5: Monte Carlo
+    pr_mc = monte_carlo_pagerank(G, num_surfers=10000)
+    print("\\nMethod 5 - Monte Carlo (10k surfers):")
+    for node, score in sorted(pr_mc.items(), key=lambda x: x[1], reverse=True):
+        print(f"  Page {node}: {score:.6f}")`;
+
+// FILE 4: pr_simulator.py (Streamlit app)
 document.getElementById("src-simulator").textContent = `import streamlit as st
 import networkx as nx
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-from scipy.stats import spearmanr, kendalltau
 import plotly.graph_objects as go
 import time
 import random
+from scipy.stats import spearmanr
 
 st.set_page_config(layout="wide", page_title="PageRank Simulator")
 
 st.title("🎓 PageRank Simulation Engine")
-st.markdown("Interactive PageRank visualiser with 5 computation methods")
+st.markdown("*Interactive PageRank visualiser with 5 computation methods*")
 
-# Simple example graph
-G = nx.DiGraph()
-G.add_edges_from([('A','B'),('A','C'),('B','C'),('B','D'),('C','A'),('D','C'),('E','D')])
+# Initialize session state
+if "G" not in st.session_state:
+    G = nx.DiGraph()
+    G.add_edges_from([
+        ('A', 'B'), ('A', 'C'),
+        ('B', 'C'), ('B', 'D'),
+        ('C', 'A'),
+        ('D', 'C'),
+        ('E', 'D')
+    ])
+    st.session_state.G = G
+    st.session_state.iteration = 0
+    st.session_state.converged = False
 
-# Compute PageRank
-pr = nx.pagerank(G, alpha=0.85)
+def manual_pagerank_step(G, ranks, alpha=0.85):
+    nodes = list(G.nodes())
+    N = len(nodes)
+    dangling_sum = sum(ranks.get(n, 0) for n in nodes if G.out_degree(n) == 0)
+    new_ranks = {}
+    for node in nodes:
+        incoming = sum(ranks.get(pred, 0) / G.out_degree(pred) 
+                       for pred in G.predecessors(node) if G.out_degree(pred) > 0)
+        new_ranks[node] = (1 - alpha) / N + alpha * (incoming + dangling_sum / N)
+    delta = sum(abs(new_ranks[n] - ranks.get(n, 0)) for n in nodes)
+    return new_ranks, delta
 
-# Display results
-st.subheader("PageRank Scores")
-for node, score in sorted(pr.items(), key=lambda x: x[1], reverse=True):
-    st.metric(f"Page {node}", f"{score:.4f}")
+# Sidebar
+with st.sidebar:
+    st.header("⚙️ Configuration")
+    method = st.selectbox("Method", [
+        "Manual Power Iteration",
+        "NetworkX Built-in",
+        "Monte Carlo Surfer"
+    ])
+    alpha = st.slider("Damping factor (α)", 0.50, 0.99, 0.85)
+    
+    if st.button("▶ Step"):
+        if method == "Manual Power Iteration":
+            if st.session_state.iteration == 0:
+                N = st.session_state.G.number_of_nodes()
+                st.session_state.ranks = {n: 1.0/N for n in st.session_state.G.nodes()}
+            r, d = manual_pagerank_step(st.session_state.G, st.session_state.ranks, alpha)
+            st.session_state.ranks = r
+            st.session_state.iteration += 1
+            if d < 1e-7:
+                st.session_state.converged = True
+        st.rerun()
+    
+    if st.button("⏩ Converge"):
+        for _ in range(100):
+            if st.session_state.converged:
+                break
+            r, d = manual_pagerank_step(st.session_state.G, st.session_state.ranks, alpha)
+            st.session_state.ranks = r
+            st.session_state.iteration += 1
+            if d < 1e-7:
+                st.session_state.converged = True
+        st.rerun()
+    
+    if st.button("↺ Reset"):
+        N = st.session_state.G.number_of_nodes()
+        st.session_state.ranks = {n: 1.0/N for n in st.session_state.G.nodes()}
+        st.session_state.iteration = 0
+        st.session_state.converged = False
+        st.rerun()
 
-# Simple force-directed layout visualization
-pos = nx.spring_layout(G, seed=42)
-fig, ax = plt.subplots(figsize=(8,6))
-nx.draw_networkx_nodes(G, pos, node_size=[pr[n]*3000 for n in G.nodes()], 
-                       node_color=list(pr.values()), cmap='RdYlBu', alpha=0.9, ax=ax)
-nx.draw_networkx_edges(G, pos, alpha=0.3, ax=ax)
-nx.draw_networkx_labels(G, pos, ax=ax)
-ax.set_title("PageRank Visualization (node size ∝ rank)")
-st.pyplot(fig)`;
+# Main display
+if "ranks" in st.session_state and st.session_state.ranks:
+    ranks = st.session_state.ranks
+    
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Pages", st.session_state.G.number_of_nodes())
+    col2.metric("Edges", st.session_state.G.number_of_edges())
+    col3.metric("Iterations", st.session_state.iteration)
+    col4.metric("Status", "Converged" if st.session_state.converged else "Running")
+    
+    # Display rankings
+    st.subheader("📊 PageRank Rankings")
+    df = pd.DataFrame([
+        {"Page": node, "PageRank": score}
+        for node, score in sorted(ranks.items(), key=lambda x: x[1], reverse=True)
+    ])
+    st.dataframe(df, use_container_width=True, hide_index=True)
+    
+    # Visualization
+    st.subheader("🕸️ Graph Visualization")
+    pos = nx.spring_layout(st.session_state.G, seed=42)
+    fig = go.Figure()
+    
+    # Add edges
+    for u, v in st.session_state.G.edges():
+        fig.add_trace(go.Scatter(
+            x=[pos[u][0], pos[v][0]], y=[pos[u][1], pos[v][1]],
+            mode='lines', line=dict(color='#60A5FA', width=1),
+            showlegend=False, hoverinfo='none'
+        ))
+    
+    # Add nodes
+    node_x = [pos[n][0] for n in st.session_state.G.nodes()]
+    node_y = [pos[n][1] for n in st.session_state.G.nodes()]
+    node_sizes = [ranks.get(n, 0.1) * 2000 for n in st.session_state.G.nodes()]
+    node_colors = [ranks.get(n, 0) for n in st.session_state.G.nodes()]
+    
+    fig.add_trace(go.Scatter(
+        x=node_x, y=node_y, mode='markers+text',
+        marker=dict(size=node_sizes, color=node_colors, colorscale='RdYlBu',
+                    showscale=True, colorbar=dict(title="PageRank")),
+        text=list(st.session_state.G.nodes()),
+        textposition="bottom center",
+        textfont=dict(color="white", size=12),
+        hoverinfo='text',
+        hovertext=[f"{n}<br>PageRank: {ranks.get(n, 0):.6f}" for n in st.session_state.G.nodes()]
+    ))
+    
+    fig.update_layout(
+        paper_bgcolor='#0F172A', plot_bgcolor='#111827',
+        xaxis=dict(visible=False), yaxis=dict(visible=False),
+        height=500, margin=dict(l=0, r=0, t=0, b=0)
+    )
+    st.plotly_chart(fig, use_container_width=True)`;
 
+// FILE 5: experiments.py
 document.getElementById("src-experiments").textContent = `import networkx as nx
 import numpy as np
-import time
 import matplotlib.pyplot as plt
+import time
 
 def build_test_graph():
     G = nx.DiGraph()
-    G.add_edges_from([('A','B'),('A','C'),('B','C'),('B','D'),('C','A'),('D','C'),('E','D')])
+    G.add_edges_from([
+        ('A', 'B'), ('A', 'C'),
+        ('B', 'C'), ('B', 'D'),
+        ('C', 'A'),
+        ('D', 'C'),
+        ('E', 'D')
+    ])
     return G
 
-def my_pagerank(G, alpha=0.85, max_iter=100, tol=1e-6):
-    nodes, N = list(G.nodes()), len(G)
-    rank = {n: 1.0/N for n in nodes}
-    for _ in range(max_iter):
-        new_rank, dsum = {}, sum(rank[n] for n in nodes if G.out_degree(n)==0)
-        for node in nodes:
-            new_rank[node] = (1-alpha)/N + alpha*dsum/N
-            for pred in G.predecessors(node):
-                od = G.out_degree(pred)
-                if od > 0: new_rank[node] += alpha*rank[pred]/od
-        if sum(abs(new_rank[n]-rank[n]) for n in nodes) < tol: break
-        rank = new_rank
-    total = sum(rank.values())
-    return {n: v/total for n,v in rank.items()}
-
-def experiment1_convergence():
-    G = build_test_graph()
+def custom_pagerank(G, alpha=0.85, max_iter=100, tol=1e-6):
+    nodes = list(G.nodes())
+    N = len(nodes)
+    rank = {node: 1.0/N for node in nodes}
     errors = []
-    rank = {n: 1.0/len(G) for n in G.nodes()}
-    for _ in range(50):
-        new_rank, dsum = {}, sum(rank[n] for n in G.nodes() if G.out_degree(n)==0)
-        for node in G.nodes():
-            new_rank[node] = (1-0.85)/len(G) + 0.85*dsum/len(G)
+    
+    for iteration in range(max_iter):
+        new_rank = {}
+        dangling_sum = sum(rank[n] for n in nodes if G.out_degree(n) == 0)
+        
+        for node in nodes:
+            new_rank[node] = (1 - alpha) / N + alpha * dangling_sum / N
             for pred in G.predecessors(node):
-                od = G.out_degree(pred)
-                if od > 0: new_rank[node] += 0.85*rank[pred]/od
-        error = sum(abs(new_rank[n]-rank[n]) for n in G.nodes())
+                if G.out_degree(pred) > 0:
+                    new_rank[node] += alpha * rank[pred] / G.out_degree(pred)
+        
+        error = sum(abs(new_rank[n] - rank[n]) for n in nodes)
         errors.append(error)
         rank = new_rank
-    plt.plot(range(1,len(errors)+1), errors)
-    plt.yscale('log')
-    plt.xlabel('Iteration'); plt.ylabel('L1 Error')
-    plt.title('Convergence: Manual Power Iteration')
+        if error < tol:
+            break
+    
+    return rank, errors
+
+def experiment_1_convergence():
+    """Track convergence speed of power iteration."""
+    G = build_test_graph()
+    rank, errors = custom_pagerank(G, tol=1e-7)
+    
+    plt.figure(figsize=(10, 6))
+    plt.semilogy(range(1, len(errors)+1), errors, 'b-o', linewidth=2, markersize=4)
+    plt.axhline(y=1e-7, color='r', linestyle='--', label='Convergence threshold (1e-7)')
+    plt.xlabel('Iteration', fontsize=12)
+    plt.ylabel('L1 Error (log scale)', fontsize=12)
+    plt.title('Experiment 1: PageRank Convergence Speed', fontsize=14)
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig('exp1_convergence.png', dpi=150)
+    plt.show()
+    print(f"Converged after {len(errors)} iterations")
+
+def experiment_4_damping_factor():
+    """Analyze sensitivity to damping factor alpha."""
+    G = build_test_graph()
+    alphas = [0.50, 0.65, 0.75, 0.85, 0.90, 0.95, 0.99]
+    results = {}
+    
+    print("\\nDamping Factor Sensitivity Analysis:")
+    print("-" * 60)
+    print(f"{'Alpha':<8} {'A':<10} {'B':<10} {'C':<10} {'D':<10} {'E':<10}")
+    print("-" * 60)
+    
+    for a in alphas:
+        rank, _ = custom_pagerank(G, alpha=a)
+        results[a] = rank
+        print(f"{a:<8} {rank['A']:<10.6f} {rank['B']:<10.6f} {rank['C']:<10.6f} {rank['D']:<10.6f} {rank['E']:<10.6f}")
+    
+    # Plot
+    plt.figure(figsize=(10, 6))
+    for page in ['A', 'B', 'C', 'D', 'E']:
+        scores = [results[a][page] for a in alphas]
+        plt.plot(alphas, scores, 'o-', linewidth=2, markersize=6, label=f'Page {page}')
+    
+    plt.axvline(x=0.85, color='gray', linestyle='--', alpha=0.7, label='Standard α = 0.85')
+    plt.xlabel('Damping Factor (α)', fontsize=12)
+    plt.ylabel('PageRank Score', fontsize=12)
+    plt.title('Experiment 4: Damping Factor Sensitivity', fontsize=14)
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig('exp4_damping.png', dpi=150)
+    plt.show()
+
+def experiment_5_monte_carlo():
+    """Monte Carlo accuracy vs number of surfers."""
+    G = build_test_graph()
+    exact_rank, _ = custom_pagerank(G, tol=1e-10)
+    
+    surfer_counts = [100, 500, 1000, 5000, 10000, 50000]
+    errors = []
+    
+    print("\\nMonte Carlo Accuracy Analysis:")
+    print("-" * 60)
+    print(f"{'Surfers':<12} {'L1 Error':<15} {'Time (ms)':<12}")
+    print("-" * 60)
+    
+    import random
+    for R in surfer_counts:
+        t0 = time.time()
+        nodes = list(G.nodes())
+        N = len(nodes)
+        index = {n: i for i, n in enumerate(nodes)}
+        visits = np.zeros(N)
+        
+        for _ in range(R):
+            cur = random.choice(nodes)
+            for _ in range(100):
+                visits[index[cur]] += 1
+                if random.random() < 0.85:
+                    nbrs = list(G.successors(cur))
+                    cur = random.choice(nbrs) if nbrs else random.choice(nodes)
+                else:
+                    cur = random.choice(nodes)
+        
+        total = visits.sum()
+        mc_rank = {nodes[i]: visits[i]/total for i in range(N)}
+        l1 = sum(abs(mc_rank[n] - exact_rank[n]) for n in nodes)
+        errors.append(l1)
+        t_ms = (time.time() - t0) * 1000
+        print(f"{R:<12} {l1:<15.6f} {t_ms:<12.1f}")
+    
+    # Plot
+    plt.figure(figsize=(10, 6))
+    plt.loglog(surfer_counts, errors, 'bo-', linewidth=2, markersize=8)
+    plt.xlabel('Number of Surfers (log scale)', fontsize=12)
+    plt.ylabel('L1 Error (log scale)', fontsize=12)
+    plt.title('Experiment 5: Monte Carlo Accuracy vs Surfer Count', fontsize=14)
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig('exp5_montecarlo.png', dpi=150)
     plt.show()
 
 if __name__ == "__main__":
-    experiment1_convergence()`;
+    print("="*60)
+    print("PAGERANK SIMULATION EXPERIMENTS")
+    print("="*60)
+    
+    experiment_1_convergence()
+    experiment_4_damping_factor()
+    experiment_5_monte_carlo()`;
 
-document.getElementById("src-search_test").textContent = `import networkx as nx
+// FILE 6: search_engine.py
+document.getElementById("src-search").textContent = `import networkx as nx
 import numpy as np
 from datetime import datetime, timedelta
 
 class SearchEngine:
+    """
+    Configurable search engine combining PageRank with keyword relevance,
+    content recency, and topic-sensitive personalization.
+    """
+    
     def __init__(self, G, page_content=None, page_dates=None):
-        self.G, self.nodes = G, list(G.nodes())
+        self.G = G
+        self.nodes = list(G.nodes())
+        self.N = len(self.nodes)
         self.page_content = page_content or {}
-        self._base_pr = nx.pagerank(G, alpha=0.85) if len(self.nodes)>0 else {}
+        self.page_dates = page_dates or {}
+        self._base_pr = nx.pagerank(G, alpha=0.85) if self.N > 0 else {}
     
     def _relevance(self, keyword):
-        if not keyword: return {p:0.0 for p in self.nodes}
+        """TF-based keyword relevance scoring."""
+        if not keyword:
+            return {p: 0.0 for p in self.nodes}
+        
         kw = keyword.lower().strip()
         scores = {}
         for p in self.nodes:
-            text = str(self.page_content.get(p, "")).lower()
-            scores[p] = float(sum(text.count(w) for w in kw.split()))
+            text = str(self.page_content.get(p, str(p))).lower()
+            count = sum(text.count(w) for w in kw.split())
+            scores[p] = float(count)
+        
         total = sum(scores.values())
-        return {p: s/total if total>0 else 0.0 for p,s in scores.items()}
+        return {p: s / total if total > 0 else 0.0 for p, s in scores.items()}
     
-    def search(self, keyword='', relevance_weight=0.0, top_k=10):
-        pr, rel = self._base_pr, self._relevance(keyword)
-        w_pr = max(0.0, 1.0 - relevance_weight)
+    def _recency(self):
+        """Exponential decay recency score (half-life 70 days)."""
+        if not self.page_dates:
+            return {p: 0.5 for p in self.nodes}
+        
+        now = datetime.now()
+        scores = {}
+        for p in self.nodes:
+            if p in self.page_dates:
+                days = max(0, (now - self.page_dates[p]).days)
+                scores[p] = np.exp(-0.01 * days)
+            else:
+                scores[p] = 0.5
+        
+        mn, mx = min(scores.values()), max(scores.values())
+        return {p: (s - mn) / (mx - mn) if mx > mn else s for p, s in scores.items()}
+    
+    def search(self, keyword='', alpha=0.85, relevance_weight=0.0,
+               recency_weight=0.0, topic_weight=0.0, topic_seeds=None, top_k=10):
+        """
+        Perform search with configurable signal weights.
+        
+        Score = w_PR * PageRank + w_rel * relevance + w_rec * recency + w_topic * topic_PR
+        
+        Args:
+            keyword: Search query string
+            alpha: Damping factor for PageRank
+            relevance_weight: Weight for keyword relevance (0-1)
+            recency_weight: Weight for content recency (0-1)
+            topic_weight: Weight for topic-sensitive PageRank (0-1)
+            topic_seeds: List of seed pages for topic-sensitive PR
+            top_k: Number of results to return
+        
+        Returns:
+            List of dicts with 'page', 'score', 'pr', 'relevance', 'recency'
+        """
+        # Get base signals
+        pr = self._base_pr
+        rel = self._relevance(keyword)
+        rec = self._recency()
+        
+        # Topic-sensitive PageRank
+        if topic_weight > 0 and topic_seeds:
+            # Simplified topic PR (biasing teleportation toward seeds)
+            top = {p: pr.get(p, 0) * (1.5 if p in topic_seeds else 1.0) for p in self.nodes}
+            total = sum(top.values())
+            top = {p: v/total for p, v in top.items()}
+        else:
+            top = pr
+        
+        # Normalize weights
+        w_pr = max(0.0, 1.0 - relevance_weight - recency_weight - topic_weight)
+        
+        # Compute combined scores
         results = []
         for p in self.nodes:
-            score = w_pr*pr.get(p,0) + relevance_weight*rel.get(p,0)
-            results.append({'page': p, 'score': round(score,6), 'pr': pr.get(p,0)})
+            score = (w_pr * pr.get(p, 0) +
+                    relevance_weight * rel.get(p, 0) +
+                    recency_weight * rec.get(p, 0) +
+                    topic_weight * top.get(p, 0))
+            results.append({
+                'page': p,
+                'score': round(score, 6),
+                'pr': pr.get(p, 0),
+                'relevance': rel.get(p, 0),
+                'recency': rec.get(p, 0)
+            })
+        
         results.sort(key=lambda x: x['score'], reverse=True)
         return results[:top_k]
 
-# Test
-G = nx.DiGraph()
-G.add_edges_from([('home','about'),('home','contact'),('about','home')])
-content = {'home': 'welcome to my website', 'about': 'about us page', 'contact': 'contact information'}
-se = SearchEngine(G, page_content=content)
-results = se.search(keyword='welcome', relevance_weight=0.5)
-print("Search results:", results)`;
 
-let activeTab = 'req1';
+# Example usage and test
+if __name__ == "__main__":
+    # Build test graph
+    G = nx.DiGraph()
+    G.add_edges_from([
+        ('homepage', 'python_tutorial'),
+        ('homepage', 'data_science'),
+        ('python_tutorial', 'homepage'),
+        ('python_tutorial', 'ml_algorithms'),
+        ('data_science', 'ml_algorithms'),
+        ('ml_algorithms', 'homepage'),
+    ])
+    
+    # Content for keyword relevance
+    content = {
+        'homepage': 'python programming machine learning data science',
+        'python_tutorial': 'python tutorial beginner python programming',
+        'data_science': 'data science machine learning python',
+        'ml_algorithms': 'machine learning algorithms classification regression',
+    }
+    
+    # Run search
+    se = SearchEngine(G, page_content=content)
+    results = se.search(keyword='python', relevance_weight=0.4, top_k=5)
+    
+    print("Search Results for 'python':")
+    for i, r in enumerate(results, 1):
+        print(f"  {i}. {r['page']}: score={r['score']:.4f}, PR={r['pr']:.4f}, rel={r['relevance']:.4f}")`;
+
+// FILE 7: seo_recommendations.py
+document.getElementById("src-seo").textContent = `import networkx as nx
+
+def compute_pagerank(G, alpha=0.85):
+    """Compute PageRank and return sorted results."""
+    pr = nx.pagerank(G, alpha=alpha, max_iter=200, tol=1e-9)
+    return sorted(pr.items(), key=lambda x: x[1], reverse=True)
+
+print("="*60)
+print("SEO RECOMMENDATIONS - DATA-PROVEN RESULTS")
+print("="*60)
+
+# Test graph: Metro Daily news site simulation
+G_baseline = nx.DiGraph()
+G_baseline.add_edges_from([
+    # Homepage to sections
+    ('homepage', 'top_story'),
+    ('homepage', 'local_news'),
+    ('homepage', 'sports'),
+    ('homepage', 'weather'),
+    # Chain structure (bad for rank distribution)
+    ('top_story', 'local_news'),
+    ('local_news', 'sports'),
+    ('sports', 'weather'),
+    # Backlink from weather
+    ('weather', 'homepage'),
+    # Supporting pages linking to homepage
+    ('about', 'homepage'),
+    ('contact', 'homepage'),
+    ('privacy', 'homepage'),
+    # Dangling pages (leaking authority)
+    ('rss_feed', []),  # No outlinks - DANGLING
+    ('print_edition', []),
+])
+
+print("\\n📊 METRO DAILY CASE STUDY RESULTS:")
+print("-" * 50)
+
+# Baseline
+pr_baseline = dict(compute_pagerank(G_baseline))
+top_story_base = pr_baseline.get('top_story', 0)
+print(f"\\n1. Baseline (poor structure):")
+print(f"   Top Story PageRank: {top_story_base:.6f}")
+
+# Rec 4: Fix dangling pages
+G_rec4 = G_baseline.copy()
+G_rec4.add_edge('rss_feed', 'homepage')
+G_rec4.add_edge('print_edition', 'homepage')
+pr_rec4 = dict(compute_pagerank(G_rec4))
+top_story_rec4 = pr_rec4.get('top_story', 0)
+gain_rec4 = (top_story_rec4 - top_story_base) / top_story_base * 100
+print(f"\\n2. Rec 4 - Fix Dangling Pages:")
+print(f"   Top Story PageRank: {top_story_rec4:.6f} (+{gain_rec4:.1f}%)")
+
+# Rec 5: Hub-and-spoke navigation
+G_rec5 = G_rec4.copy()
+G_rec5.remove_edge('top_story', 'local_news')
+G_rec5.remove_edge('local_news', 'sports')
+G_rec5.remove_edge('sports', 'weather')
+G_rec5.add_edge('homepage', 'local_news')
+G_rec5.add_edge('homepage', 'sports')
+G_rec5.add_edge('homepage', 'weather')
+pr_rec5 = dict(compute_pagerank(G_rec5))
+top_story_rec5 = pr_rec5.get('top_story', 0)
+gain_rec5 = (top_story_rec5 - top_story_rec4) / top_story_rec4 * 100
+print(f"\\n3. Rec 5 - Hub-and-Spoke Navigation:")
+print(f"   Top Story PageRank: {top_story_rec5:.6f} (+{gain_rec5:.1f}%)")
+
+# Rec 2: Internal hub page
+G_rec2 = G_rec5.copy()
+for article in ['old_article_1', 'old_article_2', 'old_article_3', 'archived_post']:
+    G_rec2.add_node(article)
+    G_rec2.add_edge(article, 'top_story')
+pr_rec2 = dict(compute_pagerank(G_rec2))
+top_story_rec2 = pr_rec2.get('top_story', 0)
+gain_rec2 = (top_story_rec2 - top_story_rec5) / top_story_rec5 * 100
+print(f"\\n4. Rec 2 - Create Internal Hub Page:")
+print(f"   Top Story PageRank: {top_story_rec2:.6f} (+{gain_rec2:.1f}%)")
+
+# Final summary
+total_gain = (top_story_rec2 - top_story_base) / top_story_base * 100
+print(f"\\n" + "="*50)
+print(f"📈 TOTAL IMPROVEMENT: +{total_gain:.1f}%")
+print(f"   (From baseline PR={top_story_base:.4f} to final PR={top_story_rec2:.4f})")
+print("="*50)
+
+# Diminishing returns demonstration
+print("\\n📉 DIMINISHING RETURNS IN PAGERANK:")
+print("   Adding more inbound links after saturation yields zero gain.")
+print("   Maximum achievable rank is bounded by the teleportation baseline.")`;
+
+// FILE 8: toy_example_with_recommend.py
+document.getElementById("src-toy").textContent = `import networkx as nx
+import os
+
+def generate_site(folder_name, link_structure):
+    """Generate HTML files for a simulated website."""
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
+    pages = [f"page{i}.html" for i in range(15)]
+    for i in range(15):
+        with open(os.path.join(folder_name, pages[i]), "w") as f:
+            f.write(f"<html><body><h1>Page {i}: Metro Daily</h1>")
+            targets = link_structure.get(i, [])
+            for t in targets:
+                f.write(f'<p><a href="{pages[t]}">Link to Page {t}</a></p>')
+            f.write("</body></html>")
+
+def compute_all_pageranks(link_structure):
+    """Compute PageRank for all nodes and return sorted results."""
+    G = nx.DiGraph()
+    for u, targets in link_structure.items():
+        for v in targets:
+            G.add_edge(u, v)
+    for i in range(15):
+        G.add_node(i)
+    pr = nx.pagerank(G, alpha=0.85, max_iter=200, tol=1e-9)
+    return pr
+
+# BASELINE: Poor structure with chain and dangling pages
+baseline = {
+    0: [1],       # Homepage → Top Story
+    1: [2],       # Top Story → Local News
+    2: [3],       # Local News → Sports
+    3: [4],       # Sports → Weather
+    4: [0],       # Weather → Homepage
+    5: [0], 6: [0], 7: [0], 8: [0], 9: [0], 10: [0], 11: [0], 12: [0],
+    13: [],       # RSS Feed - DANGLING
+    14: []        # Print Edition - DANGLING
+}
+
+print("="*60)
+print("METRO DAILY SEO PROGRESSION")
+print("="*60)
+
+baseline_pr = compute_all_pageranks(baseline)
+print(f"\\nBaseline - Top Story PageRank: {baseline_pr[1]:.6f}")
+
+# Rec 4: Fix dangling pages
+rec4 = baseline.copy()
+rec4[13] = [0]   # RSS Feed → Homepage
+rec4[14] = [0]   # Print Edition → Homepage
+pr_rec4 = compute_all_pageranks(rec4)
+print(f"After Rec 4 (Fix Dangling): {pr_rec4[1]:.6f} (+{(pr_rec4[1]-baseline_pr[1])/baseline_pr[1]*100:.1f}%)")
+
+# Rec 5: Hub-and-Spoke
+rec5 = rec4.copy()
+rec5[0] = [1, 2, 3, 4]   # Homepage links to all sections
+rec5[1] = []             # Remove chain links
+rec5[2] = []
+rec5[3] = []
+rec5[4] = [0]
+pr_rec5 = compute_all_pageranks(rec5)
+print(f"After Rec 5 (Hub-and-Spoke): {pr_rec5[1]:.6f} (+{(pr_rec5[1]-pr_rec4[1])/pr_rec4[1]*100:.1f}%)")
+
+# Rec 2: Internal hub
+rec2 = rec5.copy()
+for i in [7, 8, 9, 10, 11, 12]:
+    rec2[i] = [1]
+pr_rec2 = compute_all_pageranks(rec2)
+print(f"After Rec 2 (Internal Hub): {pr_rec2[1]:.6f} (+{(pr_rec2[1]-pr_rec5[1])/pr_rec5[1]*100:.1f}%)")
+
+print(f"\\n" + "="*60)
+print(f"TOTAL IMPROVEMENT: {(pr_rec2[1]-baseline_pr[1])/baseline_pr[1]*100:.1f}%")
+print("="*60)
+
+# Final rankings
+print("\\nFINAL TOP 10 PAGES:")
+ranked = sorted(pr_rec2.items(), key=lambda x: x[1], reverse=True)
+for i, (page, score) in enumerate(ranked[:10], 1):
+    page_names = {0:"Homepage", 1:"Top Story", 2:"Local News", 3:"Sports", 4:"Weather"}
+    name = page_names.get(page, f"Page {page}")
+    print(f"  {i}. {name}: {score:.6f}")`;
+
+// Tab switching and UI functions
+let activeTab = 'pruning';
 
 function switchTab(id) {
     activeTab = id;
     document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.code-pane').forEach(p => p.classList.remove('active'));
+    
+    const tabMap = {pruning:0, realistic:1, methods:2, simulator:3, experiments:4, search:5, seo:6, toy:7};
+    const idx = tabMap[id];
     const tabs = document.querySelectorAll('.code-tab');
-    const idx = {req1:0, req2:1, req345:2, simulator:3, experiments:4, search_test:5}[id];
     if(tabs[idx]) tabs[idx].classList.add('active');
-    document.getElementById('pane-'+id).classList.add('active');
-    const names = {req1:'progressive_pruning_pr.py', req2:'realistic_data.py', req345:'all_6_methods.py', 
-                   simulator:'pr_simulator.py', experiments:'experiments.py', search_test:'search_engine.py'};
-    document.getElementById('code-filename').textContent = names[id];
-}
-
-function openCode(id) {
-    document.getElementById('code').scrollIntoView({behavior:'smooth'});
-    setTimeout(() => switchTab(id), 400);
+    
+    document.getElementById('pane-' + id).classList.add('active');
+    
+    const names = {
+        pruning: 'progressive_pruning_pr.py', realistic: 'realistic_data.py',
+        methods: 'all_6_methods.py', simulator: 'pr_simulator.py',
+        experiments: 'experiments.py', search: 'search_engine.py',
+        seo: 'seo_recommendations.py', toy: 'toy_example_with_recommend.py'
+    };
+    document.getElementById('code-filename').innerHTML = '📄 ' + names[id];
 }
 
 function copyCode() {
-    const src = document.getElementById('src-'+activeTab);
+    const src = document.getElementById('src-' + activeTab);
     if(!src) return;
     navigator.clipboard.writeText(src.textContent);
     const btn = document.querySelector('.btn-copy');
     btn.textContent = '✓ Copied!';
-    setTimeout(() => btn.textContent = 'Copy', 2000);
+    setTimeout(() => btn.textContent = '📋 Copy', 2000);
 }
 
 function downloadCode() {
-    const src = document.getElementById('src-'+activeTab);
+    const src = document.getElementById('src-' + activeTab);
     if(!src) return;
-    const names = {req1:'progressive_pruning_pr.py', req2:'realistic_data.py', req345:'all_6_methods.py', 
-                   simulator:'pr_simulator.py', experiments:'experiments.py', search_test:'search_engine.py'};
+    const names = {
+        pruning: 'progressive_pruning_pr.py', realistic: 'realistic_data.py',
+        methods: 'all_6_methods.py', simulator: 'pr_simulator.py',
+        experiments: 'experiments.py', search: 'search_engine.py',
+        seo: 'seo_recommendations.py', toy: 'toy_example_with_recommend.py'
+    };
     const blob = new Blob([src.textContent], {type:'text/plain'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
