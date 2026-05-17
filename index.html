@@ -160,7 +160,7 @@ section{padding:80px 0}
 
 /* ── CODE SECTION ─────────────────────────────────────────────── */
 #code{background:var(--surface)}
-.code-layout{display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;min-height:650px}
+.code-layout{display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;min-height:600px}
 .code-sidebar{
   background:rgba(0,0,0,.3);border-right:1px solid var(--border);
   padding:16px 0;overflow-y:auto;
@@ -198,7 +198,6 @@ section{padding:80px 0}
 .code-pane-wrapper{background:var(--code-bg);padding:20px;overflow:auto;height:600px;position:relative;}
 .code-pane-wrapper pre{margin:0;background:transparent!important;}
 .code-pane-wrapper code{font-size:.8rem!important;line-height:1.6!important;font-family:'JetBrains Mono',monospace!important;}
-.status-msg{color:var(--muted);font-style:italic;}
 
 /* ── RESULTS ──────────────────────────────────────────────────── */
 .results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
@@ -275,7 +274,7 @@ footer{
 footer p{color:var(--muted);font-size:.85rem;margin-bottom:6px}
 footer strong{color:var(--text)}
 
-/* ── SCROLL INDICATOR ─────────────────────────────────────────── */
+/* ── SCROLL PROGRESS INDICATOR ────────────────────────────────── */
 .scroll-progress{
   position:fixed;top:60px;left:0;height:2px;
   background:linear-gradient(90deg,var(--accent),var(--purple));
@@ -322,14 +321,12 @@ footer strong{color:var(--text)}
     </div>
 
     <div class="stats">
-      <div class="stats-card">
-        <div class="stat-card"><div class="stat-num">6</div><div class="stat-lbl">PR Methods</div></div>
-        <div class="stat-card"><div class="stat-num">5</div><div class="stat-lbl">Experiments</div></div>
-        <div class="stat-card"><div class="stat-num">791</div><div class="stat-lbl">Node Graph</div></div>
-        <div class="stat-card"><div class="stat-num">1.53×</div><div class="stat-lbl">Pruning Speedup</div></div>
-        <div class="stat-card"><div class="stat-num">+287%</div><div class="stat-lbl">Max SEO Gain</div></div>
-        <div class="stat-card"><div class="stat-num">6.7K</div><div class="stat-lbl">Lines of Code</div></div>
-      </div>
+      <div class="stat-card"><div class="stat-num">6</div><div class="stat-lbl">PR Methods</div></div>
+      <div class="stat-card"><div class="stat-num">5</div><div class="stat-lbl">Experiments</div></div>
+      <div class="stat-card"><div class="stat-num">791</div><div class="stat-lbl">Node Graph</div></div>
+      <div class="stat-card"><div class="stat-num">1.53×</div><div class="stat-lbl">Pruning Speedup</div></div>
+      <div class="stat-card"><div class="stat-num">+287%</div><div class="stat-lbl">Max SEO Gain</div></div>
+      <div class="stat-card"><div class="stat-num">6.7K</div><div class="stat-lbl">Lines of Code</div></div>
     </div>
   </div>
 </section>
@@ -383,8 +380,8 @@ footer strong{color:var(--text)}
 <section id="code">
   <div class="container">
     <div class="section-tag">Source Code</div>
-    <h2 class="section-title">Complete System Source Code</h2>
-    <p class="section-sub">Dynamic source-code file fetcher. Files are loaded live directly from your workspace repository boundary.</p>
+    <h2 class="section-title">Complete Code Workspace</h2>
+    <p class="section-sub">Dynamic source-code browser. Code files are parsed and highlighted live directly from your workspace directory path context.</p>
 
     <div class="code-layout">
       <div class="code-sidebar" id="sidebar-tabs">
@@ -392,14 +389,14 @@ footer strong{color:var(--text)}
 
       <div class="code-main">
         <div class="code-header">
-          <div class="code-filename" id="code-filename">Select a file</div>
+          <div class="code-filename" id="code-filename">Initializing...</div>
           <div class="code-actions">
             <button class="btn-copy" onclick="copyCode()">Copy</button>
             <button class="btn-download" onclick="downloadCode()">Download Full Script</button>
           </div>
         </div>
         <div class="code-pane-wrapper">
-          <pre><code class="language-python" id="code-display-block"># Please select a source script from the sidebar menu module context.</code></pre>
+          <pre><code class="language-python" id="code-display-block"># Processing workspace logic variables... Please wait.</code></pre>
         </div>
       </div>
     </div>
@@ -560,7 +557,7 @@ streamlit run pr_simulator.py</pre>
 </footer>
 
 <script>
-// Your complete array of exact developer filenames in the local context directory
+// Exact, synchronous source array matching your root repository folder filenames
 const sourceFiles = [
   "Experiments.py",
   "all_6_methods.py",
@@ -574,10 +571,10 @@ const sourceFiles = [
 
 let selectedFile = sourceFiles[0];
 
-// Dynamic structural sidebar UI builder
+// Renders the file nodes dynamically into your workspace component block
 function initializeSidebar() {
   const sidebar = document.getElementById('sidebar-tabs');
-  sidebar.innerHTML = ''; // clear initial parameters
+  sidebar.innerHTML = ''; 
   
   sourceFiles.forEach((filename, index) => {
     const tabLink = document.createElement('a');
@@ -593,60 +590,59 @@ function initializeSidebar() {
   });
 }
 
-// Dynamic Fetch Handler logic block — pulls down raw text completely
+// ASYNC AJAX CONTROLLER ENGINE: Fetches complete, un-truncated scripts on demand
 function switchTab(filename) {
   selectedFile = filename;
   
-  // Reset selected state visual indicators
   document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
   const activeTab = document.getElementById(`tab-${filename}`);
   if (activeTab) activeTab.classList.add('active');
   
   document.getElementById('code-filename').textContent = filename;
   const codeDisplay = document.getElementById('code-display-block');
-  codeDisplay.textContent = `# Loading complete text context for ${filename}... Please wait.`;
+  codeDisplay.textContent = `# Querying filesystem stream loop for '${filename}'...`;
   
-  // AJAX local engine lookup
+  // Requests the document context live from the root workspace directory path
   fetch('./' + filename)
     .then(response => {
       if (!response.ok) {
-        throw new Error(`HTTP target exception status returned: ${response.status}`);
+        throw new Error(`Asset file missing or connection error. Status: ${response.status}`);
       }
       return response.text();
     })
     .then(text => {
       codeDisplay.textContent = text;
-      // Re-initialize highlight.js formatting for newly loaded files
+      // Re-trigger the formatting parser for new raw code blocks
       hljs.highlightElement(codeDisplay);
     })
     .catch(err => {
-      codeDisplay.textContent = `# Error loading code asset file execution stream: \\n# ${err.message}\\n# Ensure file is saved as '${filename}' right next to this index.html file inside the server directory configuration context.`;
+      codeDisplay.textContent = `# System Workspace Error:\\n# Could not open the source file '${filename}' live.\\n# Reason: ${err.message}\\n\\n# Verification Fix:\\n# Make sure the file named '${filename}' is saved in the exact same directory folder alongside this index.html page on your server.`;
     });
 }
 
-// Download Interface controller routine block
+// Bypasses character string truncations completely via native relative directory execution
 function downloadCode() {
-  const downloadLink = document.createElement('a');
-  downloadLink.href = './' + selectedFile;
-  downloadLink.download = selectedFile;
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.href = './' + selectedFile;
+  downloadAnchor.download = selectedFile;
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  document.body.removeChild(downloadAnchor);
 }
 
 function copyCode() {
   const displayCodeBlock = document.getElementById('code-display-block');
   if (displayCodeBlock) {
     navigator.clipboard.writeText(displayCodeBlock.textContent)
-      .then(() => alert(`Text content of ${selectedFile} successfully copied to clipboard!`))
-      .catch(err => alert('Clipboard error: ' + err));
+      .then(() => alert(`Text profile of ${selectedFile} copied to clipboard!`))
+      .catch(err => alert('Clipboard operation failed: ' + err));
   }
 }
 
-// Main operational hook initialization routing boundary window loop
+// Global DOM entry event initialization
 window.addEventListener('DOMContentLoaded', () => {
   initializeSidebar();
-  if(sourceFiles.length > 0) {
+  if (sourceFiles.length > 0) {
     switchTab(sourceFiles[0]);
   }
 });
@@ -654,8 +650,8 @@ window.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('scroll', () => {
   const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
   const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const progressScrolled = (winScroll / totalHeight) * 100;
-  document.getElementById('scrollBar').style.width = progressScrolled + '%';
+  const progressPercent = (winScroll / totalHeight) * 100;
+  document.getElementById('scrollBar').style.width = progressPercent + '%';
 });
 </script>
 </body>
