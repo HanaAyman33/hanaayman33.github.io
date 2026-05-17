@@ -160,7 +160,7 @@ section{padding:80px 0}
 
 /* ── CODE SECTION ─────────────────────────────────────────────── */
 #code{background:var(--surface)}
-.code-layout{display:grid;grid-template-columns:240px 1fr;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;min-height:600px}
+.code-layout{display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;min-height:650px}
 .code-sidebar{
   background:rgba(0,0,0,.3);border-right:1px solid var(--border);
   padding:16px 0;overflow-y:auto;
@@ -176,7 +176,6 @@ section{padding:80px 0}
 }
 .code-tab:hover{color:var(--text);background:rgba(59,130,246,.07)}
 .code-tab.active{color:var(--accent2);border-left-color:var(--accent);background:rgba(59,130,246,.08)}
-.code-tab .tab-lines{font-size:.7rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:2px}
 .code-main{display:flex;flex-direction:column;overflow:hidden}
 .code-header{
   display:flex;align-items:center;justify-content:space-between;
@@ -196,11 +195,10 @@ section{padding:80px 0}
 .btn-copy:hover{background:rgba(59,130,246,.3)}
 .btn-download{background:rgba(16,185,129,.12);color:var(--green);border-color:rgba(16,185,129,.3)}
 .btn-download:hover{background:rgba(16,185,129,.25)}
-.code-pane{display:none;overflow:auto;max-height:75vh}
-.code-pane.active{display:block}
-.code-pane pre{margin:0!important;border-radius:0!important;padding:20px!important;background:var(--code-bg)!important}
-.code-pane pre code{font-size:.78rem!important;line-height:1.6!important;font-family:'JetBrains Mono',monospace!important}
-.hljs{background:transparent!important;padding:0!important}
+.code-pane-wrapper{background:var(--code-bg);padding:20px;overflow:auto;height:600px;position:relative;}
+.code-pane-wrapper pre{margin:0;background:transparent!important;}
+.code-pane-wrapper code{font-size:.8rem!important;line-height:1.6!important;font-family:'JetBrains Mono',monospace!important;}
+.status-msg{color:var(--muted);font-style:italic;}
 
 /* ── RESULTS ──────────────────────────────────────────────────── */
 .results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
@@ -268,7 +266,6 @@ section{padding:80px 0}
   position:relative;
 }
 .install-box pre{color:var(--green);white-space:pre-wrap;word-break:break-all}
-.install-box .comment{color:var(--muted)}
 
 /* ── FOOTER ───────────────────────────────────────────────────── */
 footer{
@@ -284,9 +281,6 @@ footer strong{color:var(--text)}
   background:linear-gradient(90deg,var(--accent),var(--purple));
   z-index:99;transition:width .1s;
 }
-
-/* ── DIVIDER ──────────────────────────────────────────────────── */
-.divider{height:1px;background:var(--border);margin:0}
 
 @media(max-width:768px){
   .code-layout{grid-template-columns:1fr}
@@ -328,12 +322,14 @@ footer strong{color:var(--text)}
     </div>
 
     <div class="stats">
-      <div class="stat-card"><div class="stat-num">6</div><div class="stat-lbl">PR Methods</div></div>
-      <div class="stat-card"><div class="stat-num">5</div><div class="stat-lbl">Experiments</div></div>
-      <div class="stat-card"><div class="stat-num">791</div><div class="stat-lbl">Node Graph</div></div>
-      <div class="stat-card"><div class="stat-num">1.53×</div><div class="stat-lbl">Pruning Speedup</div></div>
-      <div class="stat-card"><div class="stat-num">+287%</div><div class="stat-lbl">Max SEO Gain</div></div>
-      <div class="stat-card"><div class="stat-num">6.7K</div><div class="stat-lbl">Lines of Code</div></div>
+      <div class="stats-card">
+        <div class="stat-card"><div class="stat-num">6</div><div class="stat-lbl">PR Methods</div></div>
+        <div class="stat-card"><div class="stat-num">5</div><div class="stat-lbl">Experiments</div></div>
+        <div class="stat-card"><div class="stat-num">791</div><div class="stat-lbl">Node Graph</div></div>
+        <div class="stat-card"><div class="stat-num">1.53×</div><div class="stat-lbl">Pruning Speedup</div></div>
+        <div class="stat-card"><div class="stat-num">+287%</div><div class="stat-lbl">Max SEO Gain</div></div>
+        <div class="stat-card"><div class="stat-num">6.7K</div><div class="stat-lbl">Lines of Code</div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -346,7 +342,7 @@ footer strong{color:var(--text)}
     <h2 class="section-title">Five Requirements, One Complete System</h2>
     <p class="section-sub">Each requirement builds on the last — from implementing the raw algorithm to building a full search engine with real-time simulation.</p>
     <div class="req-grid">
-      <div class="req-card" onclick="openCode('req1')">
+      <div class="req-card" onclick="location.href='#code'; switchTab('progressive_pruning_pr.py');">
         <div class="req-num">Requirement 1</div>
         <h3>Progressive Pruning PageRank</h3>
         <p>A novel enhancement to power iteration that freezes low-rank pages after convergence, achieving 1.53× speedup with zero accuracy loss on 2,000-node graphs.</p>
@@ -354,7 +350,7 @@ footer strong{color:var(--text)}
           <span class="tag">NumPy</span><span class="tag">Benchmark</span><span class="tag green">L1 Error = 0</span>
         </div>
       </div>
-      <div class="req-card" onclick="openCode('req2')">
+      <div class="req-card" onclick="location.href='#code'; switchTab('realistic_data.py');">
         <div class="req-num">Requirement 2</div>
         <h3>Realistic Large-Scale Data</h3>
         <p>A BFS web scraper with 4 bug fixes, validated against a 791-node synthetic documentation graph. All 7 PageRank methods benchmarked with L1 error and timing.</p>
@@ -362,7 +358,7 @@ footer strong{color:var(--text)}
           <span class="tag">BeautifulSoup</span><span class="tag">791 nodes</span><span class="tag gold">7 Methods</span>
         </div>
       </div>
-      <div class="req-card" onclick="openCode('req345')">
+      <div class="req-card" onclick="location.href='#code'; switchTab('all_6_methods.py');">
         <div class="req-num">Requirement 3</div>
         <h3>Manual PageRank Implementation</h3>
         <p>Custom PageRank algorithm using manual power iteration and NetworkX. Implements the core mathematical formula with explicit dangling node handling, convergence tracking, and validation against exact matrix algebra solution.</p>
@@ -370,7 +366,7 @@ footer strong{color:var(--text)}
           <span class="tag">Python</span><span class="tag">NetworkX</span><span class="tag purple">Power Iteration</span>
         </div>
       </div>
-      <div class="req-card" onclick="openCode('simulator')">
+      <div class="req-card" onclick="location.href='#code'; switchTab('pr_simulator.py');">
         <div class="req-num">Bonus — Week 6</div>
         <h3>Interactive Simulation Engine</h3>
         <p>A full Streamlit web app with live BFS crawling, Vis.js graph visualisation, heat-scale colour coding, TF-IDF search, and Google benchmark comparison.</p>
@@ -384,112 +380,27 @@ footer strong{color:var(--text)}
 
 <div class="divider"></div>
 
-<section id="methods">
-  <div class="container">
-    <div class="section-tag">Implementation</div>
-    <h2 class="section-title">Six PageRank Computational Methods</h2>
-    <p class="section-sub">All methods implemented from scratch and validated against each other. Complexity ranges from O(n³) to O(n).</p>
-    <div class="methods-grid">
-      <div class="method-card">
-        <div class="method-num" style="color:var(--accent)">Method 1</div>
-        <h3>NetworkX Built-in</h3>
-        <p>Primary reference implementation. Internally uses SciPy sparse matrices. Handles all edge cases automatically and serves as ground truth for accuracy comparisons.</p>
-        <div class="complexity">
-          <span class="complexity-badge">Time O(k·(N+E))</span>
-          <span class="complexity-badge">Space O(N+E)</span>
-          <span class="complexity-badge" style="color:var(--green)">Exact ✓</span>
-        </div>
-      </div>
-      <div class="method-card">
-        <div class="method-num" style="color:var(--accent2)">Method 2</div>
-        <h3>Manual Power Iteration</h3>
-        <p>Implements the PageRank formula directly using Python dicts. Every variable maps one-to-one to the mathematical definition. Fully transparent and auditable.</p>
-        <div class="complexity">
-          <span class="complexity-badge">Time O(k·(N+E))</span>
-          <span class="complexity-badge">Space O(N+E)</span>
-          <span class="complexity-badge" style="color:var(--gold)">~Exact</span>
-        </div>
-      </div>
-      <div class="method-card">
-        <div class="method-num" style="color:var(--purple)">Method 3</div>
-        <h3>Matrix Algebra (Exact)</h3>
-        <p>Solves (I − αM)r = (1−α)/N·1 directly via NumPy LU decomposition. Single-step exact solution — but O(n³) makes it impractical beyond ~200 nodes.</p>
-        <div class="complexity">
-          <span class="complexity-badge">Time O(N³)</span>
-          <span class="complexity-badge">Space O(N²)</span>
-          <span class="complexity-badge" style="color:var(--green)">Exact ✓</span>
-        </div>
-      </div>
-      <div class="method-card">
-        <div class="method-num" style="color:var(--gold)">Method 4</div>
-        <h3>SciPy Sparse (CSR)</h3>
-        <p>Stores only non-zero matrix entries. For a web graph with 10 links per page, this eliminates 99.99% of wasted storage. Fastest iterative method.</p>
-        <div class="complexity">
-          <span class="complexity-badge">Time O(k·E)</span>
-          <span class="complexity-badge">Space O(N+E)</span>
-          <span class="complexity-badge" style="color:var(--gold)">~Exact</span>
-        </div>
-      </div>
-      <div class="method-card">
-        <div class="method-num" style="color:var(--red)">Method 5</div>
-        <h3>Monte Carlo Surfer</h3>
-        <p>Simulates the random surfer directly. Error decreases as O(1/√R). Only O(N) memory — trivially parallelisable. Decisive advantage at web scale.</p>
-        <div class="complexity">
-          <span class="complexity-badge">Time O(S·L)</span>
-          <span class="complexity-badge">Space O(N)</span>
-          <span class="complexity-badge" style="color:var(--muted)">Approx</span>
-        </div>
-      </div>
-      <div class="method-card">
-        <div class="method-num" style="color:var(--green)">Method 6/7</div>
-        <h3>HITS + Pruning (Custom)</h3>
-        <p>HITS computes hub and authority scores for comparison. The custom Pruning variant freezes low-rank pages early for 1.53× speedup on large web-like graphs.</p>
-        <div class="complexity">
-          <span class="complexity-badge">HITS O(k·m)</span>
-          <span class="complexity-badge" style="color:var(--green)">1.53× faster</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
 <section id="code">
   <div class="container">
     <div class="section-tag">Source Code</div>
-    <h2 class="section-title">Complete Source Code</h2>
-    <p class="section-sub">All implementation files. Use the sidebar to switch files, copy to clipboard, or download individually.</p>
+    <h2 class="section-title">Complete System Source Code</h2>
+    <p class="section-sub">Dynamic source-code file fetcher. Files are loaded live directly from your workspace repository boundary.</p>
 
     <div class="code-layout">
-      <div class="code-sidebar">
-        <div class="code-sidebar-title">Files</div>
-        <a id="tab-req1" class="code-tab active" onclick="switchTab('req1'); return false;" href="#">progressive_pruning_pr.py</a>
-        <a id="tab-req2" class="code-tab" onclick="switchTab('req2'); return false;" href="#">realistic_data.py</a>
-        <a id="tab-req345" class="code-tab" onclick="switchTab('req345'); return false;" href="#">all_6_methods.py</a>
-        <a id="tab-simulator" class="code-tab" onclick="switchTab('simulator'); return false;" href="#">pr_simulator.py</a>
-        <a id="tab-experiments" class="code-tab" onclick="switchTab('experiments'); return false;" href="#">experiments.py</a>
-        <a id="tab-search_test" class="code-tab" onclick="switchTab('search_test'); return false;" href="#">search_engine.py</a>
-        <a id="tab-toy_recommend" class="code-tab" onclick="switchTab('toy_recommend'); return false;" href="#">toy_example_with_recommend.py</a>
-        <a id="tab-seo_recommend" class="code-tab" onclick="switchTab('seo_recommend'); return false;" href="#">seo_with_recommendations.py</a>
-      </div>
+      <div class="code-sidebar" id="sidebar-tabs">
+        </div>
 
       <div class="code-main">
         <div class="code-header">
-          <div class="code-filename" id="code-filename">progressive_pruning_pr.py</div>
+          <div class="code-filename" id="code-filename">Select a file</div>
           <div class="code-actions">
             <button class="btn-copy" onclick="copyCode()">Copy</button>
-            <button class="btn-download" onclick="downloadCode()">Download</button>
+            <button class="btn-download" onclick="downloadCode()">Download Full Script</button>
           </div>
         </div>
-        <div id="pane-req1" class="code-pane active"><pre><code class="language-python" id="src-req1"></code></pre></div>
-        <div id="pane-req2" class="code-pane"><pre><code class="language-python" id="src-req2"></code></pre></div>
-        <div id="pane-req345" class="code-pane"><pre><code class="language-python" id="src-req345"></code></pre></div>
-        <div id="pane-simulator" class="code-pane"><pre><code class="language-python" id="src-simulator"></code></pre></div>
-        <div id="pane-experiments" class="code-pane"><pre><code class="language-python" id="src-experiments"></code></pre></div>
-        <div id="pane-search_test" class="code-pane"><pre><code class="language-python" id="src-search_test"></code></pre></div>
-        <div id="pane-toy_recommend" class="code-pane"><pre><code class="language-python" id="src-toy_recommend"></code></pre></div>
-        <div id="pane-seo_recommend" class="code-pane"><pre><code class="language-python" id="src-seo_recommend"></code></pre></div>
+        <div class="code-pane-wrapper">
+          <pre><code class="language-python" id="code-display-block"># Please select a source script from the sidebar menu module context.</code></pre>
+        </div>
       </div>
     </div>
   </div>
@@ -551,17 +462,6 @@ footer strong{color:var(--text)}
           <tr><td>Topic-sensitive PR</td><td class="badge-pass">PASS</td></tr>
           <tr><td>Combined weights</td><td class="badge-pass">PASS</td></tr>
           <tr><td>Edge cases</td><td class="badge-pass">PASS</td></tr>
-        </table>
-      </div>
-
-      <div class="result-card">
-        <h4>Google Comparison Metrics</h4>
-        <table class="result-table">
-          <tr><th>Metric</th><th>Value</th></tr>
-          <tr><td>Overlap@3</td><td>33%</td></tr>
-          <tr><td>Overlap@5</td><td class="badge-pass">100%</td></tr>
-          <tr><td>Overlap@10</td><td class="badge-pass">100%</td></tr>
-          <tr><td>Spearman ρ</td><td>0.685</td></tr>
         </table>
       </div>
     </div>
@@ -645,22 +545,11 @@ footer strong{color:var(--text)}
     <div class="install-box">
       <pre>pip install networkx numpy scipy matplotlib requests beautifulsoup4 streamlit plotly pandas
 
-# Run Progressive Pruning benchmark
-python progressive_pruning_pr.py
-
-# Run Large-Scale Data demo (no internet)
-python realistic_data.py --demo
-
-# Run all experiments
-python experiments.py --exp all
-
 # Launch interactive simulation engine
 streamlit run pr_simulator.py</pre>
     </div>
   </div>
 </section>
-
-<div class="divider"></div>
 
 <footer>
   <div class="container">
@@ -671,1454 +560,102 @@ streamlit run pr_simulator.py</pre>
 </footer>
 
 <script>
-// Dictionary containing the full source code for every file
-const codeDatabase = {
-  req1: `"""
-Run with:  python pruning_test.py
-"""
-
-import time
-import random
-import networkx as nx
-import numpy as np
-
-
-def pruning_pagerank(G, alpha=0.85, max_iter=100, tol=1e-6,
-                     warmup=10, prune_threshold_factor=0.5, stable_rounds=3):
-    nodes = list(G.nodes())
-    N = len(nodes)
-    idx = {n: i for i, n in enumerate(nodes)}
-
-    M = np.zeros((N, N))
-    for node in G.nodes():
-        out_deg = G.out_degree(node)
-        col = idx[node]
-        if out_deg > 0:
-            for succ in G.successors(node):
-                M[idx[succ], col] = 1.0 / out_deg
-        else:
-            M[:, col] = 1.0 / N
-
-    teleport    = np.full(N, (1.0 - alpha) / N)
-    rank        = np.full(N, 1.0 / N)
-    frozen      = set()
-    frozen_list = []
-    active_mask = np.ones(N, dtype=bool)
-    low_count   = np.zeros(N, dtype=int)
-    threshold   = prune_threshold_factor / N
-    history     = []
-    t0 = time.time()
-
-    for it in range(max_iter):
-        new_rank = alpha * M @ rank + teleport
-
-        if frozen_list:
-            new_rank[frozen_list] = rank[frozen_list]
-
-        active_idx = np.where(active_mask)[0]
-        error = np.abs(new_rank[active_idx] - rank[active_idx]).sum()
-        rank = new_rank
-
-        if it >= warmup:
-            for i in active_idx:
-                if rank[i] < threshold:
-                    low_count[i] += 1
-                    if low_count[i] >= stable_rounds:
-                        frozen.add(i)
-                        active_mask[i] = False
-                else:
-                    low_count[i] = 0
-            frozen_list = list(frozen)
-
-        history.append((it + 1, int(active_mask.sum())))
-
-        if error < tol and it >= warmup:
-            break
-
-    elapsed = (time.time() - t0) * 1000
-    return {nodes[i]: rank[i] for i in range(N)}, it + 1, elapsed, len(frozen), history
-
-
-# ── reference: standard pagerank to verify correctness ───────────────────────
-
-def standard_pagerank(G, alpha=0.85, max_iter=100, tol=1e-6):
-    nodes = list(G.nodes())
-    N = len(nodes)
-    idx = {n: i for i, n in enumerate(nodes)}
-    M = np.zeros((N, N))
-    for node in G.nodes():
-        out_deg = G.out_degree(node)
-        col = idx[node]
-        if out_deg > 0:
-            for succ in G.successors(node):
-                M[idx[succ], col] = 1.0 / out_deg
-        else:
-            M[:, col] = 1.0 / N
-    teleport = np.full(N, (1.0 - alpha) / N)
-    rank = np.full(N, 1.0 / N)
-    for it in range(max_iter):
-        new_rank = alpha * M @ rank + teleport
-        if np.abs(new_rank - rank).sum() < tol:
-            rank = new_rank
-            break
-        rank = new_rank
-    return {nodes[i]: rank[i] for i in range(N)}
-
-
-# ── helpers ───────────────────────────────────────────────────────────────────
-
-def check(condition, label):
-    """Print PASS/FAIL and return True/False."""
-    symbol = "PASS" if condition else "FAIL"
-    print(f"  [{symbol}] {label}")
-    return condition
-
-
-def build_web_graph(n, seed=42):
-    """Synthetic web-like graph: ~5% hubs, ~50% normal, ~45% leaves."""
-    rng = random.Random(seed)
-    G = nx.DiGraph()
-    n_hubs   = max(3, n // 20)
-    n_normal = n // 2
-    n_leaves = n - n_hubs - n_normal
-    hubs    = [f"Hub_{i}"  for i in range(n_hubs)]
-    normals = [f"Page_{i}" for i in range(n_normal)]
-    leaves  = [f"Leaf_{i}" for i in range(n_leaves)]
-    G.add_nodes_from(hubs + normals + leaves)
-    for h1 in hubs:
-        for h2 in hubs:
-            if h1 != h2: G.add_edge(h1, h2)
-    for p in normals:
-        for h in rng.sample(hubs, k=min(3, len(hubs))): G.add_edge(p, h)
-        others = [q for q in normals if q != p]
-        for q in rng.sample(others, k=min(2, len(others))): G.add_edge(p, q)
-    for h in hubs:
-        for p in rng.sample(normals, k=min(5, len(normals))): G.add_edge(h, p)
-    for leaf in leaves:
-        G.add_edge(leaf, rng.choice(hubs))
-        if rng.random() < 0.2: G.add_edge(rng.choice(normals), leaf)
-    return G
-
-
-# ── main ──────────────────────────────────────────────────────────────────────
-
-def main():
-    results = []   # (test_name, passed)
-
-    print("=" * 60)
-    print("  PRUNING PAGERANK — MAIN TEST")
-    print("=" * 60)
-
-    print("\\nTEST 1 — Return values have correct types and shapes")
-
-    G = nx.DiGraph()
-    G.add_edges_from([("A","B"),("B","C"),("C","A"),("D","A")])
-
-    scores, iters, elapsed_ms, n_frozen, history = pruning_pagerank(G)
-
-    ok = True
-    ok &= check(isinstance(scores, dict),        "scores is a dict")
-    ok &= check(len(scores) == 4,                "scores has one entry per node (4)")
-    ok &= check(isinstance(iters, int),          "iters is an int")
-    ok &= check(iters >= 1,                      "iters >= 1")
-    ok &= check(isinstance(elapsed_ms, float),   "elapsed_ms is a float")
-    ok &= check(elapsed_ms >= 0,                 "elapsed_ms >= 0")
-    ok &= check(isinstance(n_frozen, int),       "n_frozen is an int")
-    ok &= check(isinstance(history, list),       "history is a list")
-    ok &= check(len(history) == iters,           "history length == iters")
-    ok &= check(all(len(h)==2 for h in history), "each history entry is (iter, active_count)")
-
-    total = sum(scores.values())
-    ok &= check(abs(total - 1.0) < 1e-6, f"scores sum to 1.0 (got {total:.8f})")
-
-    results.append(("Return types & shapes", ok))
-
-    print("\\nTEST 2 — Pruning scores match standard PageRank")
-    print("         Graph: 10-node named web graph")
-    print()
-
-    G2 = nx.DiGraph()
-    G2.add_edges_from([
-        ("Hub_A","Hub_B"), ("Hub_B","Hub_A"),
-        ("Hub_A","Hub_C"), ("Hub_C","Hub_A"),
-        ("Hub_B","Hub_C"), ("Hub_C","Hub_B"),
-        ("Page_1","Hub_A"), ("Page_1","Hub_B"),
-        ("Page_2","Hub_B"), ("Page_2","Hub_C"),
-        ("Page_3","Hub_A"), ("Page_3","Page_2"),
-        ("Hub_A","Page_1"), ("Hub_B","Page_2"),
-        ("Leaf_1","Hub_A"),
-        ("Leaf_2","Hub_A"),
-        ("Leaf_3","Hub_B"),
-        ("Orphan","Hub_C"),
-    ])
-
-    ref   = standard_pagerank(G2)
-    prune, iters2, ms2, nf2, hist2 = pruning_pagerank(G2)
-
-    N2        = G2.number_of_nodes()
-    threshold = 0.5 / N2   # = 0.05
-
-    print(f"  {'Page':<12} {'Standard':>10} {'Pruning':>10} {'Diff':>12} {'Frozen?':>8}")
-    print(f"  {'-'*56}")
-    all_match = True
-    for node in sorted(ref, key=lambda x: ref[x], reverse=True):
-        diff   = abs(ref[node] - prune[node])
-        frozen = "FROZEN" if ref[node] < threshold else ""
-        ok_row = diff < 1e-9
-        if not ok_row:
-            all_match = False
-        flag = "" if ok_row else "  <-- MISMATCH"
-        print(f"  {node:<12} {ref[node]:>10.6f} {prune[node]:>10.6f} {diff:>12.2e} {frozen:>8}{flag}")
-
-    print()
-    print(f"  Threshold = 0.5 / {N2} = {threshold:.4f}")
-    print(f"  Pages frozen: {nf2}/{N2}")
-    print(f"  Iterations:   {iters2}")
-    print()
-
-    ok2 = all_match
-    ok2 &= check(all_match,  "all scores match standard PageRank (diff < 1e-9)")
-    ok2 &= check(nf2 == 5,   f"exactly 5 pages frozen (got {nf2})")
-    ok2 &= check(
-        all(ref[p] < threshold for p in ["Page_3","Leaf_1","Leaf_2","Leaf_3","Orphan"]),
-        "correct pages are below threshold (Page_3, Leaf_1/2/3, Orphan)"
-    )
-
-    print()
-    print("  EXPECTED output:")
-    print("    Hub_B  ~ 0.270  (active)   Hub_A  ~ 0.253  (active)")
-    print("    Hub_C  ~ 0.218  (active)   Page_2 ~ 0.098  (active)")
-    print("    Page_1 ~ 0.087  (active)   Page_3 ~ 0.015  FROZEN")
-    print("    Leaf_1 ~ 0.015  FROZEN     Leaf_2 ~ 0.015  FROZEN")
-    print("    Leaf_3 ~ 0.015  FROZEN     Orphan ~ 0.015  FROZEN")
-
-    results.append(("Correctness vs standard PageRank", ok2))
-
-    print("\\nTEST 3 — Warmup: no pages frozen before warmup iterations")
-
-    G3 = build_web_graph(100)
-    _, _, _, _, hist3 = pruning_pagerank(G3, warmup=10)
-
-    N3 = G3.number_of_nodes()
-    warmup_counts = [h[1] for h in hist3[:10]]
-    ok3 = check(
-        all(c == N3 for c in warmup_counts),
-        f"active count = {N3} (all pages) during all warmup iterations"
-    )
-    results.append(("Warmup respected", ok3))
-
-    print("\\nTEST 4 — Active count shrinks after warmup on leaf-heavy graph")
-
-    G4 = build_web_graph(200)
-    _, _, _, nf4, hist4 = pruning_pagerank(G4, warmup=10)
-
-    post_warmup_counts = [h[1] for h in hist4[10:]]
-    shrinks = any(post_warmup_counts[i] < post_warmup_counts[i-1]
-                  for i in range(1, len(post_warmup_counts)))
-
-    ok4 = check(nf4 > 0,   f"at least one page was frozen (got {nf4})")
-    ok4 &= check(shrinks,  "active count decreases at least once after warmup")
-    results.append(("Active count shrinks post-warmup", ok4))
-
-    print("\\nTEST 5 — Accuracy and timing: n = 50, 500, 2000")
-    print()
-    print(f"  {'N':>5}  {'Std time':>9}  {'Prune time':>10}  "
-          f"{'Frozen %':>9}  {'L1 error':>10}  {'Speedup':>8}")
-    print(f"  {'-'*60}")
-
-    ok5 = True
-    for n in [50, 500, 2000]:
-        G = build_web_graph(n)
-        ref_sc = standard_pagerank(G)
-
-        t0 = time.time(); _ = standard_pagerank(G); std_ms = (time.time()-t0)*1000
-        prune_sc, _, prune_ms, nf, _ = pruning_pagerank(G)
-
-        l1      = sum(abs(ref_sc[p] - prune_sc[p]) for p in G.nodes())
-        speedup = std_ms / prune_ms if prune_ms > 0 else 1.0
-        pct     = 100.0 * nf / n
-        row_ok  = l1 < 1e-6
-        if not row_ok:
-            ok5 = False
-        flag = "OK" if row_ok else "FAIL"
-
-        print(f"  {n:>5}  {std_ms:>8.1f}ms  {prune_ms:>9.1f}ms  "
-              f"{pct:>8.1f}%  {l1:>10.2e}  {speedup:>7.2f}x  [{flag}]")
-
-    print()
-    print("  EXPECTED:")
-    print("    L1 error = 0.00e+00 for all sizes")
-    print("    ~56% pages frozen at n=50 (mostly leaves)")
-    print("    Speedup grows with graph size")
-
-    ok5 = check(ok5, "L1 error < 1e-6 for all graph sizes")
-    results.append(("Accuracy across sizes", ok5))
-
-    print()
-    print("=" * 60)
-    print("  SUMMARY")
-    print("=" * 60)
-    passed = sum(1 for _, ok in results if ok)
-    for name, ok in results:
-        symbol = "PASS" if ok else "FAIL"
-        print(f"  [{symbol}] {name}")
-    print()
-    print(f"  {passed}/{len(results)} tests passed")
-    print("=" * 60)
-
-
-if __name__ == "__main__":
-    main()`,
-  req2: `"""
-req2_realistic_data.py  —  Requirement 2: Realistic Large-Scale Data
-"""
-
-import argparse, csv, os, random, sys, time
-import networkx as nx
-import numpy as np
-import scipy.sparse as sp
-
-
-def scrape_website(start_url, max_depth=2, max_pages=500):
-    import requests
-    from bs4 import BeautifulSoup
-    from collections import deque
-    from urllib.parse import urljoin, urlparse
-
-    base_domain = urlparse(start_url).netloc
-    visited   = {}
-    raw_edges = []
-    queue     = deque([(start_url, 0)])
-
-    while queue and len(visited) < max_pages:
-        url, depth = queue.popleft()
-        if url in visited or depth > max_depth:
-            continue
-        visited[url] = depth
-        try:
-            resp = requests.get(url, timeout=8,
-                                headers={"User-Agent": "PageRank-Thesis/1.0"})
-            if resp.status_code != 200:
-                continue
-            soup = BeautifulSoup(resp.text, "html.parser")
-            for tag in soup.find_all("a", href=True):
-                link = urljoin(url, tag["href"]).split("#")[0].split("?")[0]
-                if not link:
-                    continue
-                lp = urlparse(link)
-                if lp.netloc != base_domain or lp.scheme not in ("http", "https"):
-                    continue
-                if link == url:
-                    continue
-                raw_edges.append((url, link))
-                if link not in visited and depth < max_depth:
-                    queue.append((link, depth + 1))
-        except Exception:
-            pass
-
-    G = nx.DiGraph()
-    G.add_nodes_from(visited)
-    for src, dst in raw_edges:
-        if src in visited and dst in visited:
-            G.add_edge(src, dst)
-    return G
-
-
-def build_synthetic_graph(seed=42):
-    rng = random.Random(seed)
-    G   = nx.DiGraph()
-
-    homepage = "index"
-    sections = [f"section_{i}" for i in range(10)]
-    articles = {s: [f"{s}_article_{j}" for j in range(78)] for s in sections}
-    all_articles = [a for arts in articles.values() for a in arts]
-
-    G.add_node(homepage)
-    G.add_nodes_from(sections)
-    G.add_nodes_from(all_articles)
-
-    for sec in sections:
-        G.add_edge(homepage, sec)
-        G.add_edge(sec, homepage)
-        for art in articles[sec]:
-            G.add_edge(sec, art)
-            G.add_edge(art, sec)
-            G.add_edge(art, homepage)
-
-    added = 0
-    while added < 868:
-        a = rng.choice(all_articles)
-        b = rng.choice(all_articles)
-        if "_".join(a.split("_")[:2]) != "_".join(b.split("_")[:2]) and not G.has_edge(a, b):
-            G.add_edge(a, b)
-            added += 1
-    return G
-
-
-def method1_networkx(G, alpha=0.85):
-    t0 = time.time()
-    return nx.pagerank(G, alpha=alpha), (time.time() - t0) * 1000
-
-def method2_manual(G, alpha=0.85, tol=1e-6, max_iter=100):
-    nodes = list(G.nodes()); n = len(nodes)
-    rank = {v: 1/n for v in nodes}
-    t0 = time.time()
-    for _ in range(max_iter):
-        d_sum = sum(rank[v] for v in nodes if G.out_degree(v) == 0)
-        new_rank = {}
-        for v in nodes:
-            new_rank[v] = (1 - alpha) / n + alpha * d_sum / n
-            for p in G.predecessors(v):
-                if G.out_degree(p) > 0:
-                    new_rank[v] += alpha * rank[p] / G.out_degree(p)
-        if sum(abs(new_rank[v] - rank[v]) for v in nodes) < tol:
-            rank = new_rank; break
-        rank = new_rank
-    return rank, (time.time() - t0) * 1000
-
-def method3_matrix(G, alpha=0.85):
-    nodes = list(G.nodes()); n = len(nodes)
-    idx = {v: i for i, v in enumerate(nodes)}
-    M = np.zeros((n, n))
-    for v in G.nodes():
-        od = G.out_degree(v); c = idx[v]
-        if od > 0:
-            for nb in G.successors(v): M[idx[nb], c] = 1 / od
-        else:
-            M[:, c] = 1 / n
-    t0 = time.time()
-    r = np.linalg.solve(np.eye(n) - alpha * M, np.ones(n) * (1 - alpha) / n)
-    r /= r.sum()
-    return {nodes[i]: r[i] for i in range(n)}, (time.time() - t0) * 1000
-
-def method4_scipy(G, alpha=0.85, tol=1e-6, max_iter=100):
-    nodes = list(G.nodes()); n = len(nodes)
-    idx = {v: i for i, v in enumerate(nodes)}
-    rows, cols, vals, d_idx = [], [], [], []
-    for v in G.nodes():
-        od = G.out_degree(v); c = idx[v]
-        if od > 0:
-            for nb in G.successors(v):
-                rows.append(idx[nb]); cols.append(c); vals.append(1 / od)
-        else:
-            d_idx.append(c)
-    M = sp.csr_matrix((vals, (rows, cols)), shape=(n, n))
-    rank = np.full(n, 1 / n)
-    t0 = time.time()
-    for _ in range(max_iter):
-        dv = alpha * rank[d_idx].sum() / n if d_idx else 0
-        nr = alpha * M.dot(rank) + dv + (1 - alpha) / n
-        if np.abs(nr - rank).sum() < tol: rank = nr; break
-        rank = nr
-    return {nodes[i]: rank[i] for i in range(n)}, (time.time() - t0) * 1000
-
-def method5_montecarlo(G, alpha=0.85, n_surfers=5000, steps=100):
-    nodes = list(G.nodes()); n = len(nodes)
-    idx = {v: i for i, v in enumerate(nodes)}
-    visits = np.zeros(n); rng = random.Random(42)
-    t0 = time.time()
-    for _ in range(n_surfers):
-        cur = rng.choice(nodes)
-        for _ in range(steps):
-            visits[idx[cur]] += 1
-            nbs = list(G.successors(cur))
-            cur = (rng.choice(nbs) if nbs else rng.choice(nodes)) \
-                  if rng.random() < alpha else rng.choice(nodes)
-    total = visits.sum()
-    return {nodes[i]: visits[i] / total for i in range(n)}, (time.time() - t0) * 1000
-
-def method6_hits(G):
-    t0 = time.time()
-    _, auth = nx.hits(G, max_iter=100, normalized=True)
-    return auth, (time.time() - t0) * 1000
-
-def method7_pruning(G, alpha=0.85, tol=1e-6, max_iter=100, warmup=10, stable_rounds=3):
-    nodes = list(G.nodes()); n = len(nodes)
-    idx = {v: i for i, v in enumerate(nodes)}
-    M = np.zeros((n, n))
-    for v in G.nodes():
-        od = G.out_degree(v); c = idx[v]
-        if od > 0:
-            for nb in G.successors(v): M[idx[nb], c] = 1 / od
-        else:
-            M[:, c] = 1 / n
-    teleport = np.full(n, (1 - alpha) / n)
-    rank = np.full(n, 1 / n)
-    frozen = []; active = np.ones(n, dtype=bool)
-    low_count = np.zeros(n, dtype=int); threshold = 0.5 / n
-    t0 = time.time()
-    for it in range(max_iter):
-        new_rank = alpha * M @ rank + teleport
-        if frozen: new_rank[frozen] = rank[frozen]
-        ai = np.where(active)[0]
-        err = np.abs(new_rank[ai] - rank[ai]).sum()
-        rank = new_rank
-        if it >= warmup:
-            for i in ai:
-                if rank[i] < threshold: low_count[i] += 1
-                else: low_count[i] = 0
-                if low_count[i] >= stable_rounds: active[i] = False
-            frozen = list(np.where(~active)[0])
-        if err < tol and it >= warmup: break
-    return {nodes[i]: rank[i] for i in range(n)}, (time.time() - t0) * 1000
-
-
-def load_from_csv(path):
-    if not os.path.isfile(path):
-        sys.exit(f"ERROR: file not found — {path}")
-    with open(path, encoding="utf-8-sig") as f:
-        sample = f.read(4096)
-    delim = "\\t" if sample.count("\\t") > sample.count(",") else ","
-    G = nx.DiGraph()
-    with open(path, newline="", encoding="utf-8-sig") as f:
-        reader = csv.DictReader(f, delimiter=delim)
-        headers = list(reader.fieldnames or [])
-        src_col = next((c for c in ["source","src","from","u"] + headers if c in headers), None)
-        dst_col = next((c for c in ["target","dst","to","v"] + headers
-                        if c in headers and c != src_col), None)
-        if not src_col or not dst_col:
-            sys.exit(f"ERROR: cannot identify columns. Headers: {headers}")
-        print(f"  CSV columns: '{src_col}' -> '{dst_col}'")
-        for row in reader:
-            s = (row.get(src_col) or "").strip()
-            d = (row.get(dst_col) or "").strip()
-            if s and d and s != d:
-                G.add_edge(s, d)
-    return G
-
-
-def main():
-    ap = argparse.ArgumentParser(description="Requirement 2 – Realistic Data")
-    ap.add_argument("--demo",   action="store_true", help="Run 7-method demo")
-    ap.add_argument("--scrape", action="store_true", help="Crawl a live website")
-    ap.add_argument("--url",    default="https://docs.python.org/3/")
-    ap.add_argument("--depth",  type=int, default=2)
-    ap.add_argument("--input",  default=None, help="Load graph from edge_list.csv")
-    args = ap.parse_args()
-    if not args.demo and not args.scrape:
-        args.demo = True
-
-    SEP = "=" * 65
-    sep = "─" * 65
-
-    print(SEP)
-    print("  REQUIREMENT 2 — REALISTIC LARGE-SCALE DATA")
-    print(SEP)
-
-    if args.scrape:
-        print(f"\\n  Crawling: {args.url}  (depth={args.depth}, max=500 pages)")
-        G = scrape_website(args.url, max_depth=args.depth, max_pages=500)
-        n, e = G.number_of_nodes(), G.number_of_edges()
-        print(f"  Crawl done: {n} pages, {e} links")
-        out = "edge_list.csv"
-        with open(out, "w", newline="") as f:
-            w = csv.writer(f); w.writerow(["source", "target"])
-            for s, d in G.edges(): w.writerow([s, d])
-        print(f"  Saved: {out}")
-        return
-
-    print("\\n" + sep)
-    print("  PART A — GRAPH CONSTRUCTION & TESTS")
-    print(sep)
-
-    if args.input:
-        G = load_from_csv(args.input)
-    else:
-        G = build_synthetic_graph()
-
-    N = G.number_of_nodes()
-    E = G.number_of_edges()
-
-    # (Runs verification checks on graph properties)
-    print(f"  Graph populated with {N} nodes and {E} edges.")
-
-
-if __name__ == "__main__":
-    main()`,
-  req345: `import random
-import networkx as nx
-import numpy as np
-import scipy.sparse as sp
-
-G = nx.DiGraph()
-G.add_edges_from([   ('A', 'B'), ('A', 'C'),
-                     ('B', 'C'), ('B', 'D'),
-                     ('C', 'A'),
-                     ('D', 'C'),
-                     ('E', 'D')])
-
-# Method1: NetworkX Built-in Function Method
-pr = nx.pagerank(G, alpha=0.85, max_iter=100, tol=1e-6)
-print('=== NetworkX Built-in PageRank ===')
-for page, score in sorted(pr.items(), key=lambda x: x[1], reverse=True):
-    print(f'  Page {page}: {score:.6f}')
-
-# Method2: Manual Power Iteration
-def manual_pagerank(G, alpha=0.85, max_iter=100, tol=1e-6):
-    N     = len(G)
-    nodes = list(G.nodes())
-    rank  = {node: 1 / N for node in nodes}
-    for iteration in range(max_iter):
-        new_rank     = {}
-        dangling_sum = sum(rank[n] for n in nodes if G.out_degree(n) == 0)
-        for node in nodes:
-            new_rank[node]  = (1 - alpha) / N
-            new_rank[node] += alpha * dangling_sum / N
-            for pred in G.predecessors(node):
-                out_deg = G.out_degree(pred)
-                if out_deg > 0:
-                    new_rank[node] += alpha * rank[pred] / out_deg
-                    error = sum(abs(new_rank[n] - rank[n]) for n in nodes)
-                    rank  = new_rank
-                    if error < tol:
-                        print(f'  Converged after {iteration+1} iterations.')
-                        break
-                    return rank
-
-# Method3: Matrix Algebra
-def matrix_algebra_pagerank(G, alpha=0.85):
-    nodes = list(G.nodes())
-    N     = len(nodes)
-    index = {node: i for i, node in enumerate(nodes)}
-    M = np.zeros((N, N))
-    for node in G.nodes():
-        out_deg = G.out_degree(node)
-        if out_deg > 0:
-            for nb in G.successors(node):
-                M[index[nb]][index[node]] = 1.0 / out_deg
-        else:
-            M[:, index[node]] = 1.0 / N   # dangling node fix
-        A = np.eye(N) - alpha * M
-        b = np.ones(N) * (1 - alpha) / N
-        r = np.linalg.solve(A, b)
-        r = r / r.sum()
-    return {nodes[i]: r[i] for i in range(N)}, M
-
-# Method4: Scipy Sparse
-def sparse_pagerank(G, alpha=0.85, max_iter=100, tol=1e-6):
-    nodes = list(G.nodes())
-    N     = len(nodes)
-    index = {node: i for i, node in enumerate(nodes)}
-    rows_idx, cols_idx, values = [], [], []
-    dangling_indices = []
-    for node in G.nodes():
-        out_deg = G.out_degree(node)
-        col     = index[node]
-        if out_deg > 0:
-            weight = 1.0 / out_deg
-            for nb in G.successors(node):
-                rows_idx.append(index[nb]); cols_idx.append(col); values.append(weight)
-        else:
-            dangling_indices.append(col)
-    M        = sp.csr_matrix((values,(rows_idx,cols_idx)), shape=(N,N))
-    rank     = np.full(N, 1.0/N)
-    teleport = np.full(N, 1.0/N)
-    for it in range(max_iter):
-        dangling  = alpha * rank[dangling_indices].sum() / N if dangling_indices else 0
-        new_rank  = alpha * M.dot(rank) + dangling + (1-alpha) * teleport
-        if np.abs(new_rank - rank).sum() < tol:
-            print(f'  Converged after {it+1} iterations.')
-            break
-        rank = new_rank
-    return {nodes[i]: rank[i] for i in range(N)}
-
-# Method5: Monte Carlo
-def monte_carlo_pagerank(G, num_surfers=10000, steps=100, alpha=0.85, seed=42):
-    random.seed(seed)
-    nodes       = list(G.nodes())
-    N           = len(nodes)
-    index       = {node: i for i, node in enumerate(nodes)}
-    visit_count = np.zeros(N, dtype=int)
-    for _ in range(num_surfers):
-        current = random.choice(nodes)
-        for _ in range(steps):
-            visit_count[index[current]] += 1
-            if random.random() < alpha:
-                neighbors = list(G.successors(current))
-                current   = random.choice(neighbors) if neighbors else random.choice(nodes)
-            else:
-                current = random.choice(nodes)
-    total = visit_count.sum()
-    return {nodes[i]: visit_count[i]/total for i in range(N)}
-
-# Method6: HITS Algorithm
-def manual_hits(G, max_iter=100, tol=1e-6):
-    nodes = list(G.nodes())
-    hub   = {n: 1.0 for n in nodes}
-    auth  = {n: 1.0 for n in nodes}
-    for it in range(max_iter):
-        new_auth = {n: sum(hub[p]  for p in G.predecessors(n)) for n in nodes}
-        new_hub  = {n: sum(new_auth[s] for s in G.successors(n))  for n in nodes}
-        a_norm   = np.sqrt(sum(v**2 for v in new_auth.values())) or 1
-        h_norm   = np.sqrt(sum(v**2 for v in new_hub.values()))  or 1
-        new_auth = {n: v/a_norm for n,v in new_auth.items()}
-        new_hub  = {n: v/h_norm for n,v in new_hub.items()}
-        err      = sum(abs(new_auth[n]-auth[n])+abs(new_hub[n]-hub[n]) for n in nodes)
-        auth, hub = new_auth, new_hub
-        if err < tol:
-            print(f'  HITS converged after {it+1} iterations.')
-            break
-    return hub, auth`,
-  simulator: `import streamlit as st
-import networkx as nx
-import pandas as pd
-import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin, urlparse
-from scipy.stats import spearmanr, kendalltau
-import streamlit.components.v1 as components
-import re
-import plotly.graph_objects as go
-import math
-import numpy as np
-import scipy.sparse as sp
-import random
-import datetime
-import json
-import time
-
-
-# ══════════════════════════════════════════════════════════════════
-# 1. MATHEMATICAL ENGINES
-# ══════════════════════════════════════════════════════════════════
-
-def run_nx_pagerank(G, alpha=0.85):
-    if G.number_of_nodes() == 0:
-        return {}, 0
-    ranks = nx.pagerank(G, alpha=alpha, max_iter=200, tol=1e-9)
-    return ranks, 1
-
-
-def run_pagerank_step(G, current_ranks, alpha=0.85):
-    n = G.number_of_nodes()
-    if n == 0:
-        return {}, 0
-    dangling_sum = sum(
-        current_ranks.get(node, 0)
-        for node in G.nodes()
-        if G.out_degree(node) == 0
-    )
-    new_ranks = {}
-    for node in G.nodes():
-        incoming = sum(
-            current_ranks.get(pred, 0) / G.out_degree(pred)
-            for pred in G.predecessors(node)
-            if G.out_degree(pred) > 0
-        )
-        new_ranks[node] = (1 - alpha) / n + alpha * (incoming + dangling_sum / n)
-    delta = sum(abs(new_ranks[n] - current_ranks.get(n, 0)) for n in G.nodes())
-    return new_ranks, delta
-
-
-def matrix_algebra_pagerank(G, alpha=0.85):
-    nodes = list(G.nodes())
-    N = len(nodes)
-    if N == 0:
-        return {}, 0
-    idx = {node: i for i, node in enumerate(nodes)}
-    M = np.zeros((N, N))
-    for node in nodes:
-        od = G.out_degree(node)
-        col = idx[node]
-        if od > 0:
-            for nb in G.successors(node):
-                M[idx[nb]][col] = 1.0 / od
-        else:
-            M[:, col] = 1.0 / N
-    r = np.linalg.solve(np.eye(N) - alpha * M, np.ones(N) * (1 - alpha) / N)
-    r = np.abs(r)
-    r /= r.sum()
-    return {nodes[i]: float(r[i]) for i in range(N)}, 1
-
-
-def run_sparse_step(G, current_ranks, alpha=0.85):
-    nodes = list(G.nodes())
-    N = len(nodes)
-    if N == 0:
-        return {}, 0
-    idx = {node: i for i, node in enumerate(nodes)}
-    rows, cols, vals, dangling_cols = [], [], [], []
-    for node in nodes:
-        od = G.out_degree(node)
-        c = idx[node]
-        if od > 0:
-            for nb in G.successors(node):
-                rows.append(idx[nb]);
-                cols.append(c);
-                vals.append(1.0 / od)
-        else:
-            dangling_cols.append(c)
-    M = sp.csr_matrix((vals, (rows, cols)), shape=(N, N))
-    r_vec = np.array([current_ranks.get(n, 1.0 / N) for n in nodes])
-    d_sum = alpha * r_vec[dangling_cols].sum() / N if dangling_cols else 0.0
-    new_r = alpha * M.dot(r_vec) + d_sum + (1 - alpha) / N
-    delta = float(np.abs(new_r - r_vec).sum())
-    return {nodes[i]: float(new_r[i]) for i in range(N)}, delta
-
-
-def monte_carlo_pagerank_batch(G, alpha=0.85, mc_counts=None, surfers_per_step=300):
-    nodes = list(G.nodes())
-    N = len(nodes)
-    if N == 0:
-        return {}, mc_counts or {}
-    counts = (mc_counts or {n: 0 for n in nodes}).copy()
-    successor_cache = {n: list(G.successors(n)) for n in nodes}
-    for _ in range(surfers_per_step):
-        cur = random.choice(nodes)
-        for _ in range(40):
-            counts[cur] = counts.get(cur, 0) + 1
-            nbrs = successor_cache[cur]
-            cur = (random.choice(nbrs) if nbrs and random.random() < alpha
-                   else random.choice(nodes))
-    total = sum(counts.values()) or 1
-    return {n: counts[n] / total for n in nodes}, counts
-
-
-def run_pruning_pagerank_step(G, current_ranks, alpha=0.85, it=0, warmup=10,
-                              prune_threshold_factor=0.5, stable_rounds=3,
-                              low_counts=None, active_mask=None, start_time=None):
-    nodes = list(G.nodes())
-    N = len(nodes)
-    if N == 0:
-        return {}, 0, None, None, 0, 0
-
-    if start_time is None:
-        start_time = time.time()
-
-    idx = {n: i for i, n in enumerate(nodes)}
-
-    if low_counts is None or len(low_counts) != N:
-        low_counts = np.zeros(N, dtype=int)
-    if active_mask is None or len(active_mask) != N:
-        active_mask = np.ones(N, dtype=bool)
-
-    active_before = np.sum(active_mask)
-
-    r_vec = np.array([current_ranks.get(n, 1.0 / N) for n in nodes])
-    new_r = np.zeros(N)
-
-    dangling_sum = sum(r_vec[i] for i, n in enumerate(nodes) if G.out_degree(n) == 0)
-
-    for i, node in enumerate(nodes):
-        if not active_mask[i]:
-            new_r[i] = r_vec[i]
-            continue
-
-        incoming = sum(r_vec[idx[p]] / G.out_degree(p)
-                       for p in G.predecessors(node) if G.out_degree(p) > 0)
-        new_r[i] = (1 - alpha) / N + alpha * (incoming + dangling_sum / N)
-
-    threshold = prune_threshold_factor / N
-    if it >= warmup:
-        for i in range(N):
-            if active_mask[i] and new_r[i] < threshold:
-                low_counts[i] += 1
-                if low_counts[i] >= stable_rounds:
-                    active_mask[i] = False
-            elif active_mask[i]:
-                low_counts[i] = 0
-
-    active_after = np.sum(active_mask)
-    frozen_nodes = active_before - active_after
-
-    delta = float(np.abs(new_r[active_mask] - r_vec[active_mask]).sum())
-    res_dict = {nodes[i]: float(new_r[i]) for i in range(N)}
-
-    elapsed = time.time() - start_time
-
-    return res_dict, delta, low_counts, active_mask, frozen_nodes, elapsed
-
-
-# ══════════════════════════════════════════════════════════════════
-# 1b. SEARCH ENGINE CLASS
-# ══════════════════════════════════════════════════════════════════
-
-class SearchEngine:
-    def __init__(self, G, page_content=None, page_dates=None):
-        self.G = G
-        self.nodes = list(G.nodes())
-        self.N = len(self.nodes)
-        self.page_content = page_content or {}
-        self.page_dates = page_dates or {}
-        if self.N > 0:
-            self._base_pr = nx.pagerank(G, alpha=0.85)
-        else:
-            self._base_pr = {}
-        self._recency = self._build_recency()
-
-    def _build_M(self):
-        idx = {node: i for i, node in enumerate(self.nodes)}
-        M = np.zeros((self.N, self.N))
-        for node in self.nodes:
-            od = self.G.out_degree(node)
-            col = idx[node]
-            if od > 0:
-                for nb in self.G.successors(node):
-                    M[idx[nb]][col] = 1.0 / od
-            else:
-                M[:, col] = 1.0 / self.N
-        return M
-
-    def _build_recency(self):
-        if not self.nodes: return {}
-        now = datetime.datetime.now()
-        scores = {}
-        for p in self.nodes:
-            if p in self.page_dates:
-                days = max(0, (now - self.page_dates[p]).days)
-                scores[p] = np.exp(-0.01 * days)
-            else:
-                scores[p] = 0.5
-        mn, mx = min(scores.values()), max(scores.values())
-        return {p: (s - mn) / (mx - mn) if mx > mn else s for p, s in scores.items()}
-
-    def _relevance(self, keyword):
-        if not keyword: return {p: 0.0 for p in self.nodes}
-        kw = keyword.lower().strip()
-        scores = {}
-        for p in self.nodes:
-            text = str(self.page_content.get(p, "")).lower()
-            count = sum(text.count(w) for w in kw.split())
-            scores[p] = float(count)
-        total = sum(scores.values())
-        return {p: s / total if total > 0 else 0.0 for p, s in scores.items()}
-
-    def _topic_pr(self, seeds, alpha=0.85):
-        if not seeds or self.N == 0:
-            return self._base_pr
-
-        idx = {n: i for i, n in enumerate(self.nodes)}
-        teleport = np.zeros(self.N)
-        valid = [s for s in seeds if s in idx]
-
-        if not valid: return self._base_pr
-
-        for s in valid:
-            teleport[idx[s]] += 1.0 / len(valid)
-
-        rank = np.full(self.N, 1.0 / self.N)
-        M = self._build_M()
-
-        for _ in range(50):
-            new_rank = alpha * M @ rank + (1 - alpha) * teleport
-            if np.abs(new_rank - rank).sum() < 1e-6: break
-            rank = new_rank
-        return {self.nodes[i]: rank[i] for i in range(self.N)}
-
-    def search(self, keyword='', alpha=0.85, relevance_weight=0.0,
-               recency_weight=0.0, topic_weight=0.0,
-               topic_seeds=None, top_k=None):
-
-        pr = self._base_pr
-        rel = self._relevance(keyword)
-        rec = self._recency
-        top = self._topic_pr(topic_seeds or []) if topic_weight > 0 else pr
-
-        w_pr = max(0.0, 1.0 - relevance_weight - recency_weight - topic_weight)
-
-        results = []
-        for p in self.nodes:
-            score = (w_pr * pr.get(p, 0)
-                     + relevance_weight * rel.get(p, 0)
-                     + recency_weight * rec.get(p, 0)
-                     + topic_weight * top.get(p, 0))
-
-            results.append({
-                'page': p,
-                'score': round(score, 6),
-                'pr': pr.get(p, 0),
-                'relevance': rel.get(p, 0)
-            })
-
-        results.sort(key=lambda x: x['score'], reverse=True)
-        return results[:top_k] if top_k is not None else results
-
-
-# ══════════════════════════════════════════════════════════════════
-# 2. CRAWLER
-# ══════════════════════════════════════════════════════════════════
-
-def crawl_and_analyze(seed_url, limit, max_depth=3,
-                      path_prefix="", must_contain="", skip_extensions=True):
-    SKIP_EXTS = {".pdf", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".ico",
-                 ".zip", ".tar", ".gz", ".mp4", ".mp3", ".css", ".js",
-                 ".woff", ".woff2", ".ttf", ".eot", ".xml", ".json"}
-
-    G = nx.DiGraph()
-    content_map = {}
-    to_visit = [(seed_url, 0)]
-    visited = set()
-    parsed_seed = urlparse(seed_url)
-    base_domain = parsed_seed.netloc.replace("www.", "")
-    seed_path = path_prefix.strip()
-    kw_filter = must_contain.strip().lower()
-    headers = {"User-Agent": "Mozilla/5.0 (compatible; PageRankBot/1.0)"}
-    progress_bar = st.progress(0, text="Crawling…")
-
-    def _allowed_url(url_clean):
-        p = urlparse(url_clean)
-        if base_domain not in p.netloc:
-            return False
-        if p.scheme not in ("http", "https"):
-            return False
-        if seed_path and not p.path.startswith(seed_path):
-            return False
-        if skip_extensions:
-            ext = "." + p.path.rsplit(".", 1)[-1].lower() if "." in p.path.split("/")[-1] else ""
-            if ext in SKIP_EXTS:
-                return False
-        return True
-
-    while to_visit and len(visited) < limit:
-        url, depth = to_visit.pop(0)
-        url_clean = url.split("#")[0]
-        if not url_clean.endswith(".html"):
-            url_clean = url_clean.rstrip("/")
-
-        if url_clean in visited:
-            continue
-        if not _allowed_url(url_clean):
-            continue
-
-        try:
-            res = requests.get(url, headers=headers, timeout=6)
-            if res.status_code != 200:
-                continue
-
-            soup = BeautifulSoup(res.text, "html.parser")
-            for tag in soup(["script", "style", "nav", "footer", "header"]):
-                tag.decompose()
-            page_text = soup.get_text(separator=" ", strip=True).lower()
-
-            if kw_filter and kw_filter not in page_text:
-                continue
-
-            visited.add(url_clean)
-            G.add_node(url_clean)
-            content_map[url_clean] = page_text
-            progress_bar.progress(
-                min(len(visited) / limit, 1.0),
-                text=f"Crawled {len(visited)}/{limit} pages (depth {depth})…"
-            )
-
-            if depth >= max_depth:
-                continue
-
-            for a_tag in soup.find_all("a", href=True):
-                target = urljoin(url, a_tag["href"]).split("#")[0].rstrip("/")
-                if target == url_clean:
-                    continue
-                if not _allowed_url(target):
-                    continue
-                G.add_edge(url_clean, target)
-                if target not in visited and (target, depth + 1) not in [(u, d) for u, d in to_visit]:
-                    to_visit.append((target, depth + 1))
-
-        except Exception:
-            continue
-
-    progress_bar.empty()
-    return G, content_map
-
-# ... [Main UI script processing logic wrapper omitted here for size limits] ...
-`,
-  experiments: `"""
-=============================================================================
-PageRank Simulation Experiments — Bachelor Thesis
-Implementing PageRank Using Python NetworkX
-=============================================================================
-"""
-
-import argparse
-import random
-import time
-import matplotlib.pyplot as plt
-import networkx as nx
-import numpy as np
-import scipy.sparse as sp
-
-
-def build_test_graph():
-    G = nx.DiGraph()
-    G.add_edges_from([
-        ('A', 'B'), ('A', 'C'),
-        ('B', 'C'), ('B', 'D'),
-        ('C', 'A'),
-        ('D', 'C'),
-        ('E', 'D'),
-    ])
-    return G
-
-
-def my_pagerank(G, alpha=0.85, max_iter=100, tol=1e-6, verbose=False):
-    N     = len(G)
-    nodes = list(G.nodes())
-    if N == 0: return {}
-    rank = {node: 1.0 / N for node in nodes}
-
-    for iteration in range(max_iter):
-        new_rank = {}
-        dangling_sum = sum(rank[n] for n in nodes if G.out_degree(n) == 0)
-
-        for node in nodes:
-            new_rank[node] = (1.0 - alpha) / N
-            new_rank[node] += alpha * dangling_sum / N
-            for predecessor in G.predecessors(node):
-                out_deg = G.out_degree(predecessor)
-                if out_deg > 0:
-                    new_rank[node] += alpha * rank[predecessor] / out_deg
-
-        error = sum(abs(new_rank[n] - rank[n]) for n in nodes)
-        rank  = new_rank
-        if error < tol: break
-
-    total = sum(rank.values())
-    return {n: v / total for n, v in rank.items()}
-
-
-def exact_pagerank(G, alpha=0.85):
-    nodes = list(G.nodes())
-    N     = len(nodes)
-    index = {node: i for i, node in enumerate(nodes)}
-    M = np.zeros((N, N))
-    for node in G.nodes():
-        out_deg = G.out_degree(node)
-        if out_deg > 0:
-            for nb in G.successors(node):
-                M[index[nb]][index[node]] = 1.0 / out_deg
-        else:
-            M[:, col] = 1.0 / N
-
-    A = np.eye(N) - alpha * M
-    b = np.ones(N) * (1 - alpha) / N
-    r = np.linalg.solve(A, b)
-    r = r / r.sum()
-    return {nodes[i]: r[i] for i in range(N)}
-
-
-def sparse_pagerank(G, alpha=0.85, max_iter=100, tol=1e-6):
-    nodes    = list(G.nodes())
-    N        = len(nodes)
-    index    = {node: i for i, node in enumerate(nodes)}
-    rows_idx, cols_idx, values = [], [], []
-    dangling_indices = []
-
-    for node in G.nodes():
-        out_deg = G.out_degree(node)
-        col     = index[node]
-        if out_deg > 0:
-            weight = 1.0 / out_deg
-            for nb in G.successors(node):
-                rows_idx.append(index[nb])
-                cols_idx.append(col)
-                values.append(weight)
-        else:
-            dangling_indices.append(col)
-
-    M_sp     = sp.csr_matrix((values, (rows_idx, cols_idx)), shape=(N, N))
-    rank     = np.full(N, 1.0 / N)
-    teleport = np.full(N, 1.0 / N)
-
-    for it in range(max_iter):
-        dangling  = alpha * rank[dangling_indices].sum() / N if dangling_indices else 0.0
-        new_rank  = alpha * M_sp.dot(rank) + dangling + (1 - alpha) * teleport
-        if np.abs(new_rank - rank).sum() < tol: break
-        rank = new_rank
-
-    return {nodes[i]: rank[i] for i in range(N)}
-
-
-def monte_carlo_pagerank(G, num_surfers=10000, steps=100, alpha=0.85, seed=42):
-    random.seed(seed)
-    nodes       = list(G.nodes())
-    N           = len(nodes)
-    index       = {node: i for i, node in enumerate(nodes)}
-    visit_count = np.zeros(N, dtype=int)
-
-    for _ in range(num_surfers):
-        current = random.choice(nodes)
-        for _ in range(steps):
-            visit_count[index[current]] += 1
-            if random.random() < alpha:
-                neighbors = list(G.successors(current))
-                current   = random.choice(neighbors) if neighbors else random.choice(nodes)
-            else:
-                current = random.choice(nodes)
-
-    total = visit_count.sum()
-    return {nodes[i]: visit_count[i] / total for i in range(N)}
-
-
-def simulate_convergence(G, alpha=0.85, max_iter=100, tol=1e-6):
-    nodes = list(G.nodes())
-    N     = len(nodes)
-    index = {n: i for i, n in enumerate(nodes)}
-
-    M_mat = np.zeros((N, N))
-    for node in G.nodes():
-        od = G.out_degree(node)
-        if od > 0:
-            for nb in G.successors(node): M_mat[index[nb]][index[node]] = 1.0 / od
-        else: M_mat[:, index[node]] = 1.0 / N
-
-    r_exact = np.linalg.solve(np.eye(N) - alpha * M_mat, np.ones(N) * (1 - alpha) / N)
-    r_exact = r_exact / r_exact.sum()
-    exact   = {nodes[i]: r_exact[i] for i in range(N)}
-
-    errors_manual = []
-    rank = {n: 1.0 / N for n in nodes}
-    for _ in range(max_iter):
-        new_rank     = {}
-        dangling_sum = sum(rank[n] for n in nodes if G.out_degree(n) == 0)
-        for node in nodes:
-            new_rank[node] = (1 - alpha) / N + alpha * dangling_sum / N
-            for pred in G.predecessors(node):
-                if G.out_degree(pred) > 0: new_rank[node] += alpha * rank[pred] / G.out_degree(pred)
-        error = sum(abs(new_rank[n] - exact[n]) for n in nodes)
-        errors_manual.append(error)
-        rank = new_rank
-        if error < tol: break
-
-    return errors_manual, []
-
-
-if __name__ == "__main__":
-    print("Running experiments wrapper framework context...")
-`,
-  search_test: `import numpy as np
-import networkx as nx
-from datetime import datetime, timedelta
-
-class SearchEngine:
-    def __init__(self, G, page_content=None, page_dates=None):
-        self.G          = G
-        self.nodes      = list(G.nodes())
-        self.N          = len(self.nodes)
-        self.page_content = page_content or {}
-        self.page_dates   = page_dates   or {}
-        self._base_pr   = nx.pagerank(G, alpha=0.85)
-        self._recency   = self._build_recency()
-
-    def _build_recency(self):
-        now = datetime.now()
-        scores = {}
-        for p in self.nodes:
-            if p in self.page_dates:
-                days = max(0, (now - self.page_dates[p]).days)
-                scores[p] = np.exp(-0.01 * days)
-            else:
-                scores[p] = 0.5
-        mn, mx = min(scores.values()), max(scores.values())
-        return {p: (s-mn)/(mx-mn) if mx > mn else s for p, s in scores.items()}
-
-    def _relevance(self, keyword):
-        kw = keyword.lower().strip()
-        scores = {}
-        for p in self.nodes:
-            text  = str(self.page_content.get(p, str(p))).lower()
-            count = sum(text.count(w) for w in kw.split())
-            scores[p] = float(count)
-        total = sum(scores.values())
-        return {p: s/total if total > 0 else 0.0 for p, s in scores.items()}
-
-    def _build_M(self):
-        idx = {n: i for i, n in enumerate(self.nodes)}
-        M   = np.zeros((self.N, self.N))
-        for node in self.nodes:
-            od  = self.G.out_degree(node)
-            col = idx[node]
-            if od > 0:
-                for nb in self.G.successors(node): M[idx[nb], col] = 1.0 / od
-            else: M[:, col] = 1.0 / self.N
-        return M
-
-    def _topic_pr(self, seeds, alpha=0.85):
-        idx      = {n: i for i, n in enumerate(self.nodes)}
-        teleport = np.zeros(self.N)
-        valid    = [s for s in seeds if s in idx]
-        for s in valid: teleport[idx[s]] += 1.0 / len(valid)
-        rank = np.full(self.N, 1.0 / self.N)
-        M    = self._build_M()
-        for _ in range(100):
-            new_rank = alpha * M @ rank + (1 - alpha) * teleport
-            if np.abs(new_rank - rank).sum() < 1e-6: break
-            rank = new_rank
-        return {self.nodes[i]: rank[i] for i in range(self.N)}
-
-    def search(self, keyword='', alpha=0.85, relevance_weight=0.0,
-               recency_weight=0.0, topic_weight=0.0,
-               topic_seeds=None, top_k=10):
-        pr  = nx.pagerank(self.G, alpha=alpha)
-        rel = self._relevance(keyword)
-        rec = self._recency
-        top = self._topic_pr(topic_seeds or []) if topic_weight > 0 else pr
-        w_pr = max(0.0, 1.0 - relevance_weight - recency_weight - topic_weight)
-        results = []
-        for p in self.nodes:
-            score = (w_pr             * pr.get(p, 0)
-                   + relevance_weight * rel.get(p, 0)
-                   + recency_weight   * rec.get(p, 0)
-                   + topic_weight     * top.get(p, 0))
-            results.append({'page': p, 'score': score, 'pr': pr.get(p, 0),
-                            'relevance': rel.get(p, 0), 'recency': rec.get(p, 0)})
-        results.sort(key=lambda x: x['score'], reverse=True)
-        return results[:top_k]
-
-
-def main():
-    print("Testing framework setup completed successfully.")
-
-if __name__ == '__main__':
-    main()`,
-  toy_recommend: `import os
-import networkx as nx
-
-def generate_site(folder_name, link_structure):
-    if not os.path.exists(folder_name):
-        os.makedirs(folder_name)
-    pages = [f"page{i}.html" for i in range(15)]
-    for i in range(15):
-        with open(os.path.join(folder_name, pages[i]), "w") as f:
-            f.write(f"<html><body><h1>Page {i}: Metro Daily</h1>")
-            targets = link_structure.get(i, [])
-            for t in targets:
-                f.write(f'<p><a href="{{pages[t]}}">Link to Page {t}</a></p>')
-            f.write("</body></html>")
-
-def compute_all_pageranks(link_structure):
-    G = nx.DiGraph()
-    for u, targets in link_structure.items():
-        for v in targets: G.add_edge(u, v)
-    for i in range(15): G.add_node(i)
-    return nx.pagerank(G, alpha=0.85, max_iter=200, tol=1e-9)
-
-# Baseline Structural Variations Definition
-baseline = {
-    0: [1], 1: [2], 2: [3], 3: [4], 4: [0], 5: [0], 6: [0],
-    7: [0], 8: [0], 9: [0], 10: [0], 11: [0], 12: [0], 13: [], 14: []
-}
-generate_site("metro_1_baseline", baseline)
-
-rec4 = baseline.copy()
-rec4[13] = [0]; rec4[14] = [0]
-generate_site("metro_2_rec4_fix_dangling", rec4)
-
-rec5 = rec4.copy()
-rec5[0] = [1, 2, 3, 4]; rec5[1] = []; rec5[2] = []; rec5[3] = []; rec5[4] = [0]
-generate_site("metro_3_rec5_hub_and_spoke", rec5)
-
-rec2 = rec5.copy()
-for i in [7, 8, 9, 10, 11, 12]: rec2[i] = [1]
-generate_site("metro_4_rec2_internal_hub", rec2)
-
-rec3 = rec2.copy()
-for i in range(15):
-    if i != 1:
-        if rec3.get(i) is None: rec3[i] = [1]
-        elif 1 not in rec3[i]: rec3[i].append(1)
-generate_site("metro_5_rec3_multiple_inbounds", rec3)
-
-rec1 = rec3.copy()
-rec1[0] = [1, 1, 2, 3, 4]
-generate_site("metro_6_rec1_high_authority_link", rec1)
-
-print("All comparative simulation files successfully created.")`,
-  seo_recommend: `import matplotlib.pyplot as plt
-import numpy as np
-
-steps = ['Baseline', 'Rec 4\\nFix Dangling', 'Rec 5\\nHub-and-Spoke',
-         'Rec 2\\nInternal Hub', 'Rec 3\\nMultiple Links', 'Rec 1\\nExternal Link']
-pr_values = [0.194955, 0.201128, 0.280296, 0.395902, 0.395902, 0.395902]
-improvements = [0, 3.2, 39.4, 41.2, 0, 0]
-
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-fig.suptitle('Metro Daily Case Study: SEO Recommendations', fontsize=14, fontweight='bold')
-
-# (a) PageRank Progression Mapping
-axes[0, 0].bar(steps, pr_values, color='#2E74B5', alpha=0.8, edgecolor='black')
-axes[0, 0].set_title('(a) PageRank Progression: +103% Total Improvement')
-
-# (b) Diminishing Returns Analytical Layout
-axes[0, 1].bar(steps, improvements, color='#C00000', alpha=0.8, edgecolor='black')
-axes[0, 1].set_title('(b) Diminishing Returns Plot')
-
-plt.tight_layout()
-plt.savefig('metro_daily_seo_figure.png', dpi=150)
-print("SEO analytics visualization matrix plotting complete.")`
-};
-
-// UI Interactions Controller Routine
-function switchTab(fileId) {
-  // Update Navigation Active State Indicators
-  document.querySelectorAll('.code-tab').forEach(tab => tab.classList.remove('active'));
-  const targetTab = document.getElementById('tab-' + fileId);
-  if (targetTab) targetTab.classList.add('active');
-
-  // Swap Active Functional Code Panes
-  document.querySelectorAll('.code-pane').forEach(pane => pane.classList.remove('active'));
-  const targetPane = document.getElementById('pane-' + fileId);
-  if (targetPane) targetPane.classList.add('active');
-
-  // Map Code Filename Header String Value
-  const filenameMapping = {
-    req1: 'progressive_pruning_pr.py',
-    req2: 'realistic_data.py',
-    req345: 'all_6_methods.py',
-    simulator: 'pr_simulator.py',
-    experiments: 'experiments.py',
-    search_test: 'search_engine.py',
-    toy_recommend: 'toy_example_with_recommend.py',
-    seo_recommend: 'seo_with_recommendations.py'
-  };
-  document.getElementById('code-filename').textContent = filenameMapping[fileId];
+// Your complete array of exact developer filenames in the local context directory
+const sourceFiles = [
+  "Experiments.py",
+  "all_6_methods.py",
+  "pr_simulator.py",
+  "realistic_data.py",
+  "progressive_pruning_pr.py",
+  "seo_with_recommendations.py",
+  "search_engine.py",
+  "toy_example_with_recommend.py"
+];
+
+let selectedFile = sourceFiles[0];
+
+// Dynamic structural sidebar UI builder
+function initializeSidebar() {
+  const sidebar = document.getElementById('sidebar-tabs');
+  sidebar.innerHTML = ''; // clear initial parameters
+  
+  sourceFiles.forEach((filename, index) => {
+    const tabLink = document.createElement('a');
+    tabLink.href = "#";
+    tabLink.className = `code-tab ${index === 0 ? 'active' : ''}`;
+    tabLink.id = `tab-${filename}`;
+    tabLink.textContent = filename;
+    tabLink.onclick = (e) => {
+      e.preventDefault();
+      switchTab(filename);
+    };
+    sidebar.appendChild(tabLink);
+  });
 }
 
-// Initialise Portfolio Code Database Rendering Context
+// Dynamic Fetch Handler logic block — pulls down raw text completely
+function switchTab(filename) {
+  selectedFile = filename;
+  
+  // Reset selected state visual indicators
+  document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+  const activeTab = document.getElementById(`tab-${filename}`);
+  if (activeTab) activeTab.classList.add('active');
+  
+  document.getElementById('code-filename').textContent = filename;
+  const codeDisplay = document.getElementById('code-display-block');
+  codeDisplay.textContent = `# Loading complete text context for ${filename}... Please wait.`;
+  
+  // AJAX local engine lookup
+  fetch('./' + filename)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP target exception status returned: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(text => {
+      codeDisplay.textContent = text;
+      // Re-initialize highlight.js formatting for newly loaded files
+      hljs.highlightElement(codeDisplay);
+    })
+    .catch(err => {
+      codeDisplay.textContent = `# Error loading code asset file execution stream: \\n# ${err.message}\\n# Ensure file is saved as '${filename}' right next to this index.html file inside the server directory configuration context.`;
+    });
+}
+
+// Download Interface controller routine block
+function downloadCode() {
+  const downloadLink = document.createElement('a');
+  downloadLink.href = './' + selectedFile;
+  downloadLink.download = selectedFile;
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+}
+
+function copyCode() {
+  const displayCodeBlock = document.getElementById('code-display-block');
+  if (displayCodeBlock) {
+    navigator.clipboard.writeText(displayCodeBlock.textContent)
+      .then(() => alert(`Text content of ${selectedFile} successfully copied to clipboard!`))
+      .catch(err => alert('Clipboard error: ' + err));
+  }
+}
+
+// Main operational hook initialization routing boundary window loop
 window.addEventListener('DOMContentLoaded', () => {
-  // Populate all structural raw script fragments into code code blocks
-  document.getElementById('src-req1').textContent = codeDatabase.req1;
-  document.getElementById('src-req2').textContent = codeDatabase.req2;
-  document.getElementById('src-req345').textContent = codeDatabase.req345;
-  document.getElementById('src-simulator').textContent = codeDatabase.simulator;
-  document.getElementById('src-experiments').textContent = codeDatabase.experiments;
-  document.getElementById('src-search_test').textContent = codeDatabase.search_test;
-  document.getElementById('src-toy_recommend').textContent = codeDatabase.toy_recommend;
-  document.getElementById('src-seo_recommend').textContent = codeDatabase.seo_recommend;
-
-  // Fire highlight.js engine compiler processing hook
-  hljs.highlightAll();
+  initializeSidebar();
+  if(sourceFiles.length > 0) {
+    switchTab(sourceFiles[0]);
+  }
 });
 
-// Clipboard Controller Logic Integration
-function copyCode() {
-  const activePane = document.querySelector('.code-pane.active code');
-  if (activePane) {
-    navigator.clipboard.writeText(activePane.textContent)
-      .then(() => alert('Source code text successfully copied to clipboard!'))
-      .catch(err => alert('Failed to execute text string copy: ' + err));
-  }
-}
-
-// Local File Downloader Blob Constructor Block
-function downloadCode() {
-  const activePane = document.querySelector('.code-pane.active code');
-  const currentFilename = document.getElementById('code-filename').textContent;
-  if (activePane) {
-    const blob = new Blob([activePane.textContent], { type: 'text/plain' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = currentFilename;
-    link.click();
-    URL.revokeObjectURL(link.href);
-  }
-}
-
-// Dynamic Scroll Progress Gauge Updates Indicator Tracking
 window.addEventListener('scroll', () => {
   const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const scrolled = (winScroll / height) * 100;
-  document.getElementById('scrollBar').style.width = scrolled + '%';
+  const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const progressScrolled = (winScroll / totalHeight) * 100;
+  document.getElementById('scrollBar').style.width = progressScrolled + '%';
 });
 </script>
 </body>
