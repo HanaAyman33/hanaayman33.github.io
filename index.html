@@ -542,8 +542,62 @@ footer strong{color:var(--text)}
     <div class="install-box">
       <pre>pip install networkx numpy scipy matplotlib requests beautifulsoup4 streamlit plotly pandas
 
-# Launch interactive simulation engine
-streamlit run pr_simulator.py</pre>
+# ============================================================
+# experiments.py
+# ============================================================
+
+# Run a specific experiment:
+python experiments.py --exp 1       # Convergence Speed
+python experiments.py --exp 2       # Scalability
+python experiments.py --exp 3       # Accuracy Comparison
+python experiments.py --exp 4       # Damping Factor Sensitivity
+python experiments.py --exp 5       # Monte Carlo Accuracy
+
+# Run all experiments:
+python experiments.py --exp all
+
+# ============================================================
+# pr_simulator.py
+# ============================================================
+
+streamlit run app.py
+
+# ============================================================
+# progressive_pruning_pr.py
+# ============================================================
+
+python pruning_test.py
+
+# ============================================================
+# realistic_data.py
+# ============================================================
+
+# Demo with synthetic graph (no internet required):
+python req2_realistic_data.py --demo
+
+# Scrape a real website (internet required):
+python req2_realistic_data.py --scrape --url https://docs.python.org/3/ --depth 2
+
+# Demo on a previously saved edge list:
+python req2_realistic_data.py --demo --input edge_list.csv
+
+# Dependencies:
+pip install networkx numpy scipy matplotlib requests beautifulsoup4
+
+# ============================================================
+# search_engine.py
+# ============================================================
+
+python search_engine_test.py
+
+# Dependencies:
+pip install networkx numpy
+
+# ============================================================
+# metro_daily_with_recommendations.py
+# ============================================================
+
+python metro_daily_with_recommendations.py</pre>
     </div>
   </div>
 </section>
