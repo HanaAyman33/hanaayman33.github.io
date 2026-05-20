@@ -1,0 +1,87 @@
+============================================================
+METRO DAILY PAGE RANK PROGRESSION
+============================================================
+
+Step                           Page1 PR     Change      
+------------------------------------------------------------
+1. Baseline (poor)             0.194955                 
+2. After Rec4 (Fix Dangling)   0.201128     +3.2%
+3. After Rec5 (Hub-and-Spoke)  0.280296     +39.4%
+4. After Rec2 (Internal Hub)   0.395902     +41.2%
+5. After Rec3 (Multiple Inbounds) 0.395902     +0.0%
+6. After Rec1 (External Link)  0.395902     +0.0%
+============================================================
+
+BASELINE - Top 10 Pages:
+   1. Homepage     (node0): 0.204813
+   2. Top Story    (node1): 0.194955
+   3. Local News   (node2): 0.176990
+   4. Sports       (node3): 0.161720
+   5. Weather      (node4): 0.148740
+   6. Page5        (node5): 0.011278
+   7. Page6        (node6): 0.011278
+   8. Page7        (node7): 0.011278
+   9. Page8        (node8): 0.011278
+  10. Page9        (node9): 0.011278
+
+AFTER REC4 (Fix Dangling) - Top 10 Pages:
+   1. Homepage     (node0): 0.204856
+   2. Top Story    (node1): 0.201128
+   3. Local News   (node2): 0.180959
+   4. Sports       (node3): 0.163815
+   5. Weather      (node4): 0.149243
+   6. Page5        (node5): 0.010000
+   7. Page6        (node6): 0.010000
+   8. Page7        (node7): 0.010000
+   9. Page8        (node8): 0.010000
+  10. Page9        (node9): 0.010000
+
+AFTER REC5 (Hub-and-Spoke) - Top 10 Pages:
+   1. Top Story    (node1): 0.280296
+   2. Homepage     (node0): 0.234027
+   3. Local News   (node2): 0.075614
+   4. Sports       (node3): 0.075614
+   5. Weather      (node4): 0.075614
+   6. Page5        (node5): 0.025883
+   7. Page6        (node6): 0.025883
+   8. Page7        (node7): 0.025883
+   9. Page8        (node8): 0.025883
+  10. Page9        (node9): 0.025883
+
+AFTER REC2 (Internal Hub) - Top 10 Pages:
+   1. Top Story    (node1): 0.395902
+   2. Homepage     (node0): 0.111420
+   3. Local News   (node2): 0.056111
+   4. Sports       (node3): 0.056111
+   5. Weather      (node4): 0.056111
+   6. Page5        (node5): 0.032434
+   7. Page6        (node6): 0.032434
+   8. Page7        (node7): 0.032434
+   9. Page8        (node8): 0.032434
+  10. Page9        (node9): 0.032434
+
+AFTER REC3 (Multiple Inbounds) - Top 10 Pages:
+   1. Top Story    (node1): 0.395902
+   2. Homepage     (node0): 0.111420
+   3. Local News   (node2): 0.056111
+   4. Sports       (node3): 0.056111
+   5. Weather      (node4): 0.056111
+   6. Page5        (node5): 0.032434
+   7. Page6        (node6): 0.032434
+   8. Page7        (node7): 0.032434
+   9. Page8        (node8): 0.032434
+  10. Page9        (node9): 0.032434
+
+AFTER REC1 (External Link) - Top 10 Pages:
+   1. Top Story    (node1): 0.395902
+   2. Homepage     (node0): 0.111420
+   3. Local News   (node2): 0.056111
+   4. Sports       (node3): 0.056111
+   5. Weather      (node4): 0.056111
+   6. Page5        (node5): 0.032434
+   7. Page6        (node6): 0.032434
+   8. Page7        (node7): 0.032434
+   9. Page8        (node8): 0.032434
+  10. Page9        (node9): 0.032434
+
+Process finished with exit code 0

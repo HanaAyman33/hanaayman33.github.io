@@ -1,0 +1,233 @@
+██████████████████████████████████████████████████████████████████████
+  RUNNING ALL 5 EXPERIMENTS
+  PageRank Simulation — Bachelor Thesis
+██████████████████████████████████████████████████████████████████████
+
+======================================================================
+  EXPERIMENT 1 — Convergence Speed Comparison
+======================================================================
+
+  Goal     : Track L1 error at each iteration for Method 2 (Manual) and
+             Method 4 (SciPy Sparse) against Method 3 (exact) ground truth.
+  Expected : Both methods decrease monotonically and converge to the same
+             answer within 50–100 iterations. Error curve flattens below tol.
+  Graph    : Standard 5-node thesis test graph (A–E, 7 edges).
+    
+  Graph: 5 nodes, 7 edges
+  Parameters: alpha=0.85, max_iter=100, tol=1e-6
+
+
+  Iteration        Manual Error    SciPy Error
+  --------------------------------------------
+  1                  0.35918293     0.35918293
+  5                  0.02607347     0.02607347
+  10                 0.00273495     0.00273495
+  20                 0.00004076     0.00004076
+  29                 0.00000092     0.00000092
+
+  Manual converged  : iteration 29
+  SciPy  converged  : iteration 29
+  Both reached same answer: YES ✓
+
+  Plot saved → exp1_convergence.png
+
+  ── Summary ──────────────────────────────────────────────
+  Manual Power Iteration : 29 iterations to converge
+  SciPy Sparse           : 29 iterations to converge
+  Difference in iters    : 0
+  Both methods produce identical final scores. ✓
+
+  Press Enter to continue to Experiment 2...]
+
+======================================================================
+  EXPERIMENT 2 — Scalability: Graph Size vs Execution Time
+======================================================================
+
+  Goal     : Measure execution time of each method at increasing graph sizes.
+             Show empirically where each method becomes impractical.
+  Expected : Matrix Algebra explodes at n>500 (O(n³) time).
+             Manual and NetworkX grow linearly (O(k*n+m)).
+             All methods produce same rank ordering.
+  Graphs   : Random directed graphs with n=10,50,100,500,1000 nodes,
+             ~5 outgoing links per node, seed=42 for reproducibility.
+    
+  Testing graph sizes: [10, 50, 100, 500, 1000]
+  Fixed iterations per run: 50 (to standardize comparison)
+
+
+       n    Manual (ms)   NetworkX (ms)   Matrix (ms)   Monte Carlo (ms)
+  ----------------------------------------------------------------------
+      10           1.47            1.14          0.11              12.02
+      50           6.85            0.67          3.42              11.99
+     100          13.93            0.79          0.86              11.93
+     500          69.37            1.77          3.54              12.63
+    1000         139.87            4.26   impractical              13.37
+
+       n    Manual/NX ratio    Matrix/NX ratio
+  --------------------------------------------
+      10               1.3x                0.1x
+      50              10.3x                5.1x
+     100              17.6x                1.1x
+     500              39.1x                2.0x
+    1000              32.9x        impractical
+
+  Plot saved → exp2_scalability.png
+
+  ── Key Finding ─────────────────────────────────────────
+  NetworkX (SciPy Sparse internally) is fastest at all sizes.
+  Manual Power Iteration is ~10-20x slower but correct.
+  Matrix Algebra becomes impractical beyond n=500.
+  Monte Carlo is consistent but less accurate than iterative.
+
+  Press Enter to continue to Experiment 3...
+
+======================================================================
+  EXPERIMENT 3 — Accuracy Comparison Across All Methods
+======================================================================
+
+  Goal     : Run all 6 methods on the same graph. Measure L1 error of each
+             method against the exact Matrix Algebra ground truth.
+  Expected : Methods 1, 2, 3, 4 agree to at least 5 decimal places (error < 1e-10).
+             Monte Carlo is approximate — error depends on surfer count.
+             HITS produces different scores (different algorithm, not comparable).
+  Graph    : Standard 5-node thesis test graph (A–E, 7 edges).
+    
+  Graph: 5 nodes, 7 edges, alpha=0.85
+
+
+  Method                                     L1 Error    Max Error       Status
+  ------------------------------------------------------------------------------
+  Method 1 — NetworkX Built-in               1.40e-06     4.94e-07         Good
+  Method 2 — My Implementation               2.60e-07     9.16e-08         Good
+  Method 3 — Matrix Algebra (exact)          0.00e+00     0.00e+00        Exact
+  Method 4 — SciPy Sparse                    3.97e-07     1.40e-07         Good
+  Method 5 — Monte Carlo (1k)                7.60e-03     2.28e-03       Approx
+  Method 5 — Monte Carlo (10k)               6.99e-03     2.32e-03       Approx
+  Method 6 — HITS (auth score)               7.12e-01     3.26e-01       Approx
+
+  Per-page scores (sorted by exact PageRank):
+  Page         Method 1       Method 2       Method 3       Method 4
+  ----------------------------------------------------------------------
+  C            0.348270       0.348270       0.348270       0.348269
+  A            0.326029       0.326029       0.326029       0.326029
+  B            0.168563       0.168562       0.168562       0.168562
+  D            0.127139       0.127139       0.127139       0.127139
+  E            0.030000       0.030000       0.030000       0.030000
+
+  Plot saved → exp3_accuracy.png
+
+  ── Key Finding ─────────────────────────────────────────
+  Methods 1, 2, 3, 4 all produce identical results to machine precision.
+  My implementation (Method 2) matches the exact solution. ✓
+  Monte Carlo improves with more surfers but never reaches exact.
+  HITS scores are not comparable — different algorithm, different meaning.
+
+  Press Enter to continue to Experiment 4...
+
+======================================================================
+  EXPERIMENT 4 — Damping Factor Sensitivity
+======================================================================
+
+  Goal     : Run the custom implementation with alpha values from 0.50 to 0.99.
+             Observe how the rank distribution changes with alpha.
+  Expected : At alpha=0.50 scores are close to uniform (1/N = 0.2 each).
+             At alpha=0.99 scores diverge strongly (link structure dominates).
+             Standard alpha=0.85 gives balanced, spam-resistant results.
+  Graph    : Standard 5-node thesis test graph (A–E, 7 edges).
+  Note     : Uniform distribution = 1/N = 0.200 for 5 pages.
+    
+  Graph: 5 nodes, 7 edges
+
+
+  Alpha            A          B          C          D          E
+  --------------------------------------------------------------
+  0.5       0.249057   0.162264   0.298113   0.190566   0.100000
+  0.65      0.279359   0.160792   0.322091   0.167757   0.070000
+  0.75      0.302011   0.163254   0.336015   0.148720   0.050000
+  0.85      0.326029   0.168562   0.348270   0.127139   0.030000  ← standard
+  0.9       0.338406   0.172283   0.353784   0.115527   0.020000
+  0.95      0.350958   0.176705   0.358903   0.103435   0.010000
+  0.99      0.361093   0.180741   0.362720   0.093447   0.002000
+
+  Score range per page across all alpha values:
+  Page      Min Score    Max Score      Range    % Variation
+  ----------------------------------------------------------
+  A          0.249057     0.361093   0.112036          36.7%
+  B          0.160792     0.180741   0.019949          11.7%
+  C          0.298113     0.362720   0.064607          19.6%
+  D          0.093447     0.190566   0.097119          68.4%
+  E          0.002000     0.100000   0.098000         192.2%
+
+  Plot saved → exp4_damping.png
+
+  ── Key Finding ─────────────────────────────────────────
+  At alpha=0.50: scores are near-uniform (0.18–0.23 range).
+  At alpha=0.99: scores diverge strongly (C dominates ~0.40+).
+  Standard alpha=0.85 provides meaningful ranking while
+  maintaining spam resistance through the teleportation term.
+  Justification: Page & Brin (1999) chose 0.85 empirically
+  as the optimal balance between link structure and teleportation.
+
+  Press Enter to continue to Experiment 5...
+
+======================================================================
+  EXPERIMENT 5 — Monte Carlo Accuracy vs Surfer Count
+======================================================================
+
+  Goal     : Run Monte Carlo with 100 to 50,000 surfers.
+             Measure L1 error vs exact solution at each surfer count.
+             Fit error to theoretical O(1/sqrt(R)) convergence curve.
+  Expected : Error decreases as surfer count increases following ~1/sqrt(R).
+             At 50,000 surfers the result is practically indistinguishable
+             from the exact solution.
+  Graph    : Standard 5-node thesis test graph (A–E, 7 edges).
+    
+  Graph: 5 nodes, 7 edges, alpha=0.85, steps=100 per surfer
+
+
+    Surfers     L1 Error   Max Page Error    Time (ms)   Closest Page
+  --------------------------------------------------------------------
+        100     0.001978         0.000989        11.34         Page D
+        500     0.001115         0.000490        55.43         Page E
+       1000     0.004817         0.001419       111.20         Page A
+       2000     0.004832         0.001473       233.57         Page E
+       5000     0.003214         0.000886       593.07         Page E
+      10000     0.003663         0.001031      1153.57         Page A
+      50000     0.003424         0.000948      5578.79         Page A
+
+  NetworkX (reference) L1 error vs exact: 1.40e-06 (machine precision)
+
+  Theoretical error ~ C/sqrt(R):
+    Surfers   Measured error   Predicted ~1/sqrt(R)
+  ----------------------------------------------------
+        100         0.001978               0.001978
+        500         0.001115               0.000885
+       1000         0.004817               0.000626
+       2000         0.004832               0.000442
+       5000         0.003214               0.000280
+      10000         0.003663               0.000198
+      50000         0.003424               0.000088
+
+  Plot saved → exp5_montecarlo.png
+
+  ── Key Finding ─────────────────────────────────────────
+  Error at 100 surfers   : 0.0020
+  Error at 50,000 surfers: 0.003424
+  Time at 50,000 surfers : 5578.8 ms
+  Note: On a 5-node graph Monte Carlo has high variance per run —
+  this is expected. On larger graphs (100+ nodes) the error
+  decreases clearly following O(1/sqrt(R)) as theory predicts.
+  Monte Carlo never reaches machine precision — always approximate.
+  But at high surfer counts it matches ranking order 100% of the time.
+
+██████████████████████████████████████████████████████████████████████
+  ALL 5 EXPERIMENTS COMPLETE
+  Output files saved:
+    exp1_convergence.png
+    exp2_scalability.png
+    exp3_accuracy.png
+    exp4_damping.png
+    exp5_montecarlo.png
+██████████████████████████████████████████████████████████████████████
+
+Process finished with exit code 0

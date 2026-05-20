@@ -1,0 +1,82 @@
+============================================================
+  PRUNING PAGERANK — MAIN TEST
+============================================================
+
+TEST 1 — Return values have correct types and shapes
+  [PASS] scores is a dict
+  [PASS] scores has one entry per node (4)
+  [PASS] iters is an int
+  [PASS] iters >= 1
+  [PASS] elapsed_ms is a float
+  [PASS] elapsed_ms >= 0
+  [PASS] n_frozen is an int
+  [PASS] history is a list
+  [PASS] history length == iters
+  [PASS] each history entry is (iter, active_count)
+  [PASS] scores sum to 1.0 (got 1.00000000)
+
+TEST 2 — Pruning scores match standard PageRank
+         Graph: 10-node named web graph
+
+  Page           Standard    Pruning         Diff  Frozen?
+  --------------------------------------------------------
+  Hub_B          0.270229   0.270229     0.00e+00         
+  Hub_A          0.252697   0.252697     0.00e+00         
+  Hub_C          0.217537   0.217537     0.00e+00         
+  Page_2         0.097940   0.097940     0.00e+00         
+  Page_1         0.086597   0.086597     0.00e+00         
+  Page_3         0.015000   0.015000     0.00e+00   FROZEN
+  Leaf_1         0.015000   0.015000     0.00e+00   FROZEN
+  Leaf_2         0.015000   0.015000     0.00e+00   FROZEN
+  Leaf_3         0.015000   0.015000     0.00e+00   FROZEN
+  Orphan         0.015000   0.015000     0.00e+00   FROZEN
+
+  Threshold = 0.5 / 10 = 0.0500
+  Pages frozen: 5/10
+  Iterations:   20
+
+  [PASS] all scores match standard PageRank (diff < 1e-9)
+  [PASS] exactly 5 pages frozen (got 5)
+  [PASS] correct pages are below threshold (Page_3, Leaf_1/2/3, Orphan)
+
+  EXPECTED output:
+    Hub_B  ~ 0.270  (active)   Hub_A  ~ 0.253  (active)
+    Hub_C  ~ 0.218  (active)   Page_2 ~ 0.098  (active)
+    Page_1 ~ 0.087  (active)   Page_3 ~ 0.015  FROZEN
+    Leaf_1 ~ 0.015  FROZEN     Leaf_2 ~ 0.015  FROZEN
+    Leaf_3 ~ 0.015  FROZEN     Orphan ~ 0.015  FROZEN
+
+TEST 3 — Warmup: no pages frozen before warmup iterations
+  [PASS] active count = 100 (all pages) during all warmup iterations
+
+TEST 4 — Active count shrinks after warmup on leaf-heavy graph
+  [PASS] at least one page was frozen (got 132)
+  [PASS] active count decreases at least once after warmup
+
+TEST 5 — Accuracy and timing: n = 50, 500, 2000
+
+      N   Std time  Prune time   Frozen %    L1 error   Speedup
+  ------------------------------------------------------------
+     50       0.1ms        0.1ms      56.0%    0.00e+00     0.77x  [OK]
+    500       1.3ms        1.0ms       0.0%    0.00e+00     1.31x  [OK]
+   2000      29.5ms       28.5ms       0.0%    0.00e+00     1.03x  [OK]
+
+  EXPECTED:
+    L1 error = 0.00e+00 for all sizes
+    ~56% pages frozen at n=50 (mostly leaves)
+    Speedup grows with graph size
+  [PASS] L1 error < 1e-6 for all graph sizes
+
+============================================================
+  SUMMARY
+============================================================
+  [PASS] Return types & shapes
+  [PASS] Correctness vs standard PageRank
+  [PASS] Warmup respected
+  [PASS] Active count shrinks post-warmup
+  [PASS] Accuracy across sizes
+
+  5/5 tests passed
+============================================================
+
+Process finished with exit code 0
