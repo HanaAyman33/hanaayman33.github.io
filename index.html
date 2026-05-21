@@ -10,282 +10,207 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
 <style>
-/* ── RESET & BASE ─────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:        #0A0F1E;
-  --surface:   #111827;
-  --card:      #1A2235;
-  --border:    #1E3A5F;
-  --accent:    #3B82F6;
-  --accent2:   #60A5FA;
-  --gold:      #F59E0B;
-  --green:     #10B981;
-  --red:       #EF4444;
-  --purple:    #8B5CF6;
-  --text:      #E2E8F0;
-  --muted:     #94A3B8;
-  --code-bg:   #0D1117;
-  --radius:    12px;
-  --glow:      0 0 30px rgba(59,130,246,0.15);
+  --bg:#0A0F1E;--surface:#111827;--card:#1A2235;--border:#1E3A5F;
+  --accent:#3B82F6;--accent2:#60A5FA;--gold:#F59E0B;--green:#10B981;
+  --red:#EF4444;--purple:#8B5CF6;--text:#E2E8F0;--muted:#94A3B8;
+  --code-bg:#0D1117;--radius:12px;--glow:0 0 30px rgba(59,130,246,0.15);
 }
 html{scroll-behavior:smooth}
-body{
-  font-family:'Space Grotesk',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.7;
-  overflow-x:hidden;
-}
-
-/* ── BACKGROUND MESH ──────────────────────────────────────────── */
-body::before{
-  content:'';
-  position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(59,130,246,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139,92,246,0.06) 0%, transparent 60%);
-  pointer-events:none;z-index:0;
-}
-
-/* ── LAYOUT ───────────────────────────────────────────────────── */
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(59,130,246,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(139,92,246,0.06) 0%,transparent 60%);pointer-events:none;z-index:0;}
 .container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
-
-/* ── NAV ──────────────────────────────────────────────────────── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(10,15,30,0.85);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-.nav-inner{
-  max-width:1200px;margin:0 auto;padding:0 24px;
-  display:flex;align-items:center;justify-content:space-between;
-  height:60px;
-}
-.nav-logo{
-  font-size:.9rem;font-weight:600;color:var(--accent2);
-  text-decoration:none;letter-spacing:.02em;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,15,30,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{font-size:.9rem;font-weight:600;color:var(--accent2);text-decoration:none;letter-spacing:.02em;}
 .nav-links{display:flex;gap:6px;flex-wrap:wrap}
-.nav-links a{
-  padding:5px 12px;border-radius:6px;
-  font-size:.78rem;font-weight:500;color:var(--muted);
-  text-decoration:none;transition:.2s;
-}
+.nav-links a{padding:5px 12px;border-radius:6px;font-size:.78rem;font-weight:500;color:var(--muted);text-decoration:none;transition:.2s;}
 .nav-links a:hover{background:rgba(59,130,246,.15);color:var(--accent2)}
-
-/* ── HERO ─────────────────────────────────────────────────────── */
-.hero{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:80px 24px 60px;
-}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px;}
 .hero-inner{max-width:780px}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);
-  border-radius:20px;padding:6px 16px;margin-bottom:28px;
-  font-size:.78rem;font-weight:500;color:var(--accent2);letter-spacing:.04em;text-transform:uppercase;
-}
-.hero h1{
-  font-size:clamp(2rem,5vw,3.6rem);font-weight:700;
-  line-height:1.15;margin-bottom:20px;
-  background:linear-gradient(135deg,#fff 30%,var(--accent2));
-  background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);border-radius:20px;padding:6px 16px;margin-bottom:28px;font-size:.78rem;font-weight:500;color:var(--accent2);letter-spacing:.04em;text-transform:uppercase;}
+.hero h1{font-size:clamp(2rem,5vw,3.6rem);font-weight:700;line-height:1.15;margin-bottom:20px;background:linear-gradient(135deg,#fff 30%,var(--accent2));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .hero-sub{font-size:1.1rem;color:var(--muted);margin-bottom:36px;max-width:580px;margin-left:auto;margin-right:auto}
-.hero-meta{
-  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:44px;
-}
-.hero-pill{
-  padding:6px 16px;border-radius:20px;
-  background:rgba(255,255,255,.04);border:1px solid var(--border);
-  font-size:.82rem;color:var(--muted);
-}
+.hero-meta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:44px;}
+.hero-pill{padding:6px 16px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid var(--border);font-size:.82rem;color:var(--muted);}
 .hero-pill span{color:var(--text);font-weight:500}
-
-/* ── STAT GRID ────────────────────────────────────────────────── */
-.stats{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:14px;margin-bottom:60px;
-}
-.stat-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:20px;text-align:center;
-  transition:transform .2s,border-color .2s,box-shadow .2s;
-}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:60px;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;transition:transform .2s,border-color .2s,box-shadow .2s;}
 .stat-card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:var(--glow)}
 .stat-num{font-size:2rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--accent2)}
 .stat-lbl{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
-
-/* ── SECTION COMMON ───────────────────────────────────────────── */
 section{padding:80px 0}
-.section-tag{
-  display:inline-block;
-  font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:10px;
-}
+.section-tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
 .section-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;margin-bottom:12px}
 .section-sub{color:var(--muted);font-size:1rem;max-width:600px;margin-bottom:48px}
-
-/* ── REQUIREMENTS GRID ────────────────────────────────────────── */
 .req-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.req-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:28px;cursor:pointer;
-  transition:transform .2s,border-color .2s,box-shadow .2s;
-  position:relative;overflow:hidden;
-}
-.req-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(59,130,246,.05),transparent);
-  opacity:0;transition:.2s;
-}
+.req-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative;overflow:hidden;}
+.req-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,.05),transparent);opacity:0;transition:.2s;}
 .req-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:var(--glow)}
 .req-card:hover::before{opacity:1}
-.req-num{
-  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:10px;
-}
+.req-num{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
 .req-card h3{font-size:1rem;font-weight:600;margin-bottom:8px}
 .req-card p{font-size:.85rem;color:var(--muted);line-height:1.6}
 .req-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
-.tag{
-  padding:3px 10px;border-radius:4px;font-size:.72rem;font-weight:500;
-  background:rgba(59,130,246,.12);color:var(--accent2);
-}
+.tag{padding:3px 10px;border-radius:4px;font-size:.72rem;font-weight:500;background:rgba(59,130,246,.12);color:var(--accent2);}
 .tag.green{background:rgba(16,185,129,.12);color:var(--green)}
 .tag.purple{background:rgba(139,92,246,.12);color:var(--purple)}
 .tag.gold{background:rgba(245,158,11,.12);color:var(--gold)}
 
-/* ── CODE SECTION ─────────────────────────────────────────────── */
+/* ── SHARED PANEL LAYOUT (used by both code and outputs sections) ── */
 #code{background:var(--surface)}
-.code-layout{display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;min-height:600px}
-.code-sidebar{
-  background:rgba(0,0,0,.3);border-right:1px solid var(--border);
-  padding:16px 0;overflow-y:auto;
+#outputs{background:var(--bg)}
+.panel-layout{
+  display:grid;grid-template-columns:260px 1fr;gap:0;
+  border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;min-height:600px;
 }
-.code-sidebar-title{
-  font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
-  color:var(--muted);padding:0 16px;margin-bottom:8px;
+.panel-sidebar{
+  background:rgba(0,0,0,.35);border-right:1px solid var(--border);
+  padding:12px 0;overflow-y:auto;display:flex;flex-direction:column;
 }
-.code-tab{
-  display:block;padding:10px 16px;cursor:pointer;
-  font-size:.82rem;color:var(--muted);border-left:3px solid transparent;
-  transition:.15s;text-decoration:none;
+.panel-sidebar-title{
+  font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--muted);padding:0 14px 10px;border-bottom:1px solid var(--border);
+  margin-bottom:6px;flex-shrink:0;
 }
-.code-tab:hover{color:var(--text);background:rgba(59,130,246,.07)}
-.code-tab.active{color:var(--accent2);border-left-color:var(--accent);background:rgba(59,130,246,.08)}
-.code-main{display:flex;flex-direction:column;overflow:hidden}
-.code-header{
+.panel-tab{
+  display:block;padding:9px 14px;cursor:pointer;font-size:.79rem;
+  color:var(--muted);border-left:3px solid transparent;transition:.15s;
+  text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font-family:'JetBrains Mono',monospace;
+}
+.panel-tab:hover{color:var(--text);background:rgba(59,130,246,.07)}
+.panel-tab.active{color:var(--accent2);border-left-color:var(--accent);background:rgba(59,130,246,.09)}
+.panel-tab .tab-badge{
+  display:inline-block;margin-left:6px;padding:1px 6px;border-radius:3px;
+  font-size:.65rem;font-weight:600;vertical-align:middle;
+}
+.tab-badge.out{background:rgba(16,185,129,.2);color:var(--green)}
+.tab-badge.src{background:rgba(59,130,246,.2);color:var(--accent2)}
+.panel-main{display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+.panel-header{
   display:flex;align-items:center;justify-content:space-between;
-  padding:14px 20px;background:rgba(0,0,0,.4);border-bottom:1px solid var(--border);
+  padding:12px 18px;background:rgba(0,0,0,.45);border-bottom:1px solid var(--border);
+  flex-shrink:0;gap:12px;
 }
-.code-filename{
-  font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent2);
-  display:flex;align-items:center;gap:8px;
+.panel-filename{
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent2);
+  display:flex;align-items:center;gap:8px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
-.code-filename::before{content:'📄';font-size:.9rem}
-.code-actions{display:flex;gap:8px}
-.btn-copy,.btn-download{
-  padding:5px 14px;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;
+.panel-filename .icon{flex-shrink:0}
+.panel-actions{display:flex;gap:8px;flex-shrink:0;}
+.btn-action{
+  padding:5px 13px;border-radius:6px;font-size:.73rem;font-weight:600;cursor:pointer;
   border:1px solid var(--border);transition:.15s;font-family:'Space Grotesk',sans-serif;
+  white-space:nowrap;
 }
-.btn-copy{background:rgba(59,130,246,.15);color:var(--accent2)}
-.btn-copy:hover{background:rgba(59,130,246,.3)}
-.btn-download{background:rgba(16,185,129,.12);color:var(--green);border-color:rgba(16,185,129,.3)}
-.btn-download:hover{background:rgba(16,185,129,.25)}
-.code-pane-wrapper{background:var(--code-bg);padding:20px;overflow:auto;height:600px;position:relative;}
-.code-pane-wrapper pre{margin:0;background:transparent!important;}
-.code-pane-wrapper code{font-size:.8rem!important;line-height:1.6!important;font-family:'JetBrains Mono',monospace!important;}
+.btn-copy-src{background:rgba(59,130,246,.15);color:var(--accent2)}
+.btn-copy-src:hover{background:rgba(59,130,246,.3)}
+.btn-copy-src.copied{background:rgba(16,185,129,.2);color:var(--green);border-color:rgba(16,185,129,.3)}
+.btn-dl{background:rgba(16,185,129,.12);color:var(--green);border-color:rgba(16,185,129,.3)}
+.btn-dl:hover{background:rgba(16,185,129,.25)}
 
-/* ── RESULTS ──────────────────────────────────────────────────── */
-.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.result-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;
-  transition:border-color .2s;
+/* ── CODE PANE ── */
+.code-pane-wrap{
+  background:var(--code-bg);overflow:auto;flex:1;
+  position:relative;
 }
+.code-pane-wrap pre{margin:0!important;min-height:100%;}
+.code-pane-wrap code{
+  font-size:.78rem!important;line-height:1.65!important;
+  font-family:'JetBrains Mono',monospace!important;
+  display:block;padding:20px!important;
+}
+.hljs{background:var(--code-bg)!important;padding:0!important;}
+
+/* ── OUTPUT PANE ── */
+.output-pane-wrap{
+  background:#080D14;overflow:auto;flex:1;
+  border-top:none;
+}
+.output-pane-wrap pre{
+  margin:0;padding:20px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;line-height:1.7;
+  color:#A8D8A8;
+  white-space:pre-wrap;word-break:break-word;
+  min-height:100%;
+}
+/* output colour tokens */
+.out-pass{color:#10B981;font-weight:600}
+.out-fail{color:#EF4444;font-weight:600}
+.out-warn{color:#F59E0B;font-weight:600}
+.out-head{color:#60A5FA;font-weight:600}
+.out-num {color:#C084FC}
+.out-sep {color:#334155}
+.out-cmd {color:#94A3B8;font-style:italic}
+
+/* ── EMPTY / LOADING STATES ── */
+.pane-placeholder{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;min-height:300px;gap:12px;color:var(--muted);
+  font-size:.85rem;
+}
+.pane-placeholder .ph-icon{font-size:2.5rem;opacity:.4}
+
+/* ── STATUS BAR ── */
+.status-bar{
+  display:flex;align-items:center;gap:10px;padding:7px 18px;
+  background:rgba(0,0,0,.3);border-top:1px solid var(--border);
+  font-size:.72rem;font-family:'JetBrains Mono',monospace;
+  color:var(--muted);flex-shrink:0;
+}
+.status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.status-dot.ok{background:var(--green)}
+.status-dot.err{background:var(--red)}
+.status-dot.pending{background:var(--gold)}
+.status-bar .sb-sep{color:var(--border);margin:0 4px}
+
+/* ── RESULTS ── */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.result-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:border-color .2s;}
 .result-card:hover{border-color:var(--accent)}
 .result-card h4{font-size:.95rem;font-weight:600;margin-bottom:14px;color:var(--accent2)}
 .result-table{width:100%;font-size:.8rem;border-collapse:collapse}
-.result-table th{
-  text-align:left;padding:6px 8px;
-  color:var(--muted);font-weight:500;font-size:.72rem;text-transform:uppercase;
-  border-bottom:1px solid var(--border);letter-spacing:.05em;
-}
+.result-table th{text-align:left;padding:6px 8px;color:var(--muted);font-weight:500;font-size:.72rem;text-transform:uppercase;border-bottom:1px solid var(--border);letter-spacing:.05em;}
 .result-table td{padding:6px 8px;border-bottom:1px solid rgba(30,58,95,.5);font-family:'JetBrains Mono',monospace;font-size:.78rem}
 .result-table tr:last-child td{border-bottom:none}
 .badge-pass{color:var(--green);font-weight:600}
 .badge-ref{color:var(--gold);font-weight:600}
 .badge-approx{color:var(--muted)}
-
-/* ── METHODS ──────────────────────────────────────────────────── */
 .methods-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
-.method-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;
-}
-.method-num{
-  font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;
-}
+.method-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;}
+.method-num{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
 .method-card h3{font-size:.98rem;font-weight:600;margin-bottom:10px}
 .method-card p{font-size:.84rem;color:var(--muted);margin-bottom:12px}
 .complexity{display:flex;gap:8px;flex-wrap:wrap}
-.complexity-badge{
-  padding:3px 10px;border-radius:4px;font-size:.75rem;font-family:'JetBrains Mono',monospace;
-  background:rgba(0,0,0,.3);border:1px solid var(--border);color:var(--text);
-}
-
-/* ── SIMULATOR SECTION ────────────────────────────────────────── */
+.complexity-badge{padding:3px 10px;border-radius:4px;font-size:.75rem;font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.3);border:1px solid var(--border);color:var(--text);}
 .simulator-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:40px}
-.sim-feature{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:20px;display:flex;gap:14px;align-items:flex-start;
-}
+.sim-feature{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;gap:14px;align-items:flex-start;}
 .sim-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
 .sim-feature h4{font-size:.9rem;font-weight:600;margin-bottom:4px}
 .sim-feature p{font-size:.82rem;color:var(--muted)}
-
-/* ── SEO SECTION ──────────────────────────────────────────────── */
 .seo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.seo-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;
-}
-.seo-change{
-  font-size:1.6rem;font-weight:700;font-family:'JetBrains Mono',monospace;
-  margin-bottom:6px;
-}
+.seo-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;}
+.seo-change{font-size:1.6rem;font-weight:700;font-family:'JetBrains Mono',monospace;margin-bottom:6px;}
 .seo-change.up{color:var(--green)}.seo-change.mixed{color:var(--gold)}
 .seo-card h4{font-size:.9rem;font-weight:600;margin-bottom:6px}
 .seo-card p{font-size:.82rem;color:var(--muted)}
-
-/* ── INSTALL BOX ──────────────────────────────────────────────── */
-.install-box{
-  background:var(--code-bg);border:1px solid var(--border);border-radius:var(--radius);
-  padding:24px;font-family:'JetBrains Mono',monospace;font-size:.85rem;
-  position:relative;
-}
+.install-box{background:var(--code-bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;font-family:'JetBrains Mono',monospace;font-size:.85rem;position:relative;}
 .install-box pre{color:var(--green);white-space:pre-wrap;word-break:break-all}
-
-/* ── FOOTER ───────────────────────────────────────────────────── */
-footer{
-  background:var(--surface);border-top:1px solid var(--border);
-  padding:40px 0;text-align:center;
-}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:40px 0;text-align:center;}
 footer p{color:var(--muted);font-size:.85rem;margin-bottom:6px}
 footer strong{color:var(--text)}
-
-/* ── SCROLL PROGRESS INDICATOR ────────────────────────────────── */
-.scroll-progress{
-  position:fixed;top:60px;left:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--purple));
-  z-index:99;transition:width .1s;
-}
-
+.scroll-progress{position:fixed;top:60px;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--purple));z-index:99;transition:width .1s;}
+.divider{height:1px;background:var(--border);margin:0}
 @media(max-width:768px){
-  .code-layout{grid-template-columns:1fr}
-  .code-sidebar{display:flex;overflow-x:auto;padding:8px;border-right:none;border-bottom:1px solid var(--border)}
-  .code-tab{white-space:nowrap;border-left:none;border-bottom:3px solid transparent;padding:8px 12px}
-  .code-tab.active{border-left:none;border-bottom-color:var(--accent)}
+  .panel-layout{grid-template-columns:1fr}
+  .panel-sidebar{display:flex;flex-direction:row;overflow-x:auto;padding:8px;border-right:none;border-bottom:1px solid var(--border);max-height:none;}
+  .panel-sidebar-title{display:none}
+  .panel-tab{white-space:nowrap;border-left:none;border-bottom:3px solid transparent;padding:8px 12px;flex-shrink:0;}
+  .panel-tab.active{border-left:none;border-bottom-color:var(--accent)}
   .nav-links{display:none}
 }
 </style>
@@ -296,11 +221,11 @@ footer strong{color:var(--text)}
 
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#">PageRank Thesis</a>
+    <a class="nav-logo" href="#hero">PageRank Thesis</a>
     <div class="nav-links">
       <a href="#overview">Overview</a>
-      <a href="#methods">Methods</a>
       <a href="#code">Source Code</a>
+      <a href="#outputs">Outputs</a>
       <a href="#results">Results</a>
       <a href="#simulator">Simulator</a>
       <a href="#seo">SEO</a>
@@ -309,6 +234,7 @@ footer strong{color:var(--text)}
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-inner">
     <div class="hero-badge">🎓 Bachelor Thesis · GUC 2026</div>
@@ -319,7 +245,6 @@ footer strong{color:var(--text)}
       <div class="hero-pill">Supervisor: <span>Dr. Islam El-maddah</span></div>
       <div class="hero-pill">Faculty of Media Engineering &amp; Technology</div>
     </div>
-
     <div class="stats">
       <div class="stat-card"><div class="stat-num">6</div><div class="stat-lbl">PR Methods</div></div>
       <div class="stat-card"><div class="stat-num">5</div><div class="stat-lbl">Experiments</div></div>
@@ -333,43 +258,36 @@ footer strong{color:var(--text)}
 
 <div class="divider"></div>
 
+<!-- OVERVIEW -->
 <section id="overview">
   <div class="container">
     <div class="section-tag">Project Overview</div>
     <h2 class="section-title">Five Requirements, One Complete System</h2>
     <p class="section-sub">Each requirement builds on the last — from implementing the raw algorithm to building a full search engine with real-time simulation.</p>
     <div class="req-grid">
-      <div class="req-card" onclick="location.href='#code'; switchTab('progressive_pruning_pr.py');">
+      <div class="req-card" onclick="jumpToCode('progressive_pruning_pr.py')">
         <div class="req-num">Requirement 1</div>
         <h3>Progressive Pruning PageRank</h3>
         <p>A novel enhancement to power iteration that freezes low-rank pages after convergence, achieving 1.53× speedup with zero accuracy loss on 2,000-node graphs.</p>
-        <div class="req-tags">
-          <span class="tag">NumPy</span><span class="tag">Benchmark</span><span class="tag green">L1 Error = 0</span>
-        </div>
+        <div class="req-tags"><span class="tag">NumPy</span><span class="tag">Benchmark</span><span class="tag green">L1 Error = 0</span></div>
       </div>
-      <div class="req-card" onclick="location.href='#code'; switchTab('realistic_data.py');">
+      <div class="req-card" onclick="jumpToCode('realistic_data.py')">
         <div class="req-num">Requirement 2</div>
         <h3>Realistic Large-Scale Data</h3>
         <p>A BFS web scraper with 4 bug fixes, validated against a 791-node synthetic documentation graph. All 7 PageRank methods benchmarked with L1 error and timing.</p>
-        <div class="req-tags">
-          <span class="tag">BeautifulSoup</span><span class="tag">791 nodes</span><span class="tag gold">7 Methods</span>
-        </div>
+        <div class="req-tags"><span class="tag">BeautifulSoup</span><span class="tag">791 nodes</span><span class="tag gold">7 Methods</span></div>
       </div>
-      <div class="req-card" onclick="location.href='#code'; switchTab('all_6_methods.py');">
+      <div class="req-card" onclick="jumpToCode('all_6_methods.py')">
         <div class="req-num">Requirement 3</div>
         <h3>Manual PageRank Implementation</h3>
-        <p>Custom PageRank algorithm using manual power iteration and NetworkX. Implements the core mathematical formula with explicit dangling node handling, convergence tracking, and validation against exact matrix algebra solution.</p>
-        <div class="req-tags">
-          <span class="tag">Python</span><span class="tag">NetworkX</span><span class="tag purple">Power Iteration</span>
-        </div>
+        <p>Custom PageRank algorithm using manual power iteration and NetworkX with explicit dangling node handling, convergence tracking, and validation against exact matrix algebra.</p>
+        <div class="req-tags"><span class="tag">Python</span><span class="tag">NetworkX</span><span class="tag purple">Power Iteration</span></div>
       </div>
-      <div class="req-card" onclick="location.href='#code'; switchTab('pr_simulator.py');">
+      <div class="req-card" onclick="jumpToCode('pr_simulator.py')">
         <div class="req-num">Bonus — Week 6</div>
         <h3>Interactive Simulation Engine</h3>
         <p>A full Streamlit web app with live BFS crawling, Vis.js graph visualisation, heat-scale colour coding, TF-IDF search, and Google benchmark comparison.</p>
-        <div class="req-tags">
-          <span class="tag">Streamlit</span><span class="tag">Vis.js</span><span class="tag purple">Live Demo</span>
-        </div>
+        <div class="req-tags"><span class="tag">Streamlit</span><span class="tag">Vis.js</span><span class="tag purple">Live Demo</span></div>
       </div>
     </div>
   </div>
@@ -377,55 +295,38 @@ footer strong{color:var(--text)}
 
 <div class="divider"></div>
 
+<!-- SOURCE CODE -->
 <section id="code">
   <div class="container">
     <div class="section-tag">Source Code</div>
-    <h2 class="section-title">Complete Code Workspace</h2>
-    <p class="section-sub">Dynamic source-code browser. Code files are parsed and highlighted live directly from your workspace directory path context.</p>
+    <h2 class="section-title">Complete Source Code</h2>
+    <p class="section-sub">Click any file in the sidebar to view its full source. Use Copy or Download to save individual files.</p>
 
-    <div class="code-layout">
-      <div class="code-sidebar" id="sidebar-tabs">
-        </div>
-
-      <div class="code-main">
-        <div class="code-header">
-          <div class="code-filename" id="code-filename">Initializing...</div>
-          <div class="code-actions">
-            <button class="btn-copy" onclick="copyCode()">Copy</button>
-            <button class="btn-download" onclick="downloadCode()">Download Full Script</button>
+    <div class="panel-layout">
+      <div class="panel-sidebar" id="code-sidebar">
+        <div class="panel-sidebar-title">Python Files</div>
+        <!-- tabs injected by JS -->
+      </div>
+      <div class="panel-main">
+        <div class="panel-header">
+          <div class="panel-filename">
+            <span class="icon">📄</span>
+            <span id="code-filename">Select a file…</span>
+          </div>
+          <div class="panel-actions">
+            <button class="btn-action btn-copy-src" id="btn-copy-code" onclick="copyCode()">Copy</button>
+            <button class="btn-action btn-dl" onclick="downloadCode()">Download</button>
           </div>
         </div>
-        <div class="code-pane-wrapper">
-          <pre><code class="language-python" id="code-display-block"># Processing workspace logic variables... Please wait.</code></pre>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <div class="divider"></div>
-
-<section id="outputs">
-  <div class="container">
-    <div class="section-tag">Execution Outputs</div>
-    <h2 class="section-title">Console Outputs & Experimental Results</h2>
-    <p class="section-sub">Actual terminal outputs from running each Python script. These files are generated by executing the corresponding source code.</p>
-
-    <div class="code-layout">
-      <div class="code-sidebar" id="output-sidebar-tabs">
-        <div class="code-sidebar-title">OUTPUT FILES</div>
-      </div>
-
-      <div class="code-main">
-        <div class="code-header">
-          <div class="code-filename" id="output-filename">Select an output file...</div>
-          <div class="code-actions">
-            <button class="btn-copy" onclick="copyOutput()">Copy</button>
-            <button class="btn-download" onclick="downloadOutput()">Download Output</button>
+        <div class="code-pane-wrap" id="code-pane-wrap">
+          <div class="pane-placeholder">
+            <div class="ph-icon">📂</div>
+            <div>Select a file from the sidebar to view its source</div>
           </div>
         </div>
-        <div class="code-pane-wrapper">
-          <pre><code id="output-display-block" style="font-family:'JetBrains Mono',monospace; font-size:.8rem; white-space:pre-wrap;"># Select an output file from the sidebar</code></pre>
+        <div class="status-bar" id="code-status-bar">
+          <span class="status-dot pending" id="code-status-dot"></span>
+          <span id="code-status-text">No file loaded</span>
         </div>
       </div>
     </div>
@@ -434,6 +335,48 @@ footer strong{color:var(--text)}
 
 <div class="divider"></div>
 
+<!-- OUTPUTS -->
+<section id="outputs">
+  <div class="container">
+    <div class="section-tag">Execution Outputs</div>
+    <h2 class="section-title">Console Outputs &amp; Experimental Results</h2>
+    <p class="section-sub">Actual terminal output from running each Python script. Select a file to see its full output. These are generated by executing the corresponding source code.</p>
+
+    <div class="panel-layout">
+      <div class="panel-sidebar" id="output-sidebar">
+        <div class="panel-sidebar-title">Output Files</div>
+        <!-- tabs injected by JS -->
+      </div>
+      <div class="panel-main">
+        <div class="panel-header">
+          <div class="panel-filename">
+            <span class="icon">📋</span>
+            <span id="output-filename">Select an output file…</span>
+          </div>
+          <div class="panel-actions">
+            <button class="btn-action btn-copy-src" id="btn-copy-out" onclick="copyOutput()">Copy</button>
+            <button class="btn-action btn-dl" onclick="downloadOutput()">Download</button>
+          </div>
+        </div>
+        <div class="output-pane-wrap" id="output-pane-wrap">
+          <div class="pane-placeholder">
+            <div class="ph-icon">📋</div>
+            <div>Select an output file from the sidebar to view its contents</div>
+            <div style="font-size:.75rem;color:#475569;margin-top:4px">Make sure the .txt output files are in the same folder as this index.html</div>
+          </div>
+        </div>
+        <div class="status-bar" id="output-status-bar">
+          <span class="status-dot pending" id="output-status-dot"></span>
+          <span id="output-status-text">No file loaded</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RESULTS -->
 <section id="results">
   <div class="container">
     <div class="section-tag">Experimental Results</div>
@@ -453,7 +396,6 @@ footer strong{color:var(--text)}
           <tr><td>7 Pruning</td><td>1.57e-4</td><td>93.9 ms</td></tr>
         </table>
       </div>
-
       <div class="result-card">
         <h4>Pruning Benchmark · Web-Like Graphs</h4>
         <table class="result-table">
@@ -464,7 +406,6 @@ footer strong{color:var(--text)}
         </table>
         <p style="font-size:.78rem;color:var(--muted);margin-top:10px">L1 Error = 0.00e+00 in all cases</p>
       </div>
-
       <div class="result-card">
         <h4>Monte Carlo · Error vs Surfer Count</h4>
         <table class="result-table">
@@ -474,14 +415,14 @@ footer strong{color:var(--text)}
           <tr><td>10,000</td><td>0.0031</td><td>760 ms</td></tr>
           <tr><td>50,000</td><td>0.0018</td><td>3.8 s</td></tr>
         </table>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:10px">Error ≈ O(1/√R) confirmed</p>
       </div>
-
       <div class="result-card">
         <h4>Search Engine Tests · 8/8 Passing</h4>
         <table class="result-table">
           <tr><th>Test</th><th>Status</th></tr>
-          <tr><td>Constructor & init</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Return type & structure</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Constructor &amp; init</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Return type &amp; structure</td><td class="badge-pass">PASS</td></tr>
           <tr><td>Pure PageRank mode</td><td class="badge-pass">PASS</td></tr>
           <tr><td>Keyword relevance</td><td class="badge-pass">PASS</td></tr>
           <tr><td>Recency weight</td><td class="badge-pass">PASS</td></tr>
@@ -490,143 +431,99 @@ footer strong{color:var(--text)}
           <tr><td>Edge cases</td><td class="badge-pass">PASS</td></tr>
         </table>
       </div>
+      <div class="result-card">
+        <h4>Google Comparison Metrics</h4>
+        <table class="result-table">
+          <tr><th>Metric</th><th>Value</th></tr>
+          <tr><td>Overlap@3</td><td>33%</td></tr>
+          <tr><td>Overlap@5</td><td class="badge-pass">100%</td></tr>
+          <tr><td>Overlap@10</td><td class="badge-pass">100%</td></tr>
+          <tr><td>Spearman ρ</td><td>0.685</td></tr>
+        </table>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:10px">Moderate–strong agreement with Google ranking</p>
+      </div>
+      <div class="result-card">
+        <h4>Scraper Tests · 9/9 Passing</h4>
+        <table class="result-table">
+          <tr><th>Test</th><th>Status</th></tr>
+          <tr><td>Returns nx.DiGraph</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>No self-loops</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Exactly 791 nodes</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Exactly 3,228 edges</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>PR sums to 1.0 ±1e-6</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Top page identified</td><td class="badge-pass">PASS</td></tr>
+        </table>
+      </div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
+<!-- SIMULATOR -->
 <section id="simulator" style="background:var(--surface)">
   <div class="container">
     <div class="section-tag">Interactive Tool</div>
     <h2 class="section-title">PageRank Simulation Engine</h2>
-    <p class="section-sub">A browser-based Streamlit application built in Week 6. Crawl any website, run all 5 methods, search with TF-IDF, and compare with Google.</p>
-
+    <p class="section-sub">A browser-based Streamlit application. Crawl any website, run all 6 methods, search with TF-IDF, and compare with Google.</p>
     <div class="simulator-features">
-      <div class="sim-feature">
-        <div class="sim-icon">🕸️</div>
-        <div><h4>Smart BFS Crawler</h4><p>Crawl any URL with depth, path prefix, keyword, and asset filters.</p></div>
-      </div>
-      <div class="sim-feature">
-        <div class="sim-icon">📊</div>
-        <div><h4>Live Vis.js Graph</h4><p>Nodes sized and coloured by PageRank on a blue→amber→red heat scale.</p></div>
-      </div>
-      <div class="sim-feature">
-        <div class="sim-icon">🔍</div>
-        <div><h4>TF-IDF Search</h4><p>Combined score = 0.6×PR + 0.4×TF-IDF.</p></div>
-      </div>
-      <div class="sim-feature">
-        <div class="sim-icon">🆚</div>
-        <div><h4>Google Benchmark</h4><p>Multi-tier fuzzy URL matching. Reports Spearman ρ and Kendall τ.</p></div>
-      </div>
+      <div class="sim-feature"><div class="sim-icon">🕸️</div><div><h4>Smart BFS Crawler</h4><p>Crawl any URL with depth, path prefix, keyword, and asset filters. Handles self-loops and dangling nodes.</p></div></div>
+      <div class="sim-feature"><div class="sim-icon">📊</div><div><h4>Live Vis.js Graph</h4><p>Nodes sized and coloured by PageRank on a blue→amber→red heat scale. Hover for full URL and rank.</p></div></div>
+      <div class="sim-feature"><div class="sim-icon">🔍</div><div><h4>TF-IDF Search</h4><p>Combined score = 0.6×PR + 0.4×TF-IDF. Rankings update in real time as you type.</p></div></div>
+      <div class="sim-feature"><div class="sim-icon">🆚</div><div><h4>Google Benchmark</h4><p>Paste Google results in any format. Reports Spearman ρ and Kendall τ with scatter plot.</p></div></div>
+      <div class="sim-feature"><div class="sim-icon">⚡</div><div><h4>Progressive Pruning</h4><p>6th method: freezes converged low-rank pages. 1.53× speedup at n=2,000 with zero accuracy loss.</p></div></div>
+      <div class="sim-feature"><div class="sim-icon">🚀</div><div><h4>SEO Recommendations</h4><p>Automatic analysis of the seed URL: inbound links, dangling nodes, link quality, reachability, content.</p></div></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
+<!-- SEO -->
 <section id="seo">
   <div class="container">
     <div class="section-tag">Requirement 5</div>
     <h2 class="section-title">SEO Recommendations — Proven by Data</h2>
     <p class="section-sub">Each recommendation is validated by modifying the graph and measuring exact PageRank changes using NetworkX.</p>
     <div class="seo-grid">
-      <div class="seo-card">
-        <div class="seo-change up">+287%</div>
-        <h4>1. Earn a High-Authority Inbound Link</h4>
-        <p>One link from python_tutorial (PR=0.10) increased web_scraping's rank from 0.010 to 0.039.</p>
-      </div>
-      <div class="seo-card">
-        <div class="seo-change up">+35.5%</div>
-        <h4>2. Create an Internal Hub Page</h4>
-        <p>Adding a db_hub page increased database_sql PageRank from 0.049 to 0.066.</p>
-      </div>
-      <div class="seo-card">
-        <div class="seo-change up">+763%</div>
-        <h4>3. Accumulate Multiple Inbound Links</h4>
-        <p>5 inbound links raised PageRank from 0.010 to 0.086 — a 763% total increase.</p>
-      </div>
-      <div class="seo-card">
-        <div class="seo-change up">+23.8%</div>
-        <h4>4. Fix Dangling Pages</h4>
-        <p>Adding one link back to the homepage increased homepage PR from 0.190 to 0.236.</p>
-      </div>
-      <div class="seo-card">
-        <div class="seo-change mixed">Equalise</div>
-        <h4>5. Use Hub-and-Spoke, Not Chains</h4>
-        <p>Hub-and-spoke equalises distribution — A improves +29.8%, E drops 65%.</p>
-      </div>
+      <div class="seo-card"><div class="seo-change up">+287%</div><h4>1. Earn a High-Authority Inbound Link</h4><p>One link from python_tutorial (PR=0.10) increased web_scraping rank from 0.010 to 0.039.</p></div>
+      <div class="seo-card"><div class="seo-change up">+35.5%</div><h4>2. Create an Internal Hub Page</h4><p>Adding a db_hub page increased database_sql PageRank from 0.049 to 0.066.</p></div>
+      <div class="seo-card"><div class="seo-change up">+763%</div><h4>3. Accumulate Multiple Inbound Links</h4><p>5 inbound links raised PageRank from 0.010 to 0.086 — a 763% total increase.</p></div>
+      <div class="seo-card"><div class="seo-change up">+23.8%</div><h4>4. Fix Dangling Pages</h4><p>Adding one link to the homepage increased homepage PR from 0.190 to 0.236.</p></div>
+      <div class="seo-card"><div class="seo-change mixed">Equalise</div><h4>5. Use Hub-and-Spoke, Not Chains</h4><p>Hub-and-spoke equalises distribution — A improves +29.8%, E drops 65%.</p></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
+<!-- INSTALL -->
 <section id="install">
   <div class="container">
     <div class="section-tag">Run It Yourself</div>
     <h2 class="section-title">Installation &amp; Run Commands</h2>
     <p class="section-sub">All code requires Python 3.8+. Install dependencies once, then run any requirement independently.</p>
-
     <div class="install-box">
-      <pre>pip install networkx numpy scipy matplotlib requests beautifulsoup4 streamlit plotly pandas
+<pre>pip install networkx numpy scipy matplotlib requests beautifulsoup4 streamlit plotly pandas
 
-# ============================================================
-# experiments.py
-# ============================================================
+# Requirement 1 — Progressive Pruning benchmark and chart
+python progressive_pruning_pr.py
 
-# Run a specific experiment:
-python experiments.py --exp 1       # Convergence Speed
-python experiments.py --exp 2       # Scalability
-python experiments.py --exp 3       # Accuracy Comparison
-python experiments.py --exp 4       # Damping Factor Sensitivity
-python experiments.py --exp 5       # Monte Carlo Accuracy
+# Requirement 2 — 791-node synthetic demo (no internet required)
+python realistic_data.py --demo
 
-# Run all experiments:
+# Requirement 2 — Live website crawl (internet required)
+python realistic_data.py --scrape --url https://docs.python.org/3/ --depth 2
+
+# All 6 PageRank methods + experiments
+python all_6_methods.py
 python experiments.py --exp all
 
-# ============================================================
-# pr_simulator.py
-# ============================================================
+# Interactive simulation engine (opens at http://localhost:8501)
+streamlit run pr_simulator.py
 
-streamlit run app.py
-
-# ============================================================
-# progressive_pruning_pr.py
-# ============================================================
-
-python pruning_test.py
-
-# ============================================================
-# realistic_data.py
-# ============================================================
-
-# Demo with synthetic graph (no internet required):
-python req2_realistic_data.py --demo
-
-# Scrape a real website (internet required):
-python req2_realistic_data.py --scrape --url https://docs.python.org/3/ --depth 2
-
-# Demo on a previously saved edge list:
-python req2_realistic_data.py --demo --input edge_list.csv
-
-# Dependencies:
-pip install networkx numpy scipy matplotlib requests beautifulsoup4
-
-# ============================================================
-# search_engine.py
-# ============================================================
-
-python search_engine_test.py
-
-# Dependencies:
-pip install networkx numpy
-
-# ============================================================
-# metro_daily_with_recommendations.py
-# ============================================================
-
-python metro_daily_with_recommendations.py</pre>
+# Search engine test suite (8/8 tests)
+python search_engine_test.py</pre>
     </div>
   </div>
 </section>
@@ -640,8 +537,11 @@ python metro_daily_with_recommendations.py</pre>
 </footer>
 
 <script>
-// Exact, synchronous source array matching your root repository folder filenames
-const sourceFiles = [
+// ═══════════════════════════════════════════════════════════════
+// CONFIGURATION — edit these arrays to match your actual files
+// ═══════════════════════════════════════════════════════════════
+
+const SOURCE_FILES = [
   "Experiments.py",
   "all_6_methods.py",
   "pr_simulator.py",
@@ -652,89 +552,271 @@ const sourceFiles = [
   "metro_daily_with_recommend.py"
 ];
 
-let selectedFile = sourceFiles[0];
+// Output files: these are the .txt files produced when you run each script.
+// Name them whatever you saved them as. They must be in the same folder as index.html.
+const OUTPUT_FILES = [
+  { file: "output_experiments.txt",        label: "experiments.py",             desc: "All 5 simulation experiments" },
+  { file: "output_all_6_methods.txt",      label: "all_6_methods.py",           desc: "6-method comparison on 5-node graph" },
+  { file: "output_realistic_data.txt",     label: "realistic_data.py",          desc: "791-node benchmark results" },
+  { file: "output_pruning.txt",            label: "progressive_pruning_pr.py",  desc: "Pruning speedup benchmark" },
+  { file: "output_seo.txt",                label: "seo_with_recommendations.py",desc: "SEO proof tables" },
+  { file: "output_search_engine_test.txt", label: "search_engine_test.py",      desc: "8/8 test results" },
+];
 
-// Renders the file nodes dynamically into your workspace component block
-function initializeSidebar() {
-  const sidebar = document.getElementById('sidebar-tabs');
-  sidebar.innerHTML = ''; 
-  
-  sourceFiles.forEach((filename, index) => {
-    const tabLink = document.createElement('a');
-    tabLink.href = "#";
-    tabLink.className = `code-tab ${index === 0 ? 'active' : ''}`;
-    tabLink.id = `tab-${filename}`;
-    tabLink.textContent = filename;
-    tabLink.onclick = (e) => {
-      e.preventDefault();
-      switchTab(filename);
-    };
-    sidebar.appendChild(tabLink);
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+let activeCodeFile   = null;
+let activeOutputFile = null;
+let codeContent      = {};   // cache: filename → text
+let outputContent    = {};   // cache: filename → text
+
+// ═══════════════════════════════════════════════════════════════
+// SIDEBAR BUILDERS
+// ═══════════════════════════════════════════════════════════════
+
+function buildCodeSidebar() {
+  const sb = document.getElementById('code-sidebar');
+  // Keep the title div, append tabs after it
+  const title = sb.querySelector('.panel-sidebar-title');
+  SOURCE_FILES.forEach((f, i) => {
+    const a = document.createElement('a');
+    a.href = '#';
+    a.className = 'panel-tab';
+    a.id = 'code-tab-' + i;
+    a.dataset.file = f;
+    a.innerHTML = f + '<span class="tab-badge src">PY</span>';
+    a.title = f;
+    a.addEventListener('click', e => { e.preventDefault(); loadCodeFile(f, i); });
+    sb.appendChild(a);
   });
 }
 
-// ASYNC AJAX CONTROLLER ENGINE: Fetches complete, un-truncated scripts on demand
-function switchTab(filename) {
-  selectedFile = filename;
-  
-  document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
-  const activeTab = document.getElementById(`tab-${filename}`);
-  if (activeTab) activeTab.classList.add('active');
-  
+function buildOutputSidebar() {
+  const sb = document.getElementById('output-sidebar');
+  const title = sb.querySelector('.panel-sidebar-title');
+  OUTPUT_FILES.forEach((entry, i) => {
+    const a = document.createElement('a');
+    a.href = '#';
+    a.className = 'panel-tab';
+    a.id = 'out-tab-' + i;
+    a.dataset.file = entry.file;
+    a.innerHTML = entry.label + '<span class="tab-badge out">OUT</span>';
+    a.title = entry.file + ' — ' + entry.desc;
+    a.addEventListener('click', e => { e.preventDefault(); loadOutputFile(entry, i); });
+    sb.appendChild(a);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CODE PANEL
+// ═══════════════════════════════════════════════════════════════
+
+function loadCodeFile(filename, idx) {
+  // Update active tab
+  document.querySelectorAll('#code-sidebar .panel-tab').forEach(t => t.classList.remove('active'));
+  const tab = document.getElementById('code-tab-' + idx);
+  if (tab) tab.classList.add('active');
+
   document.getElementById('code-filename').textContent = filename;
-  const codeDisplay = document.getElementById('code-display-block');
-  codeDisplay.textContent = `# Querying filesystem stream loop for '${filename}'...`;
-  
-  // Requests the document context live from the root workspace directory path
+  activeCodeFile = filename;
+  setCodeStatus('pending', 'Loading ' + filename + '…');
+
+  // Served from cache?
+  if (codeContent[filename]) {
+    renderCode(filename, codeContent[filename]);
+    return;
+  }
+
+  const wrap = document.getElementById('code-pane-wrap');
+  wrap.innerHTML = '<div class="pane-placeholder"><div class="ph-icon">⏳</div><div>Loading ' + filename + '…</div></div>';
+
   fetch('./' + filename)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Asset file missing or connection error. Status: ${response.status}`);
-      }
-      return response.text();
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status + ' — file not found');
+      return r.text();
     })
     .then(text => {
-      codeDisplay.textContent = text;
-      // Re-trigger the formatting parser for new raw code blocks
-      hljs.highlightElement(codeDisplay);
+      codeContent[filename] = text;
+      renderCode(filename, text);
     })
     .catch(err => {
-      codeDisplay.textContent = `# System Workspace Error:\\n# Could not open the source file '${filename}' live.\\n# Reason: ${err.message}\\n\\n# Verification Fix:\\n# Make sure the file named '${filename}' is saved in the exact same directory folder alongside this index.html page on your server.`;
+      wrap.innerHTML = '<div class="pane-placeholder"><div class="ph-icon">❌</div><div style="color:var(--red)">' + err.message + '</div><div style="font-size:.75rem;color:#475569;margin-top:6px">Make sure <strong>' + filename + '</strong> is saved in the same folder as index.html</div></div>';
+      setCodeStatus('err', 'Failed to load: ' + err.message);
     });
 }
 
-// Bypasses character string truncations completely via native relative directory execution
-function downloadCode() {
-  const downloadAnchor = document.createElement('a');
-  downloadAnchor.href = './' + selectedFile;
-  downloadAnchor.download = selectedFile;
-  document.body.appendChild(downloadAnchor);
-  downloadAnchor.click();
-  document.body.removeChild(downloadAnchor);
+function renderCode(filename, text) {
+  const wrap = document.getElementById('code-pane-wrap');
+  const pre  = document.createElement('pre');
+  const code = document.createElement('code');
+  code.className = 'language-python';
+  code.textContent = text;
+  pre.appendChild(code);
+  wrap.innerHTML = '';
+  wrap.appendChild(pre);
+  hljs.highlightElement(code);
+  const lines = text.split('\n').length;
+  setCodeStatus('ok', filename + '  ·  ' + lines.toLocaleString() + ' lines  ·  ' + formatBytes(new Blob([text]).size));
 }
 
 function copyCode() {
-  const displayCodeBlock = document.getElementById('code-display-block');
-  if (displayCodeBlock) {
-    navigator.clipboard.writeText(displayCodeBlock.textContent)
-      .then(() => alert(`Text profile of ${selectedFile} copied to clipboard!`))
-      .catch(err => alert('Clipboard operation failed: ' + err));
-  }
+  const code = document.querySelector('#code-pane-wrap code');
+  if (!code) return;
+  navigator.clipboard.writeText(code.textContent).then(() => {
+    const btn = document.getElementById('btn-copy-code');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
 }
 
-// Global DOM entry event initialization
-window.addEventListener('DOMContentLoaded', () => {
-  initializeSidebar();
-  if (sourceFiles.length > 0) {
-    switchTab(sourceFiles[0]);
+function downloadCode() {
+  if (!activeCodeFile) return;
+  const a = document.createElement('a');
+  a.href = './' + activeCodeFile;
+  a.download = activeCodeFile;
+  a.click();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// OUTPUT PANEL
+// ═══════════════════════════════════════════════════════════════
+
+function loadOutputFile(entry, idx) {
+  // Update active tab
+  document.querySelectorAll('#output-sidebar .panel-tab').forEach(t => t.classList.remove('active'));
+  const tab = document.getElementById('out-tab-' + idx);
+  if (tab) tab.classList.add('active');
+
+  document.getElementById('output-filename').textContent = entry.label + '  →  ' + entry.file;
+  activeOutputFile = entry.file;
+  setOutStatus('pending', 'Loading ' + entry.file + '…');
+
+  // Served from cache?
+  if (outputContent[entry.file]) {
+    renderOutput(entry, outputContent[entry.file]);
+    return;
   }
+
+  const wrap = document.getElementById('output-pane-wrap');
+  wrap.innerHTML = '<div class="pane-placeholder"><div class="ph-icon">⏳</div><div>Loading ' + entry.file + '…</div></div>';
+
+  fetch('./' + entry.file)
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status + ' — file not found');
+      return r.text();
+    })
+    .then(text => {
+      outputContent[entry.file] = text;
+      renderOutput(entry, text);
+    })
+    .catch(err => {
+      wrap.innerHTML =
+        '<div class="pane-placeholder">' +
+          '<div class="ph-icon">📋</div>' +
+          '<div style="color:var(--gold);font-weight:600">Output file not found</div>' +
+          '<div style="font-size:.8rem;color:var(--muted);margin-top:8px;max-width:420px;text-align:center">' +
+            'Expected file: <code style="color:var(--accent2)">' + entry.file + '</code><br><br>' +
+            'To generate this file, run:<br>' +
+            '<code style="color:var(--green);font-size:.78rem">python ' + entry.label + ' &gt; ' + entry.file + '</code>' +
+          '</div>' +
+          '<div style="font-size:.72rem;color:#475569;margin-top:8px">Then place <strong>' + entry.file + '</strong> in the same folder as index.html</div>' +
+        '</div>';
+      setOutStatus('err', 'File not found: ' + entry.file);
+    });
+}
+
+function renderOutput(entry, text) {
+  const wrap = document.getElementById('output-pane-wrap');
+
+  // Colorise common output patterns
+  const coloured = text
+    .split('\n')
+    .map(line => {
+      const esc = line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      if (/PASS/i.test(esc))                           return '<span class="out-pass">' + esc + '</span>';
+      if (/FAIL|ERROR|Traceback/i.test(esc))           return '<span class="out-fail">' + esc + '</span>';
+      if (/WARNING|warn/i.test(esc))                   return '<span class="out-warn">' + esc + '</span>';
+      if (/^={3,}|^-{3,}|^#{3,}/.test(esc.trim()))   return '<span class="out-sep">' + esc + '</span>';
+      if (/^\s*(Experiment|Test|Method|Result|Summary|Running)/i.test(esc)) return '<span class="out-head">' + esc + '</span>';
+      if (/\d+\.\d+e[+-]\d+|\d+\.\d{4,}/.test(esc))  return '<span class="out-num">' + esc + '</span>';
+      if (/^(python|streamlit|\$\s)/.test(esc.trim())) return '<span class="out-cmd">' + esc + '</span>';
+      return esc;
+    })
+    .join('\n');
+
+  wrap.innerHTML = '<pre><code>' + coloured + '</code></pre>';
+  const lines = text.split('\n').length;
+  setOutStatus('ok', entry.file + '  ·  ' + lines.toLocaleString() + ' lines  ·  ' + formatBytes(new Blob([text]).size));
+}
+
+function copyOutput() {
+  const el = document.querySelector('#output-pane-wrap pre');
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent).then(() => {
+    const btn = document.getElementById('btn-copy-out');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function downloadOutput() {
+  if (!activeOutputFile) return;
+  const text = outputContent[activeOutputFile];
+  if (!text) return;
+  const blob = new Blob([text], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = activeOutputFile;
+  a.click();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SHARED UTILITIES
+// ═══════════════════════════════════════════════════════════════
+
+function setCodeStatus(state, msg) {
+  document.getElementById('code-status-dot').className = 'status-dot ' + state;
+  document.getElementById('code-status-text').textContent = msg;
+}
+
+function setOutStatus(state, msg) {
+  document.getElementById('output-status-dot').className = 'status-dot ' + state;
+  document.getElementById('output-status-text').textContent = msg;
+}
+
+function formatBytes(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / 1048576).toFixed(1) + ' MB';
+}
+
+// Jump from overview card to code section and load file
+function jumpToCode(filename) {
+  document.getElementById('code').scrollIntoView({ behavior: 'smooth' });
+  const idx = SOURCE_FILES.indexOf(filename);
+  if (idx >= 0) setTimeout(() => loadCodeFile(filename, idx), 500);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildCodeSidebar();
+  buildOutputSidebar();
+  // Auto-load first file in each panel
+  if (SOURCE_FILES.length > 0) loadCodeFile(SOURCE_FILES[0], 0);
+  if (OUTPUT_FILES.length > 0) loadOutputFile(OUTPUT_FILES[0], 0);
 });
 
+// Scroll progress bar
 window.addEventListener('scroll', () => {
-  const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-  const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const progressPercent = (winScroll / totalHeight) * 100;
-  document.getElementById('scrollBar').style.width = progressPercent + '%';
+  const h   = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('scrollBar').style.width = pct + '%';
 });
 </script>
 </body>
