@@ -58,7 +58,7 @@ section{padding:80px 0}
 .tag.purple{background:rgba(139,92,246,.12);color:var(--purple)}
 .tag.gold{background:rgba(245,158,11,.12);color:var(--gold)}
 
-/* ── SHARED PANEL LAYOUT (used by both code and outputs sections) ── */
+/* ── SHARED PANEL LAYOUT ── */
 #code{background:var(--surface)}
 #outputs{background:var(--bg)}
 .panel-layout{
@@ -249,9 +249,9 @@ footer strong{color:var(--text)}
       <div class="stat-card"><div class="stat-num">6</div><div class="stat-lbl">PR Methods</div></div>
       <div class="stat-card"><div class="stat-num">5</div><div class="stat-lbl">Experiments</div></div>
       <div class="stat-card"><div class="stat-num">791</div><div class="stat-lbl">Node Graph</div></div>
-      <div class="stat-card"><div class="stat-num">1.53×</div><div class="stat-lbl">Pruning Speedup</div></div>
+      <div class="stat-card"><div class="stat-num">1.25×</div><div class="stat-lbl">Pruning Speedup</div></div>
       <div class="stat-card"><div class="stat-num">+287%</div><div class="stat-lbl">Max SEO Gain</div></div>
-      <div class="stat-card"><div class="stat-num">6.7K</div><div class="stat-lbl">Lines of Code</div></div>
+      <div class="stat-card"><div class="stat-num">6,767</div><div class="stat-lbl">Lines of Code</div></div>
     </div>
   </div>
 </section>
@@ -268,7 +268,7 @@ footer strong{color:var(--text)}
       <div class="req-card" onclick="jumpToCode('progressive_pruning_pr.py')">
         <div class="req-num">Requirement 1</div>
         <h3>Progressive Pruning PageRank</h3>
-        <p>A novel enhancement to power iteration that freezes low-rank pages after convergence, achieving 1.53× speedup with zero accuracy loss on 2,000-node graphs.</p>
+        <p>A novel enhancement to power iteration that freezes low-rank pages after convergence, achieving up to 1.25× speedup with zero accuracy loss (L1 error = 0.00 in all benchmark cases).</p>
         <div class="req-tags"><span class="tag">NumPy</span><span class="tag">Benchmark</span><span class="tag green">L1 Error = 0</span></div>
       </div>
       <div class="req-card" onclick="jumpToCode('realistic_data.py')">
@@ -305,7 +305,6 @@ footer strong{color:var(--text)}
     <div class="panel-layout">
       <div class="panel-sidebar" id="code-sidebar">
         <div class="panel-sidebar-title">Python Files</div>
-        <!-- tabs injected by JS -->
       </div>
       <div class="panel-main">
         <div class="panel-header">
@@ -345,7 +344,6 @@ footer strong{color:var(--text)}
     <div class="panel-layout">
       <div class="panel-sidebar" id="output-sidebar">
         <div class="panel-sidebar-title">Output Files</div>
-        <!-- tabs injected by JS -->
       </div>
       <div class="panel-main">
         <div class="panel-header">
@@ -383,6 +381,8 @@ footer strong{color:var(--text)}
     <h2 class="section-title">Key Numbers at a Glance</h2>
     <p class="section-sub">All results are measured on real graph executions, not estimated.</p>
     <div class="results-grid">
+
+      <!-- TABLE 1: All 7 Methods on 791-node graph — from thesis Table 4.6 -->
       <div class="result-card">
         <h4>All 7 Methods · 791-Node Graph</h4>
         <table class="result-table">
@@ -391,21 +391,25 @@ footer strong{color:var(--text)}
           <tr><td>2 Manual</td><td>1.47e-4</td><td>79.2 ms</td></tr>
           <tr><td>3 Matrix</td><td>1.47e-4</td><td>30.1 ms</td></tr>
           <tr><td>4 SciPy</td><td>1.47e-4</td><td>0.6 ms</td></tr>
-          <tr><td>5 Monte Carlo</td><td class="badge-approx">2.76e-2</td><td>645 ms</td></tr>
-          <tr><td>6 HITS</td><td class="badge-approx">2.48e-1</td><td>214 ms</td></tr>
+          <tr><td>5 Monte Carlo</td><td class="badge-approx">2.76e-2</td><td>644.5 ms</td></tr>
+          <tr><td>6 HITS</td><td class="badge-approx">2.48e-1</td><td>213.7 ms</td></tr>
           <tr><td>7 Pruning</td><td>1.57e-4</td><td>93.9 ms</td></tr>
         </table>
       </div>
+
+      <!-- TABLE 2: Pruning Benchmark — from thesis Table 4.9 -->
       <div class="result-card">
         <h4>Pruning Benchmark · Web-Like Graphs</h4>
         <table class="result-table">
           <tr><th>N</th><th>Std Time</th><th>Prune</th><th>Speedup</th></tr>
-          <tr><td>50</td><td>0.1 ms</td><td>0.2 ms</td><td>0.51×</td></tr>
-          <tr><td>500</td><td>6.8 ms</td><td>16.7 ms</td><td>0.41×</td></tr>
-          <tr><td>2,000</td><td>176 ms</td><td>115 ms</td><td class="badge-pass">1.53×</td></tr>
+          <tr><td>50</td><td>0.1 ms</td><td>0.1 ms</td><td>0.75×</td></tr>
+          <tr><td>500</td><td>1.3 ms</td><td>1.0 ms</td><td class="badge-pass">1.25×</td></tr>
+          <tr><td>2,000</td><td>60.6 ms</td><td>63.5 ms</td><td>0.96×</td></tr>
         </table>
         <p style="font-size:.78rem;color:var(--muted);margin-top:10px">L1 Error = 0.00e+00 in all cases</p>
       </div>
+
+      <!-- TABLE 3: Monte Carlo — from thesis Table 4.4 -->
       <div class="result-card">
         <h4>Monte Carlo · Error vs Surfer Count</h4>
         <table class="result-table">
@@ -413,10 +417,12 @@ footer strong{color:var(--text)}
           <tr><td>100</td><td>0.0284</td><td>8 ms</td></tr>
           <tr><td>1,000</td><td>0.0092</td><td>76 ms</td></tr>
           <tr><td>10,000</td><td>0.0031</td><td>760 ms</td></tr>
-          <tr><td>50,000</td><td>0.0018</td><td>3.8 s</td></tr>
+          <tr><td>50,000</td><td>0.0018</td><td>3,800 ms</td></tr>
         </table>
         <p style="font-size:.78rem;color:var(--muted);margin-top:10px">Error ≈ O(1/√R) confirmed</p>
       </div>
+
+      <!-- TABLE 4: Search Engine Tests — from thesis Table 4.16 / text -->
       <div class="result-card">
         <h4>Search Engine Tests · 8/8 Passing</h4>
         <table class="result-table">
@@ -431,6 +437,8 @@ footer strong{color:var(--text)}
           <tr><td>Edge cases</td><td class="badge-pass">PASS</td></tr>
         </table>
       </div>
+
+      <!-- TABLE 5: Google Comparison — from thesis Table 4.18 -->
       <div class="result-card">
         <h4>Google Comparison Metrics</h4>
         <table class="result-table">
@@ -442,18 +450,24 @@ footer strong{color:var(--text)}
         </table>
         <p style="font-size:.78rem;color:var(--muted);margin-top:10px">Moderate–strong agreement with Google ranking</p>
       </div>
+
+      <!-- TABLE 6: Scraper Tests — from thesis Table 4.5 (all 9 tests) -->
       <div class="result-card">
         <h4>Scraper Tests · 9/9 Passing</h4>
         <table class="result-table">
           <tr><th>Test</th><th>Status</th></tr>
           <tr><td>Returns nx.DiGraph</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Graph has ≥ 1 node</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Graph has ≥ 1 edge</td><td class="badge-pass">PASS</td></tr>
           <tr><td>No self-loops</td><td class="badge-pass">PASS</td></tr>
           <tr><td>Exactly 791 nodes</td><td class="badge-pass">PASS</td></tr>
           <tr><td>Exactly 3,228 edges</td><td class="badge-pass">PASS</td></tr>
           <tr><td>PR sums to 1.0 ±1e-6</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Top page identified</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Top page above average PR</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Top-ranked page identified</td><td class="badge-pass">PASS</td></tr>
         </table>
       </div>
+
     </div>
   </div>
 </section>
@@ -471,7 +485,7 @@ footer strong{color:var(--text)}
       <div class="sim-feature"><div class="sim-icon">📊</div><div><h4>Live Vis.js Graph</h4><p>Nodes sized and coloured by PageRank on a blue→amber→red heat scale. Hover for full URL and rank.</p></div></div>
       <div class="sim-feature"><div class="sim-icon">🔍</div><div><h4>TF-IDF Search</h4><p>Combined score = 0.6×PR + 0.4×TF-IDF. Rankings update in real time as you type.</p></div></div>
       <div class="sim-feature"><div class="sim-icon">🆚</div><div><h4>Google Benchmark</h4><p>Paste Google results in any format. Reports Spearman ρ and Kendall τ with scatter plot.</p></div></div>
-      <div class="sim-feature"><div class="sim-icon">⚡</div><div><h4>Progressive Pruning</h4><p>6th method: freezes converged low-rank pages. 1.53× speedup at n=2,000 with zero accuracy loss.</p></div></div>
+      <div class="sim-feature"><div class="sim-icon">⚡</div><div><h4>Progressive Pruning</h4><p>6th method: freezes converged low-rank pages. Up to 1.25× speedup at n=500 with zero accuracy loss.</p></div></div>
       <div class="sim-feature"><div class="sim-icon">🚀</div><div><h4>SEO Recommendations</h4><p>Automatic analysis of the seed URL: inbound links, dangling nodes, link quality, reachability, content.</p></div></div>
     </div>
   </div>
@@ -484,13 +498,18 @@ footer strong{color:var(--text)}
   <div class="container">
     <div class="section-tag">Requirement 5</div>
     <h2 class="section-title">SEO Recommendations — Proven by Data</h2>
-    <p class="section-sub">Each recommendation is validated by modifying the graph and measuring exact PageRank changes using NetworkX.</p>
+    <p class="section-sub">Each recommendation is validated on the Metro Daily news-site simulation by modifying the graph and measuring exact PageRank changes using NetworkX (α = 0.85).</p>
     <div class="seo-grid">
-      <div class="seo-card"><div class="seo-change up">+287%</div><h4>1. Earn a High-Authority Inbound Link</h4><p>One link from python_tutorial (PR=0.10) increased web_scraping rank from 0.010 to 0.039.</p></div>
-      <div class="seo-card"><div class="seo-change up">+35.5%</div><h4>2. Create an Internal Hub Page</h4><p>Adding a db_hub page increased database_sql PageRank from 0.049 to 0.066.</p></div>
-      <div class="seo-card"><div class="seo-change up">+763%</div><h4>3. Accumulate Multiple Inbound Links</h4><p>5 inbound links raised PageRank from 0.010 to 0.086 — a 763% total increase.</p></div>
-      <div class="seo-card"><div class="seo-change up">+23.8%</div><h4>4. Fix Dangling Pages</h4><p>Adding one link to the homepage increased homepage PR from 0.190 to 0.236.</p></div>
-      <div class="seo-card"><div class="seo-change mixed">Equalise</div><h4>5. Use Hub-and-Spoke, Not Chains</h4><p>Hub-and-spoke equalises distribution — A improves +29.8%, E drops 65%.</p></div>
+      <!-- Rec 1: Section 4.7.1 — +287% from abstract & section text -->
+      <div class="seo-card"><div class="seo-change up">+287%</div><h4>1. Earn a High-Authority Inbound Link</h4><p>A single high-authority inbound link can increase a page's PageRank by up to 287%. External links are most valuable before a page reaches its structural maximum.</p></div>
+      <!-- Rec 2: Section 4.7.2 / Figure 4.10 — +41.2% -->
+      <div class="seo-card"><div class="seo-change up">+41.2%</div><h4>2. Create an Internal Hub Page</h4><p>Converting old articles (nodes 7–12) to link directly to Top Story (Page 1) rather than Homepage produced a +41.2% improvement in Page 1's rank.</p></div>
+      <!-- Rec 3: Section 4.7.6 / Table 4.19 — cumulative +103% after hub creation -->
+      <div class="seo-card"><div class="seo-change up">+103%</div><h4>3. Accumulate Multiple Inbound Links</h4><p>Applying all structural improvements cumulatively raised Top Story PageRank from 0.195 to 0.396 — a +103% total gain. Diminishing returns apply once a page is saturated.</p></div>
+      <!-- Rec 4: Section 4.7.4 / Figure 4.12 — +3.2% -->
+      <div class="seo-card"><div class="seo-change up">+3.2%</div><h4>4. Fix Dangling Pages</h4><p>Fixing two dangling pages (RSS Feed, Print Edition) by adding outlinks to Homepage produced a +3.2% improvement in Page 1's rank.</p></div>
+      <!-- Rec 5: Section 4.7.5 — equalise / hub-and-spoke -->
+      <div class="seo-card"><div class="seo-change mixed">+39.4%</div><h4>5. Use Hub-and-Spoke, Not Chains</h4><p>Converting the chain structure (Homepage→Top Story→Local→Sports→Weather) to hub-and-spoke produced +39.4% for Top Story. Hub-and-spoke equalises distribution while chains bleed rank to end nodes.</p></div>
     </div>
   </div>
 </section>
@@ -537,10 +556,6 @@ python search_engine_test.py</pre>
 </footer>
 
 <script>
-// ═══════════════════════════════════════════════════════════════
-// CONFIGURATION — edit these arrays to match your actual files
-// ═══════════════════════════════════════════════════════════════
-
 const SOURCE_FILES = [
   "Experiments.py",
   "all_6_methods.py",
@@ -552,34 +567,22 @@ const SOURCE_FILES = [
   "metro_daily_with_recommend.py"
 ];
 
-// Output files: these are the .txt files produced when you run each script.
-// Name them whatever you saved them as. They must be in the same folder as index.html.
 const OUTPUT_FILES = [
   { file: "output_files/Experiments.txt",        label: "Experiments.py",             desc: "All 5 simulation experiments" },
   { file: "output_files/All_6_methods.txt",      label: "all_6_methods.py",           desc: "6-method comparison on 5-node graph" },
   { file: "output_files/realistic_data.txt",     label: "realistic_data.py",          desc: "791-node benchmark results" },
-  { file: "output_files/progressive_pruning_pr.txt",            label: "progressive_pruning_pr.py",  desc: "Pruning speedup benchmark" },
-  { file: "output_files/search_engine.txt", label: "search_engine.py",      desc: "8/8 test results" },
-  { file: "output_files/metro_daily_with_recommend.txt", label: "metro_daily_with_recommend.py",      desc: "metro daily website rank enhancemnet after applying 5 recommendations" },
-  
+  { file: "output_files/progressive_pruning_pr.txt", label: "progressive_pruning_pr.py", desc: "Pruning speedup benchmark" },
+  { file: "output_files/search_engine.txt",      label: "search_engine.py",           desc: "8/8 test results" },
+  { file: "output_files/metro_daily_with_recommend.txt", label: "metro_daily_with_recommend.py", desc: "Metro Daily website rank enhancement after applying 5 recommendations" },
 ];
 
-// ═══════════════════════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════════════════════
 let activeCodeFile   = null;
 let activeOutputFile = null;
-let codeContent      = {};   // cache: filename → text
-let outputContent    = {};   // cache: filename → text
-
-// ═══════════════════════════════════════════════════════════════
-// SIDEBAR BUILDERS
-// ═══════════════════════════════════════════════════════════════
+let codeContent      = {};
+let outputContent    = {};
 
 function buildCodeSidebar() {
   const sb = document.getElementById('code-sidebar');
-  // Keep the title div, append tabs after it
-  const title = sb.querySelector('.panel-sidebar-title');
   SOURCE_FILES.forEach((f, i) => {
     const a = document.createElement('a');
     a.href = '#';
@@ -595,7 +598,6 @@ function buildCodeSidebar() {
 
 function buildOutputSidebar() {
   const sb = document.getElementById('output-sidebar');
-  const title = sb.querySelector('.panel-sidebar-title');
   OUTPUT_FILES.forEach((entry, i) => {
     const a = document.createElement('a');
     a.href = '#';
@@ -609,38 +611,19 @@ function buildOutputSidebar() {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════
-// CODE PANEL
-// ═══════════════════════════════════════════════════════════════
-
 function loadCodeFile(filename, idx) {
-  // Update active tab
   document.querySelectorAll('#code-sidebar .panel-tab').forEach(t => t.classList.remove('active'));
   const tab = document.getElementById('code-tab-' + idx);
   if (tab) tab.classList.add('active');
-
   document.getElementById('code-filename').textContent = filename;
   activeCodeFile = filename;
   setCodeStatus('pending', 'Loading ' + filename + '…');
-
-  // Served from cache?
-  if (codeContent[filename]) {
-    renderCode(filename, codeContent[filename]);
-    return;
-  }
-
+  if (codeContent[filename]) { renderCode(filename, codeContent[filename]); return; }
   const wrap = document.getElementById('code-pane-wrap');
   wrap.innerHTML = '<div class="pane-placeholder"><div class="ph-icon">⏳</div><div>Loading ' + filename + '…</div></div>';
-
   fetch('./' + filename)
-    .then(r => {
-      if (!r.ok) throw new Error('HTTP ' + r.status + ' — file not found');
-      return r.text();
-    })
-    .then(text => {
-      codeContent[filename] = text;
-      renderCode(filename, text);
-    })
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status + ' — file not found'); return r.text(); })
+    .then(text => { codeContent[filename] = text; renderCode(filename, text); })
     .catch(err => {
       wrap.innerHTML = '<div class="pane-placeholder"><div class="ph-icon">❌</div><div style="color:var(--red)">' + err.message + '</div><div style="font-size:.75rem;color:#475569;margin-top:6px">Make sure <strong>' + filename + '</strong> is saved in the same folder as index.html</div></div>';
       setCodeStatus('err', 'Failed to load: ' + err.message);
@@ -680,38 +663,19 @@ function downloadCode() {
   a.click();
 }
 
-// ═══════════════════════════════════════════════════════════════
-// OUTPUT PANEL
-// ═══════════════════════════════════════════════════════════════
-
 function loadOutputFile(entry, idx) {
-  // Update active tab
   document.querySelectorAll('#output-sidebar .panel-tab').forEach(t => t.classList.remove('active'));
   const tab = document.getElementById('out-tab-' + idx);
   if (tab) tab.classList.add('active');
-
   document.getElementById('output-filename').textContent = entry.label + '  →  ' + entry.file;
   activeOutputFile = entry.file;
   setOutStatus('pending', 'Loading ' + entry.file + '…');
-
-  // Served from cache?
-  if (outputContent[entry.file]) {
-    renderOutput(entry, outputContent[entry.file]);
-    return;
-  }
-
+  if (outputContent[entry.file]) { renderOutput(entry, outputContent[entry.file]); return; }
   const wrap = document.getElementById('output-pane-wrap');
   wrap.innerHTML = '<div class="pane-placeholder"><div class="ph-icon">⏳</div><div>Loading ' + entry.file + '…</div></div>';
-
   fetch('./' + entry.file)
-    .then(r => {
-      if (!r.ok) throw new Error('HTTP ' + r.status + ' — file not found');
-      return r.text();
-    })
-    .then(text => {
-      outputContent[entry.file] = text;
-      renderOutput(entry, text);
-    })
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status + ' — file not found'); return r.text(); })
+    .then(text => { outputContent[entry.file] = text; renderOutput(entry, text); })
     .catch(err => {
       wrap.innerHTML =
         '<div class="pane-placeholder">' +
@@ -730,8 +694,6 @@ function loadOutputFile(entry, idx) {
 
 function renderOutput(entry, text) {
   const wrap = document.getElementById('output-pane-wrap');
-
-  // Colorise common output patterns
   const coloured = text
     .split('\n')
     .map(line => {
@@ -746,7 +708,6 @@ function renderOutput(entry, text) {
       return esc;
     })
     .join('\n');
-
   wrap.innerHTML = '<pre><code>' + coloured + '</code></pre>';
   const lines = text.split('\n').length;
   setOutStatus('ok', entry.file + '  ·  ' + lines.toLocaleString() + ' lines  ·  ' + formatBytes(new Blob([text]).size));
@@ -774,10 +735,6 @@ function downloadOutput() {
   a.click();
 }
 
-// ═══════════════════════════════════════════════════════════════
-// SHARED UTILITIES
-// ═══════════════════════════════════════════════════════════════
-
 function setCodeStatus(state, msg) {
   document.getElementById('code-status-dot').className = 'status-dot ' + state;
   document.getElementById('code-status-text').textContent = msg;
@@ -794,26 +751,19 @@ function formatBytes(bytes) {
   return (bytes / 1048576).toFixed(1) + ' MB';
 }
 
-// Jump from overview card to code section and load file
 function jumpToCode(filename) {
   document.getElementById('code').scrollIntoView({ behavior: 'smooth' });
   const idx = SOURCE_FILES.indexOf(filename);
   if (idx >= 0) setTimeout(() => loadCodeFile(filename, idx), 500);
 }
 
-// ═══════════════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════════════
-
 document.addEventListener('DOMContentLoaded', () => {
   buildCodeSidebar();
   buildOutputSidebar();
-  // Auto-load first file in each panel
   if (SOURCE_FILES.length > 0) loadCodeFile(SOURCE_FILES[0], 0);
   if (OUTPUT_FILES.length > 0) loadOutputFile(OUTPUT_FILES[0], 0);
 });
 
-// Scroll progress bar
 window.addEventListener('scroll', () => {
   const h   = document.documentElement;
   const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
