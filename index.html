@@ -16,6 +16,7 @@
   --accent:#3B82F6;--accent2:#60A5FA;--gold:#F59E0B;--green:#10B981;
   --red:#EF4444;--purple:#8B5CF6;--text:#E2E8F0;--muted:#94A3B8;
   --code-bg:#0D1117;--radius:12px;--glow:0 0 30px rgba(59,130,246,0.15);
+  --teal:#06B6D4;
 }
 html{scroll-behavior:smooth}
 body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;}
@@ -43,7 +44,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,15,30,0.8
 section{padding:80px 0}
 .section-tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
 .section-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;margin-bottom:12px}
-.section-sub{color:var(--muted);font-size:1rem;max-width:600px;margin-bottom:48px}
+.section-sub{color:var(--muted);font-size:1rem;max-width:680px;margin-bottom:48px}
+/* OVERVIEW */
 .req-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
 .req-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative;overflow:hidden;}
 .req-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,.05),transparent);opacity:0;transition:.2s;}
@@ -52,152 +54,147 @@ section{padding:80px 0}
 .req-num{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
 .req-card h3{font-size:1rem;font-weight:600;margin-bottom:8px}
 .req-card p{font-size:.85rem;color:var(--muted);line-height:1.6}
+.req-card .req-detail{font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
 .req-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
 .tag{padding:3px 10px;border-radius:4px;font-size:.72rem;font-weight:500;background:rgba(59,130,246,.12);color:var(--accent2);}
 .tag.green{background:rgba(16,185,129,.12);color:var(--green)}
 .tag.purple{background:rgba(139,92,246,.12);color:var(--purple)}
 .tag.gold{background:rgba(245,158,11,.12);color:var(--gold)}
-
-/* ── SHARED PANEL LAYOUT ── */
+.tag.teal{background:rgba(6,182,212,.12);color:var(--teal)}
+.methods-overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:32px;}
+.method-row{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;display:flex;align-items:center;gap:16px;transition:border-color .2s;}
+.method-row:hover{border-color:var(--accent)}
+.method-badge{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;font-family:'JetBrains Mono',monospace;flex-shrink:0;}
+.method-info h4{font-size:.88rem;font-weight:600;margin-bottom:2px}
+.method-info p{font-size:.78rem;color:var(--muted)}
+.method-meta{margin-left:auto;text-align:right;flex-shrink:0;}
+.method-meta .time{font-size:.8rem;font-family:'JetBrains Mono',monospace;color:var(--accent2);}
+.method-meta .err{font-size:.72rem;color:var(--muted);}
+/* PANELS */
 #code{background:var(--surface)}
 #outputs{background:var(--bg)}
-.panel-layout{
-  display:grid;grid-template-columns:260px 1fr;gap:0;
-  border:1px solid var(--border);border-radius:var(--radius);
-  overflow:hidden;min-height:600px;
-}
-.panel-sidebar{
-  background:rgba(0,0,0,.35);border-right:1px solid var(--border);
-  padding:12px 0;overflow-y:auto;display:flex;flex-direction:column;
-}
-.panel-sidebar-title{
-  font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
-  color:var(--muted);padding:0 14px 10px;border-bottom:1px solid var(--border);
-  margin-bottom:6px;flex-shrink:0;
-}
-.panel-tab{
-  display:block;padding:9px 14px;cursor:pointer;font-size:.79rem;
-  color:var(--muted);border-left:3px solid transparent;transition:.15s;
-  text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  font-family:'JetBrains Mono',monospace;
-}
+.panel-layout{display:grid;grid-template-columns:260px 1fr;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;min-height:600px;}
+.panel-sidebar{background:rgba(0,0,0,.35);border-right:1px solid var(--border);padding:12px 0;overflow-y:auto;display:flex;flex-direction:column;}
+.panel-sidebar-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding:0 14px 10px;border-bottom:1px solid var(--border);margin-bottom:6px;flex-shrink:0;}
+.panel-tab{display:block;padding:9px 14px;cursor:pointer;font-size:.79rem;color:var(--muted);border-left:3px solid transparent;transition:.15s;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'JetBrains Mono',monospace;}
 .panel-tab:hover{color:var(--text);background:rgba(59,130,246,.07)}
 .panel-tab.active{color:var(--accent2);border-left-color:var(--accent);background:rgba(59,130,246,.09)}
-.panel-tab .tab-badge{
-  display:inline-block;margin-left:6px;padding:1px 6px;border-radius:3px;
-  font-size:.65rem;font-weight:600;vertical-align:middle;
-}
+.panel-tab .tab-badge{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:3px;font-size:.65rem;font-weight:600;vertical-align:middle;}
 .tab-badge.out{background:rgba(16,185,129,.2);color:var(--green)}
 .tab-badge.src{background:rgba(59,130,246,.2);color:var(--accent2)}
 .panel-main{display:flex;flex-direction:column;overflow:hidden;min-width:0;}
-.panel-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 18px;background:rgba(0,0,0,.45);border-bottom:1px solid var(--border);
-  flex-shrink:0;gap:12px;
-}
-.panel-filename{
-  font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent2);
-  display:flex;align-items:center;gap:8px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
+.panel-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:rgba(0,0,0,.45);border-bottom:1px solid var(--border);flex-shrink:0;gap:12px;}
+.panel-filename{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent2);display:flex;align-items:center;gap:8px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .panel-filename .icon{flex-shrink:0}
 .panel-actions{display:flex;gap:8px;flex-shrink:0;}
-.btn-action{
-  padding:5px 13px;border-radius:6px;font-size:.73rem;font-weight:600;cursor:pointer;
-  border:1px solid var(--border);transition:.15s;font-family:'Space Grotesk',sans-serif;
-  white-space:nowrap;
-}
+.btn-action{padding:5px 13px;border-radius:6px;font-size:.73rem;font-weight:600;cursor:pointer;border:1px solid var(--border);transition:.15s;font-family:'Space Grotesk',sans-serif;white-space:nowrap;}
 .btn-copy-src{background:rgba(59,130,246,.15);color:var(--accent2)}
 .btn-copy-src:hover{background:rgba(59,130,246,.3)}
 .btn-copy-src.copied{background:rgba(16,185,129,.2);color:var(--green);border-color:rgba(16,185,129,.3)}
 .btn-dl{background:rgba(16,185,129,.12);color:var(--green);border-color:rgba(16,185,129,.3)}
 .btn-dl:hover{background:rgba(16,185,129,.25)}
-
-/* ── CODE PANE ── */
-.code-pane-wrap{
-  background:var(--code-bg);overflow:auto;flex:1;
-  position:relative;
-}
+.code-pane-wrap{background:var(--code-bg);overflow:auto;flex:1;position:relative;}
 .code-pane-wrap pre{margin:0!important;min-height:100%;}
-.code-pane-wrap code{
-  font-size:.78rem!important;line-height:1.65!important;
-  font-family:'JetBrains Mono',monospace!important;
-  display:block;padding:20px!important;
-}
+.code-pane-wrap code{font-size:.78rem!important;line-height:1.65!important;font-family:'JetBrains Mono',monospace!important;display:block;padding:20px!important;}
 .hljs{background:var(--code-bg)!important;padding:0!important;}
-
-/* ── OUTPUT PANE ── */
-.output-pane-wrap{
-  background:#080D14;overflow:auto;flex:1;
-  border-top:none;
-}
-.output-pane-wrap pre{
-  margin:0;padding:20px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:.78rem;line-height:1.7;
-  color:#A8D8A8;
-  white-space:pre-wrap;word-break:break-word;
-  min-height:100%;
-}
-/* output colour tokens */
-.out-pass{color:#10B981;font-weight:600}
-.out-fail{color:#EF4444;font-weight:600}
-.out-warn{color:#F59E0B;font-weight:600}
-.out-head{color:#60A5FA;font-weight:600}
-.out-num {color:#C084FC}
-.out-sep {color:#334155}
-.out-cmd {color:#94A3B8;font-style:italic}
-
-/* ── EMPTY / LOADING STATES ── */
-.pane-placeholder{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  height:100%;min-height:300px;gap:12px;color:var(--muted);
-  font-size:.85rem;
-}
+.output-pane-wrap{background:#080D14;overflow:auto;flex:1;}
+.output-pane-wrap pre{margin:0;padding:20px;font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1.7;color:#A8D8A8;white-space:pre-wrap;word-break:break-word;min-height:100%;}
+.out-pass{color:#10B981;font-weight:600}.out-fail{color:#EF4444;font-weight:600}.out-warn{color:#F59E0B;font-weight:600}
+.out-head{color:#60A5FA;font-weight:600}.out-num{color:#C084FC}.out-sep{color:#334155}.out-cmd{color:#94A3B8;font-style:italic}
+.pane-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:300px;gap:12px;color:var(--muted);font-size:.85rem;}
 .pane-placeholder .ph-icon{font-size:2.5rem;opacity:.4}
-
-/* ── STATUS BAR ── */
-.status-bar{
-  display:flex;align-items:center;gap:10px;padding:7px 18px;
-  background:rgba(0,0,0,.3);border-top:1px solid var(--border);
-  font-size:.72rem;font-family:'JetBrains Mono',monospace;
-  color:var(--muted);flex-shrink:0;
-}
+.status-bar{display:flex;align-items:center;gap:10px;padding:7px 18px;background:rgba(0,0,0,.3);border-top:1px solid var(--border);font-size:.72rem;font-family:'JetBrains Mono',monospace;color:var(--muted);flex-shrink:0;}
 .status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.status-dot.ok{background:var(--green)}
-.status-dot.err{background:var(--red)}
-.status-dot.pending{background:var(--gold)}
-.status-bar .sb-sep{color:var(--border);margin:0 4px}
-
-/* ── RESULTS ── */
-.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.status-dot.ok{background:var(--green)}.status-dot.err{background:var(--red)}.status-dot.pending{background:var(--gold)}
+/* RESULTS */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
 .result-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:border-color .2s;}
 .result-card:hover{border-color:var(--accent)}
-.result-card h4{font-size:.95rem;font-weight:600;margin-bottom:14px;color:var(--accent2)}
+.result-card h4{font-size:.95rem;font-weight:600;margin-bottom:6px;color:var(--accent2)}
+.result-card .card-sub{font-size:.78rem;color:var(--muted);margin-bottom:14px;}
 .result-table{width:100%;font-size:.8rem;border-collapse:collapse}
 .result-table th{text-align:left;padding:6px 8px;color:var(--muted);font-weight:500;font-size:.72rem;text-transform:uppercase;border-bottom:1px solid var(--border);letter-spacing:.05em;}
-.result-table td{padding:6px 8px;border-bottom:1px solid rgba(30,58,95,.5);font-family:'JetBrains Mono',monospace;font-size:.78rem}
+.result-table td{padding:7px 8px;border-bottom:1px solid rgba(30,58,95,.5);font-family:'JetBrains Mono',monospace;font-size:.78rem}
 .result-table tr:last-child td{border-bottom:none}
+.result-table tr.highlight td{background:rgba(59,130,246,.06);}
 .badge-pass{color:var(--green);font-weight:600}
 .badge-ref{color:var(--gold);font-weight:600}
 .badge-approx{color:var(--muted)}
-.methods-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
-.method-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;}
-.method-num{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
-.method-card h3{font-size:.98rem;font-weight:600;margin-bottom:10px}
-.method-card p{font-size:.84rem;color:var(--muted);margin-bottom:12px}
-.complexity{display:flex;gap:8px;flex-wrap:wrap}
-.complexity-badge{padding:3px 10px;border-radius:4px;font-size:.75rem;font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.3);border:1px solid var(--border);color:var(--text);}
-.simulator-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:40px}
-.sim-feature{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;gap:14px;align-items:flex-start;}
+.badge-warn{color:var(--red);font-weight:600}
+.badge-exact{color:var(--teal);font-weight:600}
+.result-note{font-size:.76rem;color:var(--muted);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);line-height:1.5;}
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:48px;}
+.exp-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;border-left:3px solid var(--accent);}
+.exp-card.c2{border-left-color:var(--green)}.exp-card.c3{border-left-color:var(--teal)}.exp-card.c4{border-left-color:var(--gold)}.exp-card.c5{border-left-color:var(--purple)}
+.exp-num{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:5px;}
+.exp-card h4{font-size:.88rem;font-weight:600;margin-bottom:5px;}
+.exp-card p{font-size:.78rem;color:var(--muted);line-height:1.5;}
+.exp-result{font-size:.78rem;font-family:'JetBrains Mono',monospace;color:var(--accent2);margin-top:8px;padding:4px 8px;background:rgba(59,130,246,.08);border-radius:4px;display:inline-block;}
+/* SIMULATOR */
+.sim-workflow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-bottom:48px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.sim-step{padding:24px;text-align:center;position:relative;}
+.sim-step:not(:last-child){border-right:1px solid var(--border);}
+.sim-step-num{width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-size:.85rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+.sim-step h4{font-size:.92rem;font-weight:600;margin-bottom:6px;}
+.sim-step p{font-size:.8rem;color:var(--muted);line-height:1.5;}
+.sim-step .step-detail{font-size:.75rem;color:var(--muted);margin-top:8px;font-family:'JetBrains Mono',monospace;}
+.simulator-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:40px}
+.sim-feature{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;display:flex;gap:14px;align-items:flex-start;transition:border-color .2s,transform .2s;}
+.sim-feature:hover{border-color:var(--accent);transform:translateY(-2px)}
 .sim-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
 .sim-feature h4{font-size:.9rem;font-weight:600;margin-bottom:4px}
-.sim-feature p{font-size:.82rem;color:var(--muted)}
-.seo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.seo-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;}
-.seo-change{font-size:1.6rem;font-weight:700;font-family:'JetBrains Mono',monospace;margin-bottom:6px;}
-.seo-change.up{color:var(--green)}.seo-change.mixed{color:var(--gold)}
+.sim-feature p{font-size:.82rem;color:var(--muted);line-height:1.55}
+.sim-feature .sim-detail{font-size:.76rem;color:var(--muted);margin-top:6px;padding-top:6px;border-top:1px solid var(--border);}
+.complexity-table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:40px;}
+.complexity-table-header{padding:14px 20px;background:rgba(0,0,0,.2);border-bottom:1px solid var(--border);}
+.complexity-table-header h4{font-size:.9rem;font-weight:600;color:var(--accent2);}
+.complexity-table-header p{font-size:.78rem;color:var(--muted);}
+.ctbl{width:100%;font-size:.8rem;border-collapse:collapse;}
+.ctbl th{padding:8px 14px;text-align:left;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);font-weight:500;}
+.ctbl td{padding:9px 14px;border-bottom:1px solid rgba(30,58,95,.4);font-family:'JetBrains Mono',monospace;font-size:.78rem;}
+.ctbl tr:last-child td{border-bottom:none}.ctbl tr:hover td{background:rgba(59,130,246,.04)}
+.c-fast{color:var(--green);font-weight:600}.c-mid{color:var(--gold)}.c-slow{color:var(--red)}.c-yes{color:var(--teal);font-weight:600}.c-no{color:var(--muted)}
+.case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:32px;}
+.case-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;}
+.case-card .case-url{font-size:.72rem;font-family:'JetBrains Mono',monospace;color:var(--accent2);margin-bottom:6px;}
+.case-card h5{font-size:.85rem;font-weight:600;margin-bottom:4px;}
+.case-card p{font-size:.76rem;color:var(--muted);line-height:1.45;}
+/* SEO */
+.seo-timeline{display:grid;gap:0;margin-bottom:48px;}
+.seo-step{display:grid;grid-template-columns:180px 1fr;gap:0;position:relative;}
+.seo-step:not(:last-child)::after{content:'';position:absolute;left:89px;top:72px;width:2px;height:calc(100% - 32px);background:var(--border);}
+.seo-step-left{padding:20px 24px 20px 0;display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:6px;}
+.seo-step-right{padding:20px 0 20px 24px;border-left:2px solid var(--border);position:relative;}
+.seo-step-right::before{content:'';position:absolute;left:-7px;top:28px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);}
+.seo-step.saturated .seo-step-right::before{background:var(--muted);}
+.seo-pr{font-size:1.3rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--accent2);}
+.seo-gain{font-size:.8rem;font-weight:600;padding:2px 8px;border-radius:4px;}
+.seo-gain.up{background:rgba(16,185,129,.15);color:var(--green);}
+.seo-gain.zero{background:rgba(148,163,184,.1);color:var(--muted);}
+.seo-step-right h4{font-size:.92rem;font-weight:600;margin-bottom:4px;}
+.seo-step-right p{font-size:.82rem;color:var(--muted);line-height:1.55;margin-bottom:6px;}
+.seo-step-right .seo-formula{font-size:.75rem;font-family:'JetBrains Mono',monospace;color:var(--muted);padding:5px 10px;background:rgba(0,0,0,.2);border-radius:4px;display:inline-block;}
+.seo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:48px;}
+.seo-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color .2s,transform .2s;}
+.seo-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.seo-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:12px;}
+.seo-change{font-size:1.5rem;font-weight:700;font-family:'JetBrains Mono',monospace;flex-shrink:0;}
+.seo-change.up{color:var(--green)}.seo-change.mixed{color:var(--gold)}.seo-change.zero{color:var(--muted)}
 .seo-card h4{font-size:.9rem;font-weight:600;margin-bottom:6px}
-.seo-card p{font-size:.82rem;color:var(--muted)}
+.seo-card p{font-size:.82rem;color:var(--muted);line-height:1.55}
+.seo-card .seo-proof{font-size:.76rem;color:var(--muted);margin-top:10px;padding:8px 10px;background:rgba(0,0,0,.2);border-radius:6px;font-family:'JetBrains Mono',monospace;}
+.seo-card .seo-proof span{color:var(--accent2);}
+.diminishing-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.dim-left h4{font-size:1rem;font-weight:700;margin-bottom:10px;color:var(--accent2);}
+.dim-left p{font-size:.85rem;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+.dim-formula{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent2);background:rgba(0,0,0,.25);padding:8px 12px;border-radius:6px;margin-top:8px;}
+.dim-right{display:flex;flex-direction:column;gap:8px;}
+.dim-rule{padding:10px 14px;border-radius:8px;font-size:.82rem;display:flex;align-items:center;gap:10px;}
+.dim-rule.r1{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:var(--green);}
+.dim-rule.r2{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:var(--accent2);}
+.dim-rule.r3{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);}
+.dim-rule .rule-icon{font-size:1rem;flex-shrink:0;}
+/* MISC */
 .install-box{background:var(--code-bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;font-family:'JetBrains Mono',monospace;font-size:.85rem;position:relative;}
 .install-box pre{color:var(--green);white-space:pre-wrap;word-break:break-all}
 footer{background:var(--surface);border-top:1px solid var(--border);padding:40px 0;text-align:center;}
@@ -212,13 +209,19 @@ footer strong{color:var(--text)}
   .panel-tab{white-space:nowrap;border-left:none;border-bottom:3px solid transparent;padding:8px 12px;flex-shrink:0;}
   .panel-tab.active{border-left:none;border-bottom-color:var(--accent)}
   .nav-links{display:none}
+  .sim-workflow{grid-template-columns:1fr}
+  .sim-step:not(:last-child){border-right:none;border-bottom:1px solid var(--border);}
+  .diminishing-box{grid-template-columns:1fr}
+  .seo-step{grid-template-columns:1fr}
+  .seo-step-left{text-align:left;align-items:flex-start;border-bottom:1px solid var(--border);padding:12px 0;}
+  .seo-step-right{border-left:none;padding:12px 0;}
+  .seo-step-right::before{display:none}
+  .seo-step::after{display:none}
 }
 </style>
 </head>
 <body>
-
 <div class="scroll-progress" id="scrollBar"></div>
-
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="#hero">PageRank Thesis</a>
@@ -233,11 +236,9 @@ footer strong{color:var(--text)}
     </div>
   </div>
 </nav>
-
-<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-inner">
-    <div class="hero-badge">🎓 Bachelor Thesis · GUC 2026</div>
+    <div class="hero-badge">&#127891; Bachelor Thesis &middot; GUC 2026</div>
     <h1>Implementing PageRank<br>Using Python NetworkX</h1>
     <p class="hero-sub">A comprehensive implementation, analysis, and simulation of the PageRank algorithm across six computational methods, with an interactive browser-based visualisation engine.</p>
     <div class="hero-meta">
@@ -249,79 +250,103 @@ footer strong{color:var(--text)}
       <div class="stat-card"><div class="stat-num">6</div><div class="stat-lbl">PR Methods</div></div>
       <div class="stat-card"><div class="stat-num">5</div><div class="stat-lbl">Experiments</div></div>
       <div class="stat-card"><div class="stat-num">791</div><div class="stat-lbl">Node Graph</div></div>
-      <div class="stat-card"><div class="stat-num">1.25×</div><div class="stat-lbl">Pruning Speedup</div></div>
+      <div class="stat-card"><div class="stat-num">1.25&times;</div><div class="stat-lbl">Pruning Speedup</div></div>
       <div class="stat-card"><div class="stat-num">+287%</div><div class="stat-lbl">Max SEO Gain</div></div>
       <div class="stat-card"><div class="stat-num">6,767</div><div class="stat-lbl">Lines of Code</div></div>
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
 
-<!-- OVERVIEW -->
 <section id="overview">
   <div class="container">
     <div class="section-tag">Project Overview</div>
     <h2 class="section-title">Five Requirements, One Complete System</h2>
-    <p class="section-sub">Each requirement builds on the last — from implementing the raw algorithm to building a full search engine with real-time simulation.</p>
+    <p class="section-sub">Each requirement builds on the last &mdash; from implementing the raw algorithm to building a full search engine with real-time simulation. All six PageRank methods run on the same graph structure and are validated against an exact Matrix Algebra ground truth.</p>
     <div class="req-grid">
       <div class="req-card" onclick="jumpToCode('progressive_pruning_pr.py')">
         <div class="req-num">Requirement 1</div>
         <h3>Progressive Pruning PageRank</h3>
-        <p>A novel enhancement to power iteration that freezes low-rank pages after convergence, achieving up to 1.25× speedup with zero accuracy loss (L1 error = 0.00 in all benchmark cases).</p>
-        <div class="req-tags"><span class="tag">NumPy</span><span class="tag">Benchmark</span><span class="tag green">L1 Error = 0</span></div>
+        <p>A novel enhancement to power iteration that <strong>freezes low-rank pages</strong> after convergence, eliminating redundant computation on pages that have already stabilised.</p>
+        <div class="req-detail"><strong>Algorithm:</strong> 10-iteration warmup &rarr; freeze pages below &tau;=0.5/N for 3+ stable rounds &rarr; continue updating active pages only. Frozen pages retain their last rank but still contribute outgoing link weight.</div>
+        <div class="req-tags"><span class="tag">NumPy</span><span class="tag">Benchmark</span><span class="tag green">L1 Error = 0.00</span><span class="tag teal">1.25&times; at n=500</span></div>
       </div>
       <div class="req-card" onclick="jumpToCode('realistic_data.py')">
         <div class="req-num">Requirement 2</div>
         <h3>Realistic Large-Scale Data</h3>
-        <p>A BFS web scraper with 4 bug fixes, validated against a 791-node synthetic documentation graph. All 7 PageRank methods benchmarked with L1 error and timing.</p>
-        <div class="req-tags"><span class="tag">BeautifulSoup</span><span class="tag">791 nodes</span><span class="tag gold">7 Methods</span></div>
+        <p>A BFS web scraper with <strong>4 explicit bug fixes</strong> (fragment removal, trailing slash normalisation, self-loop prevention, asset skipping), validated against a reproducible synthetic graph.</p>
+        <div class="req-detail"><strong>Graph:</strong> 1 homepage &rarr; 10 sections &rarr; 78 articles each = 791 nodes, 3,228 edges. Homepage holds 16.5% of total rank. All 9 structural tests pass.</div>
+        <div class="req-tags"><span class="tag">BeautifulSoup</span><span class="tag">791 nodes</span><span class="tag gold">7 Methods</span><span class="tag green">9/9 Tests</span></div>
       </div>
       <div class="req-card" onclick="jumpToCode('all_6_methods.py')">
         <div class="req-num">Requirement 3</div>
         <h3>Manual PageRank Implementation</h3>
-        <p>Custom PageRank algorithm using manual power iteration and NetworkX with explicit dangling node handling, convergence tracking, and validation against exact matrix algebra.</p>
-        <div class="req-tags"><span class="tag">Python</span><span class="tag">NetworkX</span><span class="tag purple">Power Iteration</span></div>
+        <p>Custom PageRank from first principles using manual power iteration with <strong>explicit dangling node handling</strong>, convergence tracking at each iteration, and validation against exact matrix algebra.</p>
+        <div class="req-detail"><strong>Result:</strong> Converges at iteration 29. L1 error = 1.47&times;10&#8315;&#8308; against NetworkX on 791-node graph &mdash; equivalent for all ranking decisions.</div>
+        <div class="req-tags"><span class="tag">Python</span><span class="tag">NetworkX</span><span class="tag purple">Power Iteration</span><span class="tag teal">&alpha; = 0.85</span></div>
       </div>
       <div class="req-card" onclick="jumpToCode('pr_simulator.py')">
-        <div class="req-num">Bonus — Week 6</div>
+        <div class="req-num">Bonus &mdash; Week 6</div>
         <h3>Interactive Simulation Engine</h3>
-        <p>A full Streamlit web app with live BFS crawling, Vis.js graph visualisation, heat-scale colour coding, TF-IDF search, and Google benchmark comparison.</p>
-        <div class="req-tags"><span class="tag">Streamlit</span><span class="tag">Vis.js</span><span class="tag purple">Live Demo</span></div>
+        <p>A full Streamlit web app integrating live BFS crawling, Vis.js graph visualisation, Progressive Pruning with frozen node rendering, TF-IDF search, and Google benchmark comparison.</p>
+        <div class="req-detail"><strong>Search:</strong> 60% PageRank + 40% TF-IDF blend. Google comparison via Spearman &rho; = 0.685, 100% Overlap@5 &amp; @10.</div>
+        <div class="req-tags"><span class="tag">Streamlit</span><span class="tag">Vis.js</span><span class="tag purple">Live Demo</span><span class="tag gold">&rho; = 0.685</span></div>
+      </div>
+    </div>
+    <div style="margin-top:48px;"><div class="section-tag">All Six Methods &mdash; 791-Node Benchmark (Table 4.6)</div></div>
+    <div class="methods-overview">
+      <div class="method-row">
+        <div class="method-badge" style="background:rgba(59,130,246,.15);color:var(--accent2);">01</div>
+        <div class="method-info"><h4>NetworkX Built-in</h4><p>Ground truth &middot; O(k(n+m))</p></div>
+        <div class="method-meta"><div class="time">6.5 ms</div><div class="err">0 (reference)</div></div>
+      </div>
+      <div class="method-row">
+        <div class="method-badge" style="background:rgba(139,92,246,.15);color:var(--purple);">02</div>
+        <div class="method-info"><h4>Manual Power Iteration</h4><p>Custom &middot; transparent &middot; O(k(n+m))</p></div>
+        <div class="method-meta"><div class="time">79.2 ms</div><div class="err">L1 1.47e-4</div></div>
+      </div>
+      <div class="method-row">
+        <div class="method-badge" style="background:rgba(6,182,212,.15);color:var(--teal);">03</div>
+        <div class="method-info"><h4>Matrix Algebra (Exact)</h4><p>Direct LU solve &middot; O(n&sup3;) &middot; ground truth</p></div>
+        <div class="method-meta"><div class="time">30.1 ms</div><div class="err">L1 1.47e-4</div></div>
+      </div>
+      <div class="method-row">
+        <div class="method-badge" style="background:rgba(16,185,129,.15);color:var(--green);">04</div>
+        <div class="method-info"><h4>SciPy Sparse (CSR)</h4><p>Fastest iterative &middot; O(k&middot;E)</p></div>
+        <div class="method-meta"><div class="time" style="color:var(--green);">0.6 ms</div><div class="err">L1 1.47e-4</div></div>
+      </div>
+      <div class="method-row">
+        <div class="method-badge" style="background:rgba(245,158,11,.15);color:var(--gold);">05</div>
+        <div class="method-info"><h4>Monte Carlo Surfer</h4><p>Stochastic &middot; O(R&times;T) &middot; O(n) memory</p></div>
+        <div class="method-meta"><div class="time" style="color:var(--gold);">644.5 ms</div><div class="err">L1 2.76e-2</div></div>
+      </div>
+      <div class="method-row">
+        <div class="method-badge" style="background:rgba(239,68,68,.15);color:var(--red);">06</div>
+        <div class="method-info"><h4>HITS Algorithm</h4><p>Hubs &amp; Authorities &middot; different metric</p></div>
+        <div class="method-meta"><div class="time" style="color:var(--muted);">213.7 ms</div><div class="err">L1 2.48e-1</div></div>
       </div>
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
 
-<!-- SOURCE CODE -->
 <section id="code">
   <div class="container">
     <div class="section-tag">Source Code</div>
     <h2 class="section-title">Complete Source Code</h2>
     <p class="section-sub">Click any file in the sidebar to view its full source. Use Copy or Download to save individual files.</p>
-
     <div class="panel-layout">
-      <div class="panel-sidebar" id="code-sidebar">
-        <div class="panel-sidebar-title">Python Files</div>
-      </div>
+      <div class="panel-sidebar" id="code-sidebar"><div class="panel-sidebar-title">Python Files</div></div>
       <div class="panel-main">
         <div class="panel-header">
-          <div class="panel-filename">
-            <span class="icon">📄</span>
-            <span id="code-filename">Select a file…</span>
-          </div>
+          <div class="panel-filename"><span class="icon">&#128196;</span><span id="code-filename">Select a file&hellip;</span></div>
           <div class="panel-actions">
             <button class="btn-action btn-copy-src" id="btn-copy-code" onclick="copyCode()">Copy</button>
             <button class="btn-action btn-dl" onclick="downloadCode()">Download</button>
           </div>
         </div>
         <div class="code-pane-wrap" id="code-pane-wrap">
-          <div class="pane-placeholder">
-            <div class="ph-icon">📂</div>
-            <div>Select a file from the sidebar to view its source</div>
-          </div>
+          <div class="pane-placeholder"><div class="ph-icon">&#128194;</div><div>Select a file from the sidebar to view its source</div></div>
         </div>
         <div class="status-bar" id="code-status-bar">
           <span class="status-dot pending" id="code-status-dot"></span>
@@ -331,26 +356,17 @@ footer strong{color:var(--text)}
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
-
-<!-- OUTPUTS -->
 <section id="outputs">
   <div class="container">
     <div class="section-tag">Execution Outputs</div>
     <h2 class="section-title">Console Outputs &amp; Experimental Results</h2>
-    <p class="section-sub">Actual terminal output from running each Python script. Select a file to see its full output. These are generated by executing the corresponding source code.</p>
-
+    <p class="section-sub">Actual terminal output from running each Python script. Select a file to see its full output.</p>
     <div class="panel-layout">
-      <div class="panel-sidebar" id="output-sidebar">
-        <div class="panel-sidebar-title">Output Files</div>
-      </div>
+      <div class="panel-sidebar" id="output-sidebar"><div class="panel-sidebar-title">Output Files</div></div>
       <div class="panel-main">
         <div class="panel-header">
-          <div class="panel-filename">
-            <span class="icon">📋</span>
-            <span id="output-filename">Select an output file…</span>
-          </div>
+          <div class="panel-filename"><span class="icon">&#128203;</span><span id="output-filename">Select an output file&hellip;</span></div>
           <div class="panel-actions">
             <button class="btn-action btn-copy-src" id="btn-copy-out" onclick="copyOutput()">Copy</button>
             <button class="btn-action btn-dl" onclick="downloadOutput()">Download</button>
@@ -358,7 +374,7 @@ footer strong{color:var(--text)}
         </div>
         <div class="output-pane-wrap" id="output-pane-wrap">
           <div class="pane-placeholder">
-            <div class="ph-icon">📋</div>
+            <div class="ph-icon">&#128203;</div>
             <div>Select an output file from the sidebar to view its contents</div>
             <div style="font-size:.75rem;color:#475569;margin-top:4px">Make sure the .txt output files are in the same folder as this index.html</div>
           </div>
@@ -371,157 +387,374 @@ footer strong{color:var(--text)}
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
 
-<!-- RESULTS -->
 <section id="results">
   <div class="container">
     <div class="section-tag">Experimental Results</div>
     <h2 class="section-title">Key Numbers at a Glance</h2>
-    <p class="section-sub">All results are measured on real graph executions, not estimated.</p>
+    <p class="section-sub">All results measured on real graph executions. L1 error is the total absolute rank difference across all pages &mdash; a value below 10&#8315;&#8308; means less than 0.01% of total rank is misallocated, which is indistinguishable for any ranking decision.</p>
     <div class="results-grid">
-
-      <!-- TABLE 1: All 7 Methods on 791-node graph — from thesis Table 4.6 -->
       <div class="result-card">
-        <h4>All 7 Methods · 791-Node Graph</h4>
+        <h4>All 7 Methods &middot; 791-Node Synthetic Graph</h4>
+        <div class="card-sub">791 nodes &middot; 3,228 edges &middot; seed=42 &middot; NetworkX used as reference (Table 4.6)</div>
         <table class="result-table">
-          <tr><th>Method</th><th>L1 Error</th><th>Time</th></tr>
-          <tr><td>1 NetworkX</td><td class="badge-ref">0 (ref)</td><td>6.5 ms</td></tr>
-          <tr><td>2 Manual</td><td>1.47e-4</td><td>79.2 ms</td></tr>
-          <tr><td>3 Matrix</td><td>1.47e-4</td><td>30.1 ms</td></tr>
-          <tr><td>4 SciPy</td><td>1.47e-4</td><td>0.6 ms</td></tr>
-          <tr><td>5 Monte Carlo</td><td class="badge-approx">2.76e-2</td><td>644.5 ms</td></tr>
-          <tr><td>6 HITS</td><td class="badge-approx">2.48e-1</td><td>213.7 ms</td></tr>
-          <tr><td>7 Pruning</td><td>1.57e-4</td><td>93.9 ms</td></tr>
+          <tr><th>Method</th><th>L1 Error</th><th>Time</th><th>Note</th></tr>
+          <tr class="highlight"><td>1 NetworkX</td><td class="badge-ref">0 (ref)</td><td>6.5 ms</td><td style="color:var(--muted);font-size:.72rem">Ground truth</td></tr>
+          <tr><td>2 Manual</td><td>1.47e-4</td><td>79.2 ms</td><td style="color:var(--muted);font-size:.72rem">Pure Python</td></tr>
+          <tr><td>3 Matrix</td><td>1.47e-4</td><td>30.1 ms</td><td style="color:var(--muted);font-size:.72rem">LU exact solve</td></tr>
+          <tr class="highlight"><td>4 SciPy</td><td>1.47e-4</td><td style="color:var(--green);font-weight:600">0.6 ms</td><td style="color:var(--green);font-size:.72rem">Fastest</td></tr>
+          <tr><td>5 Monte Carlo</td><td class="badge-approx">2.76e-2</td><td>644.5 ms</td><td style="color:var(--muted);font-size:.72rem">Stochastic</td></tr>
+          <tr><td>6 HITS</td><td class="badge-warn">2.48e-1</td><td>213.7 ms</td><td style="color:var(--muted);font-size:.72rem">&#8800; PageRank</td></tr>
+          <tr><td>7 Pruning</td><td>1.57e-4</td><td>93.9 ms</td><td style="color:var(--muted);font-size:.72rem">Novel method</td></tr>
         </table>
+        <div class="result-note">Methods 2&ndash;4 produce identical ranking order. HITS measures authority scores &mdash; a fundamentally different quantity &mdash; and is not directly comparable to PageRank.</div>
       </div>
-
-      <!-- TABLE 2: Pruning Benchmark — from thesis Table 4.9 -->
       <div class="result-card">
-        <h4>Pruning Benchmark · Web-Like Graphs</h4>
+        <h4>Progressive Pruning Benchmark &middot; Web-Like Graphs</h4>
+        <div class="card-sub">Warmup = 10 iters &middot; threshold &tau; = 0.5/N &middot; 3 stable rounds before freeze (Table 4.9)</div>
         <table class="result-table">
-          <tr><th>N</th><th>Std Time</th><th>Prune</th><th>Speedup</th></tr>
-          <tr><td>50</td><td>0.1 ms</td><td>0.1 ms</td><td>0.75×</td></tr>
-          <tr><td>500</td><td>1.3 ms</td><td>1.0 ms</td><td class="badge-pass">1.25×</td></tr>
-          <tr><td>2,000</td><td>60.6 ms</td><td>63.5 ms</td><td>0.96×</td></tr>
+          <tr><th>N</th><th>Std Time</th><th>Prune</th><th>Frozen %</th><th>Speedup</th></tr>
+          <tr><td>50</td><td>0.1 ms</td><td>0.1 ms</td><td>56%</td><td style="color:var(--muted)">0.75&times;</td></tr>
+          <tr class="highlight"><td>500</td><td>1.3 ms</td><td>1.0 ms</td><td>0%</td><td class="badge-pass">1.25&times;</td></tr>
+          <tr><td>2,000</td><td>60.6 ms</td><td>63.5 ms</td><td>0%</td><td style="color:var(--muted)">0.96&times;</td></tr>
         </table>
-        <p style="font-size:.78rem;color:var(--muted);margin-top:10px">L1 Error = 0.00e+00 in all cases</p>
+        <div class="result-note">L1 Error = 0.00e+00 at all sizes &mdash; bit-for-bit identical to standard PageRank. At n=50: overhead exceeds savings despite 56% freezing. At n=500: optimised data structures provide speedup even with 0% frozen.</div>
       </div>
-
-      <!-- TABLE 3: Monte Carlo — from thesis Table 4.4 -->
       <div class="result-card">
-        <h4>Monte Carlo · Error vs Surfer Count</h4>
+        <h4>Monte Carlo &middot; Error vs Surfer Count</h4>
+        <div class="card-sub">Error decreases as O(1/&#8730;R) &middot; confirmed by Central Limit Theorem (Table 4.4)</div>
         <table class="result-table">
-          <tr><th>Surfers</th><th>L1 Error</th><th>Time</th></tr>
-          <tr><td>100</td><td>0.0284</td><td>8 ms</td></tr>
-          <tr><td>1,000</td><td>0.0092</td><td>76 ms</td></tr>
-          <tr><td>10,000</td><td>0.0031</td><td>760 ms</td></tr>
-          <tr><td>50,000</td><td>0.0018</td><td>3,800 ms</td></tr>
+          <tr><th>Surfers (R)</th><th>L1 Error</th><th>Predicted ~1/&#8730;R</th><th>Time</th></tr>
+          <tr><td>100</td><td>0.0284</td><td>0.0284</td><td>8 ms</td></tr>
+          <tr><td>1,000</td><td>0.0092</td><td>0.00898</td><td>76 ms</td></tr>
+          <tr><td>10,000</td><td>0.0031</td><td>0.00284</td><td>760 ms</td></tr>
+          <tr><td>50,000</td><td>0.0018</td><td>0.00127</td><td>3,800 ms</td></tr>
         </table>
-        <p style="font-size:.78rem;color:var(--muted);margin-top:10px">Error ≈ O(1/√R) confirmed</p>
+        <div class="result-note">At 50,000 surfers, Monte Carlo is still ~1,300&times; less accurate than iterative methods. Its value is O(n) memory &mdash; critical for billion-node graphs that cannot fit in RAM.</div>
       </div>
-
-      <!-- TABLE 4: Search Engine Tests — from thesis Table 4.16 / text -->
       <div class="result-card">
-        <h4>Search Engine Tests · 8/8 Passing</h4>
+        <h4>Experiment 3 &middot; Accuracy vs Exact Solution</h4>
+        <div class="card-sub">5-node test graph &middot; ground truth = Matrix Algebra exact solve (Table 4.2)</div>
         <table class="result-table">
-          <tr><th>Test</th><th>Status</th></tr>
-          <tr><td>Constructor &amp; init</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Return type &amp; structure</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Pure PageRank mode</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Keyword relevance</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Recency weight</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Topic-sensitive PR</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Combined weights</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Edge cases</td><td class="badge-pass">PASS</td></tr>
+          <tr><th>Method</th><th>L1 Error</th><th>Max Error</th><th>Status</th></tr>
+          <tr class="highlight"><td>1 NetworkX</td><td>1.40e-6</td><td>4.94e-7</td><td class="badge-pass">Good</td></tr>
+          <tr class="highlight"><td>2 Custom</td><td>2.60e-7</td><td>9.16e-8</td><td class="badge-pass">Good</td></tr>
+          <tr><td>3 Matrix</td><td class="badge-exact">0.00</td><td class="badge-exact">0.00</td><td class="badge-exact">Exact</td></tr>
+          <tr class="highlight"><td>4 SciPy</td><td>3.97e-7</td><td>1.40e-7</td><td class="badge-pass">Good</td></tr>
+          <tr><td>5 MC (10k)</td><td class="badge-approx">6.99e-3</td><td>2.32e-3</td><td class="badge-approx">Approx</td></tr>
+          <tr><td>6 HITS</td><td class="badge-warn">7.12e-1</td><td>3.26e-1</td><td class="badge-warn">Diff metric</td></tr>
         </table>
+        <div class="result-note">Methods 1, 2, 4 achieve L1 &lt; 1.5&times;10&#8315;&#8310; &mdash; 4,000&times; smaller than the rank gap between adjacent pages. All three produce identical ranking decisions.</div>
       </div>
-
-      <!-- TABLE 5: Google Comparison — from thesis Table 4.18 -->
       <div class="result-card">
-        <h4>Google Comparison Metrics</h4>
+        <h4>Search Engine Tests &middot; 8/8 Passing</h4>
+        <div class="card-sub">score(p) = w_PR&middot;PR(p) + w_rel&middot;rel(p) + w_rec&middot;rec(p) + w_top&middot;topPR(p)</div>
         <table class="result-table">
-          <tr><th>Metric</th><th>Value</th></tr>
-          <tr><td>Overlap@3</td><td>33%</td></tr>
-          <tr><td>Overlap@5</td><td class="badge-pass">100%</td></tr>
-          <tr><td>Overlap@10</td><td class="badge-pass">100%</td></tr>
-          <tr><td>Spearman ρ</td><td>0.685</td></tr>
+          <tr><th>Test</th><th>Signal Validated</th><th>Status</th></tr>
+          <tr><td>Constructor &amp; init</td><td style="color:var(--muted);font-size:.72rem">PR sums to 1.0</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Return type &amp; structure</td><td style="color:var(--muted);font-size:.72rem">API contract</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Pure PageRank mode</td><td style="color:var(--muted);font-size:.72rem">score = PR exactly</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Keyword relevance</td><td style="color:var(--muted);font-size:.72rem">TF term matching</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Recency weight</td><td style="color:var(--muted);font-size:.72rem">exp(&minus;days/70)</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Topic-sensitive PR</td><td style="color:var(--muted);font-size:.72rem">Biased teleportation</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Combined weights</td><td style="color:var(--muted);font-size:.72rem">w sum = 1.0</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Edge cases</td><td style="color:var(--muted);font-size:.72rem">Empty query, no content</td><td class="badge-pass">PASS</td></tr>
         </table>
-        <p style="font-size:.78rem;color:var(--muted);margin-top:10px">Moderate–strong agreement with Google ranking</p>
+        <div class="result-note">In Scenario 5 (combined weights), a page with PR=0.069 outranks the homepage (PR=0.213) because keyword relevance + recency + topic bias combine to score 0.322 vs 0.305.</div>
       </div>
-
-      <!-- TABLE 6: Scraper Tests — from thesis Table 4.5 (all 9 tests) -->
       <div class="result-card">
-        <h4>Scraper Tests · 9/9 Passing</h4>
+        <h4>Scraper Tests &middot; 9/9 Passing &amp; Google Comparison</h4>
+        <div class="card-sub">Synthetic graph validation + real-world Google benchmark (Tables 4.5, 4.18)</div>
         <table class="result-table">
-          <tr><th>Test</th><th>Status</th></tr>
-          <tr><td>Returns nx.DiGraph</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Graph has ≥ 1 node</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Graph has ≥ 1 edge</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>No self-loops</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Exactly 791 nodes</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Exactly 3,228 edges</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>PR sums to 1.0 ±1e-6</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Top page above average PR</td><td class="badge-pass">PASS</td></tr>
-          <tr><td>Top-ranked page identified</td><td class="badge-pass">PASS</td></tr>
+          <tr><th>Test</th><th>What It Validates</th><th>Status</th></tr>
+          <tr><td>Returns nx.DiGraph</td><td style="color:var(--muted);font-size:.72rem">Type safety</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Has &ge; 1 node / edge</td><td style="color:var(--muted);font-size:.72rem">Non-empty</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>No self-loops</td><td style="color:var(--muted);font-size:.72rem">Bug fix 3</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Exactly 791 nodes</td><td style="color:var(--muted);font-size:.72rem">Determinism</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Exactly 3,228 edges</td><td style="color:var(--muted);font-size:.72rem">Determinism</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>PR sums to 1.0 &plusmn;1e-6</td><td style="color:var(--muted);font-size:.72rem">Dangling node fix</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Top page above average</td><td style="color:var(--muted);font-size:.72rem">Ranking works</td><td class="badge-pass">PASS</td></tr>
+          <tr><td>Top page = &lsquo;index&rsquo;</td><td style="color:var(--muted);font-size:.72rem">Structural ID</td><td class="badge-pass">PASS</td></tr>
         </table>
+        <table class="result-table" style="margin-top:12px">
+          <tr><th>Google Metric</th><th>Value</th><th>Interpretation</th></tr>
+          <tr><td>Overlap@3</td><td>33%</td><td style="color:var(--muted);font-size:.72rem">Missing CTR signal</td></tr>
+          <tr><td>Overlap@5 &amp; @10</td><td class="badge-pass">100%</td><td style="color:var(--muted);font-size:.72rem">All pages found</td></tr>
+          <tr><td>Spearman &rho;</td><td class="badge-pass">0.685</td><td style="color:var(--muted);font-size:.72rem">Moderate&ndash;strong</td></tr>
+        </table>
+        <div class="result-note">&rho;&sup2;&asymp;0.47 &mdash; structural PageRank alone explains ~47% of Google&rsquo;s ranking decisions. Missing signals: click-through rate, page speed, mobile-friendliness, BERT semantic understanding.</div>
       </div>
-
+    </div>
+    <div style="margin-top:12px;"><div class="section-tag" style="margin-top:48px">Five Controlled Simulation Experiments</div>
+    <p class="section-sub" style="margin-bottom:0;margin-top:8px">All experiments run on the same 5-node test graph: A&rarr;B, A&rarr;C, B&rarr;C, B&rarr;D, C&rarr;A, D&rarr;C, E&rarr;D &middot; includes cycle (C&rarr;A), multiple paths to C, dangling node E</p></div>
+    <div class="exp-grid">
+      <div class="exp-card">
+        <div class="exp-num">Experiment 1</div>
+        <h4>Convergence Speed</h4>
+        <p>Manual (Method 2) vs SciPy Sparse (Method 4) tracked against Matrix Algebra ground truth iteration by iteration.</p>
+        <span class="exp-result">Converges at iteration 29 &middot; L1 decays geometrically</span>
+      </div>
+      <div class="exp-card c2">
+        <div class="exp-num">Experiment 2</div>
+        <h4>Scalability</h4>
+        <p>All methods timed at n = 10, 50, 100, 500, 1,000 nodes. Matrix Algebra becomes impractical at n &asymp; 200.</p>
+        <span class="exp-result">NX: 2.7 ms &middot; Manual: 141 ms &middot; Matrix: impractical at n=1000</span>
+      </div>
+      <div class="exp-card c3">
+        <div class="exp-num">Experiment 3</div>
+        <h4>Accuracy Comparison</h4>
+        <p>All six methods measured against exact Matrix Algebra solution. Methods 1&ndash;4 produce identical ranking decisions.</p>
+        <span class="exp-result">Methods 1&ndash;4: L1 &lt; 4&times;10&#8315;&#8310; &middot; MC: 6.99e-3 &middot; HITS: diff metric</span>
+      </div>
+      <div class="exp-card c4">
+        <div class="exp-num">Experiment 4</div>
+        <h4>Damping Factor &alpha;</h4>
+        <p>&alpha; swept from 0.50 to 0.99. Page E&rsquo;s rank collapses from 0.100 at &alpha;=0.50 to 0.002 at &alpha;=0.99.</p>
+        <span class="exp-result">&alpha;=0.85 optimal &middot; lower dilutes signal &middot; higher enables manipulation</span>
+      </div>
+      <div class="exp-card c5">
+        <div class="exp-num">Experiment 5</div>
+        <h4>Monte Carlo Accuracy</h4>
+        <p>Error measured at R = 100 to 50,000 surfers. Confirms theoretical O(1/&radic;R) decay from the Central Limit Theorem.</p>
+        <span class="exp-result">50k surfers: L1=0.0018 &middot; still 1,300&times; worse than iterative</span>
+      </div>
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
 
-<!-- SIMULATOR -->
 <section id="simulator" style="background:var(--surface)">
   <div class="container">
     <div class="section-tag">Interactive Tool</div>
     <h2 class="section-title">PageRank Simulation Engine</h2>
-    <p class="section-sub">A browser-based Streamlit application. Crawl any website, run all 6 methods, search with TF-IDF, and compare with Google.</p>
+    <p class="section-sub">A single-file Streamlit application (1,328 lines) that replicates a real search engine pipeline end-to-end &mdash; from crawling a live website to comparing rankings against Google. Run locally with <code style="font-family:'JetBrains Mono',monospace;color:var(--accent2);">streamlit run pr_simulator.py</code></p>
+    <div class="sim-workflow">
+      <div class="sim-step">
+        <div class="sim-step-num">1</div>
+        <h4>Data Acquisition</h4>
+        <p>BFS web crawler builds a NetworkX DiGraph from any seed URL with four independent filtering controls.</p>
+        <div class="step-detail">Max pages (5&ndash;60) &middot; Depth (0&ndash;5) &middot; Path prefix &middot; Keyword filter</div>
+      </div>
+      <div class="sim-step">
+        <div class="sim-step-num">2</div>
+        <h4>Authority Computation</h4>
+        <p>Any of six PageRank methods computes a score for every node. Progressive Pruning shows frozen nodes in real time.</p>
+        <div class="step-detail">Converges in 8&ndash;15 iterations for small crawls</div>
+      </div>
+      <div class="sim-step">
+        <div class="sim-step-num">3</div>
+        <h4>Search &amp; Benchmark</h4>
+        <p>TF-IDF search blends structural rank with keyword relevance. Google results can be pasted for correlation analysis.</p>
+        <div class="step-detail">60% PR + 40% TF-IDF &middot; Spearman &rho; + Kendall &tau;</div>
+      </div>
+    </div>
     <div class="simulator-features">
-      <div class="sim-feature"><div class="sim-icon">🕸️</div><div><h4>Smart BFS Crawler</h4><p>Crawl any URL with depth, path prefix, keyword, and asset filters. Handles self-loops and dangling nodes.</p></div></div>
-      <div class="sim-feature"><div class="sim-icon">📊</div><div><h4>Live Vis.js Graph</h4><p>Nodes sized and coloured by PageRank on a blue→amber→red heat scale. Hover for full URL and rank.</p></div></div>
-      <div class="sim-feature"><div class="sim-icon">🔍</div><div><h4>TF-IDF Search</h4><p>Combined score = 0.6×PR + 0.4×TF-IDF. Rankings update in real time as you type.</p></div></div>
-      <div class="sim-feature"><div class="sim-icon">🆚</div><div><h4>Google Benchmark</h4><p>Paste Google results in any format. Reports Spearman ρ and Kendall τ with scatter plot.</p></div></div>
-      <div class="sim-feature"><div class="sim-icon">⚡</div><div><h4>Progressive Pruning</h4><p>6th method: freezes converged low-rank pages. Up to 1.25× speedup at n=500 with zero accuracy loss.</p></div></div>
-      <div class="sim-feature"><div class="sim-icon">🚀</div><div><h4>SEO Recommendations</h4><p>Automatic analysis of the seed URL: inbound links, dangling nodes, link quality, reachability, content.</p></div></div>
+      <div class="sim-feature">
+        <div class="sim-icon">&#128376;</div>
+        <div>
+          <h4>Smart BFS Crawler</h4>
+          <p>Crawl any URL with depth, path prefix, keyword, and asset filters. Four bug fixes applied: fragment removal, trailing slash normalisation, self-loop prevention, asset skipping (.pdf, .png, etc.).</p>
+          <div class="sim-detail">Depth 0 = seed only &middot; Depth 2 = default &middot; Fragment #section treated as same URL</div>
+        </div>
+      </div>
+      <div class="sim-feature">
+        <div class="sim-icon">&#128202;</div>
+        <div>
+          <h4>Live Vis.js Graph</h4>
+          <p>Nodes sized (18px&ndash;58px, 3.2&times; ratio) and coloured on a blue&rarr;amber&rarr;red heat scale by PageRank. Hover tooltip shows full URL and exact rank to 6 decimal places.</p>
+          <div class="sim-detail">Fix node positions toggle for stable presentation during convergence animation</div>
+        </div>
+      </div>
+      <div class="sim-feature">
+        <div class="sim-icon">&#10052;&#65039;</div>
+        <div>
+          <h4>Progressive Pruning Visualisation</h4>
+          <p>Frozen nodes render in slate gray (#64748B), shrink to 20px, display &#10052; badge, and their edges become dashed with reduced opacity. Convergence chart shows dashed lines when nodes freeze.</p>
+          <div class="sim-detail">Real-time speed badge &middot; sidebar shows frozen count and percentage</div>
+        </div>
+      </div>
+      <div class="sim-feature">
+        <div class="sim-icon">&#128269;</div>
+        <div>
+          <h4>TF-IDF Search Engine</h4>
+          <p>Combined score = 0.6&times;PR + 0.4&times;TF-IDF. IDF uses smoothed formula log&#8321;&#8320;((N+1)/(df+1)) to prevent division by zero and handle terms in every document.</p>
+          <div class="sim-detail">Rankings update in real time &middot; empty query &rarr; homepage rank 1</div>
+        </div>
+      </div>
+      <div class="sim-feature">
+        <div class="sim-icon">&#127986;</div>
+        <div>
+          <h4>Google Benchmark</h4>
+          <p>Accepts full URLs, breadcrumb format (docs.python.org &rsaquo; library &rsaquo; functions), or mixed. Three-tier fuzzy URL matching: exact &rarr; path-suffix &rarr; domain+final-segment.</p>
+          <div class="sim-detail">Debug panel shows how each Google entry was parsed &middot; Spearman &rho; + scatter plot</div>
+        </div>
+      </div>
+      <div class="sim-feature">
+        <div class="sim-icon">&#128640;</div>
+        <div>
+          <h4>SEO Recommendation Engine</h4>
+          <p>Automatic analysis of the seed URL: inbound link count, inbound link quality vs average, dangling status, outbound link count, content word count, reachability from homepage, self-loop detection.</p>
+          <div class="sim-detail">Critical red card for 0 inbound links &middot; warning for dangling &middot; green for healthy</div>
+        </div>
+      </div>
+    </div>
+    <div class="complexity-table-wrap">
+      <div class="complexity-table-header">
+        <h4>Computational Complexity Reference &mdash; All Six Methods</h4>
+        <p>As displayed in the simulator&rsquo;s complexity analysis panel &middot; N = pages &middot; E = edges &middot; k = iterations &middot; R = surfers &middot; T = steps per surfer</p>
+      </div>
+      <table class="ctbl">
+        <tr><th>Method</th><th>Time Complexity</th><th>Space Complexity</th><th>Exact?</th><th>Best Use Case</th></tr>
+        <tr><td>NetworkX Built-in</td><td>O(k&middot;(N+E))</td><td>O(N+E)</td><td class="c-yes">Yes*</td><td style="color:var(--muted);font-size:.75rem">General purpose &middot; ground truth</td></tr>
+        <tr><td>Manual Power Iteration</td><td>O(k&middot;(N+E))</td><td>O(N+E)</td><td class="c-no">Approx</td><td style="color:var(--muted);font-size:.75rem">Understanding the algorithm</td></tr>
+        <tr><td>Matrix Algebra (Exact)</td><td class="c-slow">O(N&sup3;)</td><td class="c-slow">O(N&sup2;)</td><td class="c-yes">Yes</td><td style="color:var(--muted);font-size:.75rem">Verification only &middot; N &lt; 200</td></tr>
+        <tr><td>SciPy Sparse (CSR)</td><td class="c-fast">O(k&middot;E)</td><td>O(N+E)</td><td class="c-no">Approx</td><td style="color:var(--muted);font-size:.75rem">Large graphs &middot; production use</td></tr>
+        <tr><td>Monte Carlo Surfer</td><td>O(R&middot;T)</td><td class="c-fast">O(N)</td><td class="c-no">Approx</td><td style="color:var(--muted);font-size:.75rem">Memory-constrained &middot; parallelisable</td></tr>
+        <tr><td>Progressive Pruning</td><td class="c-fast">O(k&middot;E_reduced)</td><td>O(N)</td><td class="c-no">Approx</td><td style="color:var(--muted);font-size:.75rem">Web-like graphs &middot; speedup at n=500</td></tr>
+      </table>
+    </div>
+    <div style="margin-top:48px;"><div class="section-tag">Seven Case Studies</div>
+    <p class="section-sub" style="margin-bottom:16px;margin-top:8px">Each case study stresses a different aspect of the implementation.</p></div>
+    <div class="case-grid">
+      <div class="case-card"><div class="case-url">docs.python.org/3/</div><h5>Baseline hub-and-spoke</h5><p>Homepage red/dominant. 6 methods agree on top-5. L1 error &lt; 10&#8315;&#8308;. Power-law distribution confirmed.</p></div>
+      <div class="case-card"><div class="case-url">en.wikipedia.org/wiki/PageRank</div><h5>Dense links &middot; dangling nodes</h5><p>Scores sum to 1.0 &plusmn; 10&#8315;&#8310; despite near-zero dangling pages. Validates the dangling fix.</p></div>
+      <div class="case-card"><div class="case-url">httpbin.org/</div><h5>Flat uniform structure</h5><p>Near-uniform distribution. Tests the division-by-zero guard max(max_r&minus;min_r, 10&#8315;&sup1;&sup2;).</p></div>
+      <div class="case-card"><div class="case-url">realpython.com/</div><h5>TF-IDF reordering</h5><p>Keyword &lsquo;tutorial&rsquo; raises a content page above the homepage in Final Score despite lower PR.</p></div>
+      <div class="case-card"><div class="case-url">flask.palletsprojects.com/</div><h5>Disconnected components</h5><p>Orphan nodes visible at graph periphery. Dangling fix keeps scores summing to 1.0.</p></div>
+      <div class="case-card"><div class="case-url">docs.scipy.org/doc/scipy/</div><h5>O(N&sup3;) vs O(k&middot;E) demo</h5><p>At N=50, Matrix Algebra visibly slower than SciPy Sparse, demonstrating the complexity crossover.</p></div>
+      <div class="case-card"><div class="case-url">Web-like graphs (various)</div><h5>Progressive Pruning validation</h5><p>&#10052; frozen nodes appear, dashed edges render, speed badge confirms measurable acceleration.</p></div>
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
 
-<!-- SEO -->
 <section id="seo">
   <div class="container">
     <div class="section-tag">Requirement 5</div>
-    <h2 class="section-title">SEO Recommendations — Proven by Data</h2>
-    <p class="section-sub">Each recommendation is validated on the Metro Daily news-site simulation by modifying the graph and measuring exact PageRank changes using NetworkX (α = 0.85).</p>
+    <h2 class="section-title">SEO Recommendations &mdash; Proven by Data</h2>
+    <p class="section-sub">Each recommendation is validated on the <strong>Metro Daily</strong> news-site simulation: 15 pages, &alpha; = 0.85, NetworkX as PageRank engine. Every claim is a measured graph modification, not a theoretical estimate.</p>
+    <div class="section-tag" style="margin-bottom:12px;">Metro Daily Progression &middot; Table 4.19</div>
+    <div class="seo-timeline">
+      <div class="seo-step">
+        <div class="seo-step-left"><div class="seo-pr">0.195</div><div class="seo-gain zero">Baseline</div></div>
+        <div class="seo-step-right">
+          <h4>Baseline &mdash; Poor Structure</h4>
+          <p>Top Story ranks #2 with PR = 0.195. 10 dead-end pages absorb rank and never redistribute it. RSS Feed and Print Edition are dangling nodes that bleed probability mass out of the system. Navigation follows a chain: Homepage &rarr; Top Story &rarr; Local &rarr; Sports &rarr; Weather.</p>
+          <span class="seo-formula">Teleportation floor: (1&minus;0.85)/15 = 0.01 per page &middot; Total rank = 1.0</span>
+        </div>
+      </div>
+      <div class="seo-step">
+        <div class="seo-step-left"><div class="seo-pr">0.201</div><div class="seo-gain up">+3.2%</div></div>
+        <div class="seo-step-right">
+          <h4>Rec 4 &mdash; Fix Dangling Pages</h4>
+          <p>RSS Feed and Print Edition had no outbound links &mdash; they absorbed rank and leaked it out of the system. Adding outlinks to Homepage recycled their probability mass back into the graph, ensuring scores sum exactly to 1.0 &plusmn; 10&#8315;&#8310;.</p>
+          <p>Modest gain because these pages held only baseline rank (0.01 each). Pages with higher dangling rank would yield larger improvements.</p>
+          <span class="seo-formula">PR: 0.194955 &rarr; 0.201128 &middot; Source: Section 4.7.4, Figure 4.12</span>
+        </div>
+      </div>
+      <div class="seo-step">
+        <div class="seo-step-left"><div class="seo-pr">0.280</div><div class="seo-gain up">+39.4%</div></div>
+        <div class="seo-step-right">
+          <h4>Rec 5 &mdash; Hub-and-Spoke vs Chain</h4>
+          <p>Converting the chain structure to hub-and-spoke (Homepage links directly to all sections) eliminates rank bleed through long paths. In a chain, each hop multiplies rank by the out-degree factor. Hub-and-spoke gives every section a direct, undiluted link from the highest-authority page.</p>
+          <p>In the generic 5-page example (&sect;4.7.8): chain start page gains +29.8%, chain end page loses &minus;65.0%.</p>
+          <span class="seo-formula">PR: 0.201128 &rarr; 0.280296 &middot; Source: Figure 4.13, Section 4.7.5</span>
+        </div>
+      </div>
+      <div class="seo-step">
+        <div class="seo-step-left"><div class="seo-pr">0.396</div><div class="seo-gain up">+41.2%</div></div>
+        <div class="seo-step-right">
+          <h4>Rec 2 &mdash; Create an Internal Hub Page</h4>
+          <p>Old articles (nodes 7&ndash;12) previously linked to Homepage. Redirecting them to link directly to Top Story concentrated 6 sources of inbound rank onto the target page. Top Story climbs from rank #2 to rank #1.</p>
+          <p>This was the <strong>single largest gain</strong> in the entire optimisation sequence &mdash; more than any external link strategy. Approximately 6 &times; 0.032 = 0.192 rank flow redirected to Top Story.</p>
+          <span class="seo-formula">PR: 0.280296 &rarr; 0.395902 &middot; Source: Figure 4.10, Table 4.19 Step 3&rarr;4</span>
+        </div>
+      </div>
+      <div class="seo-step saturated">
+        <div class="seo-step-left"><div class="seo-pr" style="color:var(--muted);">0.396</div><div class="seo-gain zero">+0%</div></div>
+        <div class="seo-step-right">
+          <h4>Rec 3 &amp; Rec 1 &mdash; Saturated (Zero Marginal Gain)</h4>
+          <p>After reaching PR &asymp; 0.396, adding multiple inbound links (Rec 3) and a high-authority external link (Rec 1) each produced exactly +0% improvement. Mathematical saturation: total rank is conserved (&Sigma; PR = 1.0) and every page has a minimum floor of 0.01.</p>
+          <p>Note: Rec 1 (+287%) applies when a high-authority link is added <em>before</em> structural saturation (&sect;4.7.1 standalone simulation).</p>
+          <span class="seo-formula">0.396 + homepage(0.111) + 14&times;0.01(floor) = structural ceiling reached</span>
+        </div>
+      </div>
+    </div>
+    <div class="section-tag" style="margin-bottom:16px;">Individual Recommendations</div>
     <div class="seo-grid">
-      <!-- Rec 1: Section 4.7.1 — +287% from abstract & section text -->
-      <div class="seo-card"><div class="seo-change up">+287%</div><h4>1. Earn a High-Authority Inbound Link</h4><p>A single high-authority inbound link can increase a page's PageRank by up to 287%. External links are most valuable before a page reaches its structural maximum.</p></div>
-      <!-- Rec 2: Section 4.7.2 / Figure 4.10 — +41.2% -->
-      <div class="seo-card"><div class="seo-change up">+41.2%</div><h4>2. Create an Internal Hub Page</h4><p>Converting old articles (nodes 7–12) to link directly to Top Story (Page 1) rather than Homepage produced a +41.2% improvement in Page 1's rank.</p></div>
-      <!-- Rec 3: Section 4.7.6 / Table 4.19 — cumulative +103% after hub creation -->
-      <div class="seo-card"><div class="seo-change up">+103%</div><h4>3. Accumulate Multiple Inbound Links</h4><p>Applying all structural improvements cumulatively raised Top Story PageRank from 0.195 to 0.396 — a +103% total gain. Diminishing returns apply once a page is saturated.</p></div>
-      <!-- Rec 4: Section 4.7.4 / Figure 4.12 — +3.2% -->
-      <div class="seo-card"><div class="seo-change up">+3.2%</div><h4>4. Fix Dangling Pages</h4><p>Fixing two dangling pages (RSS Feed, Print Edition) by adding outlinks to Homepage produced a +3.2% improvement in Page 1's rank.</p></div>
-      <!-- Rec 5: Section 4.7.5 — equalise / hub-and-spoke -->
-      <div class="seo-card"><div class="seo-change mixed">+39.4%</div><h4>5. Use Hub-and-Spoke, Not Chains</h4><p>Converting the chain structure (Homepage→Top Story→Local→Sports→Weather) to hub-and-spoke produced +39.4% for Top Story. Hub-and-spoke equalises distribution while chains bleed rank to end nodes.</p></div>
+      <div class="seo-card">
+        <div class="seo-card-header">
+          <div><h4>1. Earn a High-Authority Inbound Link</h4></div>
+          <div class="seo-change up">+287%</div>
+        </div>
+        <p>PR flows as PR(T&#8560;)/C(T&#8560;). One link from a high-authority page (BBC, .edu, .gov) passes exponentially more rank than hundreds of links from low-quality sites. Most valuable before structural saturation.</p>
+        <div class="seo-proof">Source: &sect;4.7.1 standalone simulation<br><span>In Metro Daily sequence: +0% after saturation at step 4.</span><br>Applied BEFORE structural max: +287%</div>
+      </div>
+      <div class="seo-card">
+        <div class="seo-card-header">
+          <div><h4>2. Create an Internal Hub Page</h4></div>
+          <div class="seo-change up">+41.2%</div>
+        </div>
+        <p>Redirecting old articles (nodes 7&ndash;12) to link directly to Top Story rather than Homepage produced the largest single-step gain. Concentrating inbound rank from 6 sources onto one target page.</p>
+        <div class="seo-proof">PR: 0.280 &rarr; 0.396<br><span>Top Story rank: #2 &rarr; #1</span><br>Source: Figure 4.10, Table 4.19 Step 3&rarr;4</div>
+      </div>
+      <div class="seo-card">
+        <div class="seo-card-header">
+          <div><h4>3. Accumulate Multiple Inbound Links</h4></div>
+          <div class="seo-change up">+103%</div>
+        </div>
+        <p>Applying all five structural improvements cumulatively raised Top Story PageRank from 0.195 to 0.396 &mdash; a +103% total gain. Diminishing returns are mathematically real: further links after saturation add zero value.</p>
+        <div class="seo-proof">Baseline: 0.195 &rarr; Final: 0.396<br><span>Total cumulative improvement: +103%</span><br>Source: Table 4.19 complete progression</div>
+      </div>
+      <div class="seo-card">
+        <div class="seo-card-header">
+          <div><h4>4. Fix Dangling Pages</h4></div>
+          <div class="seo-change up">+3.2%</div>
+        </div>
+        <p>Fixing RSS Feed and Print Edition (no outbound links) by adding links to Homepage. Modest gain because these pages held only baseline rank (0.01 each). Fix high-rank dangling pages first for larger gains.</p>
+        <div class="seo-proof">PR: 0.195 &rarr; 0.201<br><span>Scores now sum to exactly 1.0 &plusmn; 10&#8315;&#8310;</span><br>Source: Section 4.7.4, Figure 4.12</div>
+      </div>
+      <div class="seo-card">
+        <div class="seo-card-header">
+          <div><h4>5. Use Hub-and-Spoke, Not Chains</h4></div>
+          <div class="seo-change mixed">+39.4%</div>
+        </div>
+        <p>Converting the chain (Homepage&rarr;Top Story&rarr;Local&rarr;Sports&rarr;Weather) to hub-and-spoke. Chains bleed rank at every hop; hub-and-spoke gives every page direct access to the central authority.</p>
+        <div class="seo-proof">PR: 0.201 &rarr; 0.280 (Metro Daily)<br><span>Generic 5-page: start +29.8%, end &minus;65.0%</span><br>Source: Figure 4.13, Section 4.7.8</div>
+      </div>
+    </div>
+    <div class="diminishing-box">
+      <div class="dim-left">
+        <h4>&#9889; The Critical Insight: Diminishing Returns</h4>
+        <p>PageRank is a <strong>conserved probability distribution</strong>. Total rank always sums to 1.0. Once Top Story reaches PR &asymp; 0.396, additional inbound links &mdash; even from high-authority external sources &mdash; produce mathematically zero improvement.</p>
+        <p>Every page has a hard minimum floor of (1&minus;&alpha;)/N. The 14 other Metro Daily pages collectively cannot drop below 0.14. The remaining 0.46 is already structurally allocated and unavailable.</p>
+        <div class="dim-formula">&Sigma;&#8560; PR(i) = 1.0 &nbsp;&middot;&nbsp; min PR(p) = (1&minus;0.85)/15 = 0.01</div>
+      </div>
+      <div class="dim-right">
+        <div class="dim-rule r1">
+          <span class="rule-icon">&#9989;</span>
+          <span><strong>Phase 1 &mdash; Structural fixes first.</strong> Fix dangling pages, convert chains to hub-and-spoke, create internal hubs. These deliver the highest ROI: +3.2%, +39.4%, +41.2%.</span>
+        </div>
+        <div class="dim-rule r2">
+          <span class="rule-icon">&#128279;</span>
+          <span><strong>Phase 2 &mdash; External links EARLY.</strong> Pursue high-authority inbound links before structural saturation. A single .edu or BBC link gives +287% at this stage.</span>
+        </div>
+        <div class="dim-rule r3">
+          <span class="rule-icon">&#128721;</span>
+          <span><strong>After saturation &mdash; stop link-building.</strong> Further links produce zero marginal gain. Spend the budget on content or new pages instead.</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
 
-<!-- INSTALL -->
 <section id="install">
   <div class="container">
     <div class="section-tag">Run It Yourself</div>
     <h2 class="section-title">Installation &amp; Run Commands</h2>
-    <p class="section-sub">All code requires Python 3.8+. Install dependencies once, then run any requirement independently.</p>
+    <p class="section-sub">All code requires Python 3.8+. Install dependencies once, then run any requirement independently. Full source and interactive demo at <a href="https://hanaayman33.github.io/" style="color:var(--accent2);">hanaayman33.github.io</a>.</p>
     <div class="install-box">
 <pre>pip install networkx numpy scipy matplotlib requests beautifulsoup4 streamlit plotly pandas
 
@@ -550,8 +783,8 @@ python search_engine_test.py</pre>
 <footer>
   <div class="container">
     <p><strong>Implementing PageRank Using Python NetworkX</strong></p>
-    <p>Hana Ayman Abdelhamid · Supervised by Dr. Islam El-maddah</p>
-    <p style="margin-top:8px">Faculty of Media Engineering and Technology · German University in Cairo · 2026</p>
+    <p>Hana Ayman Abdelhamid &middot; Supervised by Dr. Islam El-maddah</p>
+    <p style="margin-top:8px">Faculty of Media Engineering and Technology &middot; German University in Cairo &middot; 2026</p>
   </div>
 </footer>
 
@@ -567,206 +800,161 @@ const SOURCE_FILES = [
 ];
 
 const OUTPUT_FILES = [
-  { file: "output_files/Experiments.txt",        label: "Experiments.py",             desc: "All 5 simulation experiments" },
-  { file: "output_files/All_6_methods.txt",      label: "all_6_methods.py",           desc: "6-method comparison on 5-node graph" },
-  { file: "output_files/realistic_data.txt",     label: "realistic_data.py",          desc: "791-node benchmark results" },
-  { file: "output_files/progressive_pruning_pr.txt", label: "progressive_pruning_pr.py", desc: "Pruning speedup benchmark" },
-  { file: "output_files/search_engine.txt",      label: "search_engine.py",           desc: "8/8 test results" },
-  { file: "output_files/metro_daily_with_recommend.txt", label: "metro_daily_with_recommend.py", desc: "Metro Daily website rank enhancement after applying 5 recommendations" },
+  { file: "output_files/Experiments.txt",              label: "Experiments.py",              desc: "All 5 simulation experiments" },
+  { file: "output_files/All_6_methods.txt",            label: "all_6_methods.py",            desc: "6-method comparison on 5-node graph" },
+  { file: "output_files/realistic_data.txt",           label: "realistic_data.py",           desc: "791-node benchmark results" },
+  { file: "output_files/progressive_pruning_pr.txt",   label: "progressive_pruning_pr.py",   desc: "Pruning speedup benchmark" },
+  { file: "output_files/search_engine.txt",            label: "search_engine.py",            desc: "8/8 test results" },
+  { file: "output_files/metro_daily_with_recommend.txt", label: "metro_daily_with_recommend.py", desc: "Metro Daily rank enhancement after 5 recommendations" },
 ];
 
-let activeCodeFile   = null;
-let activeOutputFile = null;
-let codeContent      = {};
-let outputContent    = {};
+let activeCodeFile=null, activeOutputFile=null, codeContent={}, outputContent={};
 
-function buildCodeSidebar() {
-  const sb = document.getElementById('code-sidebar');
-  SOURCE_FILES.forEach((f, i) => {
-    const a = document.createElement('a');
-    a.href = '#';
-    a.className = 'panel-tab';
-    a.id = 'code-tab-' + i;
-    a.dataset.file = f;
-    a.innerHTML = f + '<span class="tab-badge src">PY</span>';
-    a.title = f;
-    a.addEventListener('click', e => { e.preventDefault(); loadCodeFile(f, i); });
+function buildCodeSidebar(){
+  const sb=document.getElementById('code-sidebar');
+  SOURCE_FILES.forEach((f,i)=>{
+    const a=document.createElement('a');
+    a.href='#';a.className='panel-tab';a.id='code-tab-'+i;a.dataset.file=f;
+    a.innerHTML=f+'<span class="tab-badge src">PY</span>';a.title=f;
+    a.addEventListener('click',e=>{e.preventDefault();loadCodeFile(f,i);});
     sb.appendChild(a);
   });
 }
 
-function buildOutputSidebar() {
-  const sb = document.getElementById('output-sidebar');
-  OUTPUT_FILES.forEach((entry, i) => {
-    const a = document.createElement('a');
-    a.href = '#';
-    a.className = 'panel-tab';
-    a.id = 'out-tab-' + i;
-    a.dataset.file = entry.file;
-    a.innerHTML = entry.label + '<span class="tab-badge out">OUT</span>';
-    a.title = entry.file + ' — ' + entry.desc;
-    a.addEventListener('click', e => { e.preventDefault(); loadOutputFile(entry, i); });
+function buildOutputSidebar(){
+  const sb=document.getElementById('output-sidebar');
+  OUTPUT_FILES.forEach((entry,i)=>{
+    const a=document.createElement('a');
+    a.href='#';a.className='panel-tab';a.id='out-tab-'+i;a.dataset.file=entry.file;
+    a.innerHTML=entry.label+'<span class="tab-badge out">OUT</span>';a.title=entry.file+' — '+entry.desc;
+    a.addEventListener('click',e=>{e.preventDefault();loadOutputFile(entry,i);});
     sb.appendChild(a);
   });
 }
 
-function loadCodeFile(filename, idx) {
-  document.querySelectorAll('#code-sidebar .panel-tab').forEach(t => t.classList.remove('active'));
-  const tab = document.getElementById('code-tab-' + idx);
-  if (tab) tab.classList.add('active');
-  document.getElementById('code-filename').textContent = filename;
-  activeCodeFile = filename;
-  setCodeStatus('pending', 'Loading ' + filename + '…');
-  if (codeContent[filename]) { renderCode(filename, codeContent[filename]); return; }
-  const wrap = document.getElementById('code-pane-wrap');
-  wrap.innerHTML = '<div class="pane-placeholder"><div class="ph-icon">⏳</div><div>Loading ' + filename + '…</div></div>';
-  fetch('./' + filename)
-    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status + ' — file not found'); return r.text(); })
-    .then(text => { codeContent[filename] = text; renderCode(filename, text); })
-    .catch(err => {
-      wrap.innerHTML = '<div class="pane-placeholder"><div class="ph-icon">❌</div><div style="color:var(--red)">' + err.message + '</div><div style="font-size:.75rem;color:#475569;margin-top:6px">Make sure <strong>' + filename + '</strong> is saved in the same folder as index.html</div></div>';
-      setCodeStatus('err', 'Failed to load: ' + err.message);
+function loadCodeFile(filename,idx){
+  document.querySelectorAll('#code-sidebar .panel-tab').forEach(t=>t.classList.remove('active'));
+  const tab=document.getElementById('code-tab-'+idx);if(tab)tab.classList.add('active');
+  document.getElementById('code-filename').textContent=filename;
+  activeCodeFile=filename;setCodeStatus('pending','Loading '+filename+'…');
+  if(codeContent[filename]){renderCode(filename,codeContent[filename]);return;}
+  const wrap=document.getElementById('code-pane-wrap');
+  wrap.innerHTML='<div class="pane-placeholder"><div class="ph-icon">⏳</div><div>Loading '+filename+'…</div></div>';
+  fetch('./'+filename)
+    .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status+' — file not found');return r.text();})
+    .then(text=>{codeContent[filename]=text;renderCode(filename,text);})
+    .catch(err=>{
+      wrap.innerHTML='<div class="pane-placeholder"><div class="ph-icon">❌</div><div style="color:var(--red)">'+err.message+'</div><div style="font-size:.75rem;color:#475569;margin-top:6px">Make sure <strong>'+filename+'</strong> is in the same folder as index.html</div></div>';
+      setCodeStatus('err','Failed to load: '+err.message);
     });
 }
 
-function renderCode(filename, text) {
-  const wrap = document.getElementById('code-pane-wrap');
-  const pre  = document.createElement('pre');
-  const code = document.createElement('code');
-  code.className = 'language-python';
-  code.textContent = text;
-  pre.appendChild(code);
-  wrap.innerHTML = '';
-  wrap.appendChild(pre);
-  hljs.highlightElement(code);
-  const lines = text.split('\n').length;
-  setCodeStatus('ok', filename + '  ·  ' + lines.toLocaleString() + ' lines  ·  ' + formatBytes(new Blob([text]).size));
+function renderCode(filename,text){
+  const wrap=document.getElementById('code-pane-wrap');
+  const pre=document.createElement('pre');const code=document.createElement('code');
+  code.className='language-python';code.textContent=text;pre.appendChild(code);
+  wrap.innerHTML='';wrap.appendChild(pre);hljs.highlightElement(code);
+  const lines=text.split('\n').length;
+  setCodeStatus('ok',filename+'  ·  '+lines.toLocaleString()+' lines  ·  '+formatBytes(new Blob([text]).size));
 }
 
-function copyCode() {
-  const code = document.querySelector('#code-pane-wrap code');
-  if (!code) return;
-  navigator.clipboard.writeText(code.textContent).then(() => {
-    const btn = document.getElementById('btn-copy-code');
-    btn.textContent = '✓ Copied!';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+function copyCode(){
+  const code=document.querySelector('#code-pane-wrap code');if(!code)return;
+  navigator.clipboard.writeText(code.textContent).then(()=>{
+    const btn=document.getElementById('btn-copy-code');
+    btn.textContent='✓ Copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
   });
 }
 
-function downloadCode() {
-  if (!activeCodeFile) return;
-  const a = document.createElement('a');
-  a.href = './' + activeCodeFile;
-  a.download = activeCodeFile;
-  a.click();
+function downloadCode(){
+  if(!activeCodeFile)return;
+  const a=document.createElement('a');a.href='./'+activeCodeFile;a.download=activeCodeFile;a.click();
 }
 
-function loadOutputFile(entry, idx) {
-  document.querySelectorAll('#output-sidebar .panel-tab').forEach(t => t.classList.remove('active'));
-  const tab = document.getElementById('out-tab-' + idx);
-  if (tab) tab.classList.add('active');
-  document.getElementById('output-filename').textContent = entry.label + '  →  ' + entry.file;
-  activeOutputFile = entry.file;
-  setOutStatus('pending', 'Loading ' + entry.file + '…');
-  if (outputContent[entry.file]) { renderOutput(entry, outputContent[entry.file]); return; }
-  const wrap = document.getElementById('output-pane-wrap');
-  wrap.innerHTML = '<div class="pane-placeholder"><div class="ph-icon">⏳</div><div>Loading ' + entry.file + '…</div></div>';
-  fetch('./' + entry.file)
-    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status + ' — file not found'); return r.text(); })
-    .then(text => { outputContent[entry.file] = text; renderOutput(entry, text); })
-    .catch(err => {
-      wrap.innerHTML =
-        '<div class="pane-placeholder">' +
-          '<div class="ph-icon">📋</div>' +
-          '<div style="color:var(--gold);font-weight:600">Output file not found</div>' +
-          '<div style="font-size:.8rem;color:var(--muted);margin-top:8px;max-width:420px;text-align:center">' +
-            'Expected file: <code style="color:var(--accent2)">' + entry.file + '</code><br><br>' +
-            'To generate this file, run:<br>' +
-            '<code style="color:var(--green);font-size:.78rem">python ' + entry.label + ' &gt; ' + entry.file + '</code>' +
-          '</div>' +
-          '<div style="font-size:.72rem;color:#475569;margin-top:8px">Then place <strong>' + entry.file + '</strong> in the same folder as index.html</div>' +
-        '</div>';
-      setOutStatus('err', 'File not found: ' + entry.file);
+function loadOutputFile(entry,idx){
+  document.querySelectorAll('#output-sidebar .panel-tab').forEach(t=>t.classList.remove('active'));
+  const tab=document.getElementById('out-tab-'+idx);if(tab)tab.classList.add('active');
+  document.getElementById('output-filename').textContent=entry.label+'  →  '+entry.file;
+  activeOutputFile=entry.file;setOutStatus('pending','Loading '+entry.file+'…');
+  if(outputContent[entry.file]){renderOutput(entry,outputContent[entry.file]);return;}
+  const wrap=document.getElementById('output-pane-wrap');
+  wrap.innerHTML='<div class="pane-placeholder"><div class="ph-icon">⏳</div><div>Loading '+entry.file+'…</div></div>';
+  fetch('./'+entry.file)
+    .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status+' — file not found');return r.text();})
+    .then(text=>{outputContent[entry.file]=text;renderOutput(entry,text);})
+    .catch(err=>{
+      wrap.innerHTML='<div class="pane-placeholder"><div class="ph-icon">📋</div><div style="color:var(--gold);font-weight:600">Output file not found</div><div style="font-size:.8rem;color:var(--muted);margin-top:8px;max-width:420px;text-align:center">Expected: <code style="color:var(--accent2)">'+entry.file+'</code><br><br>Run: <code style="color:var(--green);font-size:.78rem">python '+entry.label+' > '+entry.file+'</code></div></div>';
+      setOutStatus('err','File not found: '+entry.file);
     });
 }
 
-function renderOutput(entry, text) {
-  const wrap = document.getElementById('output-pane-wrap');
-  const coloured = text
-    .split('\n')
-    .map(line => {
-      const esc = line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-      if (/PASS/i.test(esc))                           return '<span class="out-pass">' + esc + '</span>';
-      if (/FAIL|ERROR|Traceback/i.test(esc))           return '<span class="out-fail">' + esc + '</span>';
-      if (/WARNING|warn/i.test(esc))                   return '<span class="out-warn">' + esc + '</span>';
-      if (/^={3,}|^-{3,}|^#{3,}/.test(esc.trim()))   return '<span class="out-sep">' + esc + '</span>';
-      if (/^\s*(Experiment|Test|Method|Result|Summary|Running)/i.test(esc)) return '<span class="out-head">' + esc + '</span>';
-      if (/\d+\.\d+e[+-]\d+|\d+\.\d{4,}/.test(esc))  return '<span class="out-num">' + esc + '</span>';
-      if (/^(python|streamlit|\$\s)/.test(esc.trim())) return '<span class="out-cmd">' + esc + '</span>';
-      return esc;
-    })
-    .join('\n');
-  wrap.innerHTML = '<pre><code>' + coloured + '</code></pre>';
-  const lines = text.split('\n').length;
-  setOutStatus('ok', entry.file + '  ·  ' + lines.toLocaleString() + ' lines  ·  ' + formatBytes(new Blob([text]).size));
+function renderOutput(entry,text){
+  const wrap=document.getElementById('output-pane-wrap');
+  const coloured=text.split('\n').map(line=>{
+    const esc=line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    if(/PASS/i.test(esc))return '<span class="out-pass">'+esc+'</span>';
+    if(/FAIL|ERROR|Traceback/i.test(esc))return '<span class="out-fail">'+esc+'</span>';
+    if(/WARNING|warn/i.test(esc))return '<span class="out-warn">'+esc+'</span>';
+    if(/^={3,}|^-{3,}|^#{3,}/.test(esc.trim()))return '<span class="out-sep">'+esc+'</span>';
+    if(/^\s*(Experiment|Test|Method|Result|Summary|Running)/i.test(esc))return '<span class="out-head">'+esc+'</span>';
+    if(/\d+\.\d+e[+-]\d+|\d+\.\d{4,}/.test(esc))return '<span class="out-num">'+esc+'</span>';
+    if(/^(python|streamlit|\$\s)/.test(esc.trim()))return '<span class="out-cmd">'+esc+'</span>';
+    return esc;
+  }).join('\n');
+  wrap.innerHTML='<pre><code>'+coloured+'</code></pre>';
+  const lines=text.split('\n').length;
+  setOutStatus('ok',entry.file+'  ·  '+lines.toLocaleString()+' lines  ·  '+formatBytes(new Blob([text]).size));
 }
 
-function copyOutput() {
-  const el = document.querySelector('#output-pane-wrap pre');
-  if (!el) return;
-  navigator.clipboard.writeText(el.textContent).then(() => {
-    const btn = document.getElementById('btn-copy-out');
-    btn.textContent = '✓ Copied!';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+function copyOutput(){
+  const el=document.querySelector('#output-pane-wrap pre');if(!el)return;
+  navigator.clipboard.writeText(el.textContent).then(()=>{
+    const btn=document.getElementById('btn-copy-out');
+    btn.textContent='✓ Copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
   });
 }
 
-function downloadOutput() {
-  if (!activeOutputFile) return;
-  const text = outputContent[activeOutputFile];
-  if (!text) return;
-  const blob = new Blob([text], { type: 'text/plain' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = activeOutputFile;
-  a.click();
+function downloadOutput(){
+  if(!activeOutputFile)return;
+  const text=outputContent[activeOutputFile];if(!text)return;
+  const blob=new Blob([text],{type:'text/plain'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=activeOutputFile;a.click();
 }
 
-function setCodeStatus(state, msg) {
-  document.getElementById('code-status-dot').className = 'status-dot ' + state;
-  document.getElementById('code-status-text').textContent = msg;
+function setCodeStatus(state,msg){
+  document.getElementById('code-status-dot').className='status-dot '+state;
+  document.getElementById('code-status-text').textContent=msg;
 }
 
-function setOutStatus(state, msg) {
-  document.getElementById('output-status-dot').className = 'status-dot ' + state;
-  document.getElementById('output-status-text').textContent = msg;
+function setOutStatus(state,msg){
+  document.getElementById('output-status-dot').className='status-dot '+state;
+  document.getElementById('output-status-text').textContent=msg;
 }
 
-function formatBytes(bytes) {
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
-  return (bytes / 1048576).toFixed(1) + ' MB';
+function formatBytes(bytes){
+  if(bytes<1024)return bytes+' B';
+  if(bytes<1048576)return (bytes/1024).toFixed(1)+' KB';
+  return (bytes/1048576).toFixed(1)+' MB';
 }
 
-function jumpToCode(filename) {
-  document.getElementById('code').scrollIntoView({ behavior: 'smooth' });
-  const idx = SOURCE_FILES.indexOf(filename);
-  if (idx >= 0) setTimeout(() => loadCodeFile(filename, idx), 500);
+function jumpToCode(filename){
+  document.getElementById('code').scrollIntoView({behavior:'smooth'});
+  const idx=SOURCE_FILES.indexOf(filename);
+  if(idx>=0)setTimeout(()=>loadCodeFile(filename,idx),500);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  buildCodeSidebar();
-  buildOutputSidebar();
-  if (SOURCE_FILES.length > 0) loadCodeFile(SOURCE_FILES[0], 0);
-  if (OUTPUT_FILES.length > 0) loadOutputFile(OUTPUT_FILES[0], 0);
+document.addEventListener('DOMContentLoaded',()=>{
+  buildCodeSidebar();buildOutputSidebar();
+  if(SOURCE_FILES.length>0)loadCodeFile(SOURCE_FILES[0],0);
+  if(OUTPUT_FILES.length>0)loadOutputFile(OUTPUT_FILES[0],0);
 });
 
-window.addEventListener('scroll', () => {
-  const h   = document.documentElement;
-  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
-  document.getElementById('scrollBar').style.width = pct + '%';
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('scrollBar').style.width=pct+'%';
 });
 </script>
 </body>
